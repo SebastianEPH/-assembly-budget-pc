@@ -11,6 +11,13 @@ project.get = async (req, res)=>{ // esto es de la vista principal, no es de pro
     res.json(fg)
 
 }
+project.getOnly = async (req, res)=>{
+
+    const only = await taks.findById(req.params.id)
+
+    res.json(only);
+
+}
 project.add= async (req, res)=>{
 
     //console.log(req.body) // imprime lo que el ususario envio al body
@@ -30,7 +37,7 @@ project.add= async (req, res)=>{
 project.update = async (req, res)=>{
     const {nameProject,description} =  req.body
     const newTask = {nameProject,description}
-    
+
     await taks.findByIdAndUpdate(req.params.id, newTask)
     console.log(req.params.id)
 
@@ -39,7 +46,14 @@ project.update = async (req, res)=>{
     })
 
 }
+project.delete = async(req, res)=>{
 
+    await taks.findByIdAndDelete(req.params.id)
+    res.json({
+        status: 'delete ok '
+    })
+
+}
 
 
 
