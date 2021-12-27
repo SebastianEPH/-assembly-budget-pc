@@ -1,5 +1,5 @@
 const express = require('express') // framework
-const path = require('path') // join path
+const path = require('express') // join path
 const morgan = require('morgan')
 
 const app = express();
@@ -15,6 +15,8 @@ app.use(morgan('dev'))
 app.use(express.json()) // acepta json
 
 // static files
+console.log(__dirname+ "\\public" )
+app.use(express.static(__dirname+ "\\public"))
 
 
 // routers
