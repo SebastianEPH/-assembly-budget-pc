@@ -15,8 +15,8 @@ app.use(morgan('dev'))
 app.use(express.json()) // acepta json
 
 // static files
-console.log(__dirname+ "\\public" )
-app.use(express.static(__dirname+ "\\public"))
+//console.log(__dirname+ "\\public" )
+//app.use(express.static(__dirname+ "\\public"))
 
 
 // routers
