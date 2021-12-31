@@ -2,12 +2,16 @@ const express = require('express') // framework
 const path = require('express') // join path
 const morgan = require('morgan')
 
+
 const app = express();
 
 // app settings
 app.set('port', process.env.PORT|| 5000 );
 
 const {mongoose} = require('./database')
+
+
+
 
 
 // middlewares

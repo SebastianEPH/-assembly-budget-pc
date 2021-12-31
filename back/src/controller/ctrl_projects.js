@@ -22,13 +22,13 @@ project.add= async (req, res)=>{
 
     //console.log(req.body) // imprime lo que el ususario envio al body
     const {name, details, date, img } =  req.body;
-    const project= new m_project({
+    const project = new m_project({
         name,
         details,
         date,
         img,
     })
-    await project.save();
+    await project.save()
     console.log(project)
 
 
