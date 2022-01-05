@@ -1,6 +1,8 @@
 const express = require('express') // framework
 const path = require('express') // join path
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
 
 const app = express();
@@ -10,6 +12,9 @@ app.set('port', process.env.PORT|| 5000 );
 
 const {mongoose} = require('./database')
 
+// enable cors
+
+app.use(cors())
 
 
 
@@ -17,6 +22,10 @@ const {mongoose} = require('./database')
 // middlewares
 app.use(morgan('dev'))
 app.use(express.json()) // acepta json
+app.use(bodyParser.json())
+app.use(express.urlencoded({
+    extended:true// estaba en false , lo pondre en true
+}))
 
 // static files
 //console.log(__dirname+ "\\public" )

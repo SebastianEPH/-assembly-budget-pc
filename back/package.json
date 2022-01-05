@@ -21,6 +21,7 @@
   "homepage": "https://github.com/SebastianEPH/assembly-budget_node#readme",
   "dependencies": {
     "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^6.1.1"
   },
