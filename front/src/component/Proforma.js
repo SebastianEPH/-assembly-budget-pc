@@ -2,13 +2,14 @@ export default function Proforma(){
     return(
      <div>
          <form className="row g-3">
+             {/* Processor */}
              <div className="col-md-9">
-                 <label htmlFor="inputEmail4" className="form-label">Processor</label>
-                 <input type="text" className="form-control" id="inputEmail4" placeholder="Name and model"/>
+                 <label className="form-label">Processor</label>
+                 <input type="text" className="form-control" id="processor" placeholder="Name and model"/>
              </div>
              <div className="col-md-1">
                  <label htmlFor="inputPassword4" className="form-label">Marca</label>
-                 <select id="inputState" className="form-select">
+                 <select id="proce_brand" className="form-select">
                      <option selected>AMD</option>
                      <option>Intel</option>
                  </select>
@@ -25,7 +26,7 @@ export default function Proforma(){
                  </div>
              </div>
              <div className="col-md-2">
-                 <select id="inputState" className="form-select">
+                 <select id="proce_store" className="form-select">
                      <option selected>Other Store</option>
                      <option>Compuvision</option>
                      <option>Impacto</option>
@@ -55,24 +56,24 @@ export default function Proforma(){
                  </div>
              </div>
 
+             {/* Memory RAM */}
              <div className="col-10">
-                 <label htmlFor="inputAddress" className="form-label">Memory RAM</label>
-                 <input type="text" className="form-control" id="inputAddress" placeholder="Name and model"/>
+                 <label  className="form-label">Memory RAM</label>
+                 <input type="text" className="form-control" id="memory_ram" placeholder="Name and model"/>
              </div>
              <div className="col-md-2">
                  <label htmlFor="inputCity" className="form-label">Price</label>
                  <div className="input-group">
                      <div className="input-group-text">$</div>
-                     <input type="text" className="form-control" id="proce_dolar"
+                     <input type="text" className="form-control" id="ram_dolar"
                             placeholder="0"/>
                      <div className="input-group-text">S/</div>
-                     <input type="text" className="form-control" id="proce_Sol"
+                     <input type="text" className="form-control" id="ram_Sol"
                             placeholder="0" readOnly/>
                  </div>
              </div>
-
              <div className="col-md-2">
-                 <select id="inputState" className="form-select">
+                 <select id="ram_store" className="form-select">
                      <option selected>Other Store</option>
                      <option>Compuvision</option>
                      <option>Impacto</option>
@@ -102,7 +103,7 @@ export default function Proforma(){
                  </div>
              </div>
 
-
+             {/*  */}
 
          </form>
      </div>
