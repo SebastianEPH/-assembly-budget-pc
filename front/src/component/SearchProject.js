@@ -1,5 +1,4 @@
 export default function SearchProject (){
-
     return(
         <div className="">
             <label className="visually-hidden" htmlFor="specificSizeInputGroupUsername">Search Proforma</label>
@@ -14,6 +13,5 @@ export default function SearchProject (){
                        placeholder="write one or more words"/>
             </div>
         </div>
-
     );
 }

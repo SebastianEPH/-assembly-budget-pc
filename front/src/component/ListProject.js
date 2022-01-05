@@ -142,17 +142,13 @@ export default function ListProject (p){
                                 <h5 className="card-title">{p.name}</h5>
                                 <p className="card-text">{p.details}</p>
                                 <a href=""  className="btn btn-primary ">ver</a>
-
                             </div>
                             <div className="card-header-pills">
                                 <h6 className="card-subtitle mb-2 text-muted text-end">{p.date} </h6>
                             </div>
                         </div>
-
-
                     )
                 })}
-
             </div>
         </div>
 );
