@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-
+import {Link, useParams} from "react-router-dom";
 import connectionAPI from "../config/axios";
 
 export default function ListProject (p){
@@ -16,6 +16,8 @@ export default function ListProject (p){
         consultarApi()
 
     },[])
+
+
 
     const getProjects =async () =>{
 
@@ -141,7 +143,11 @@ export default function ListProject (p){
                             <div className="card-body">
                                 <h5 className="card-title">{p.name}</h5>
                                 <p className="card-text">{p.details}</p>
-                                <a href=""  className="btn btn-primary ">ver</a>
+                                <Link to={p._id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
+                                    ver
+                                </Link>
+
+                                <p>{p._id}</p>
                             </div>
                             <div className="card-header-pills">
                                 <h6 className="card-subtitle mb-2 text-muted text-end">{p.date} </h6>
