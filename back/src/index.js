@@ -2,6 +2,8 @@ const express = require('express') // framework
 const path = require('express') // join path
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+//const {database} = require('./keys')
+
 const cors = require('cors')
 
 
@@ -10,7 +12,7 @@ const app = express();
 // app settings
 app.set('port', process.env.PORT|| 5000 );
 
-const {mongoose} = require('./database')
+// const {mongoose} = require('./database')
 
 // enable cors
 
