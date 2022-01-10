@@ -2,7 +2,7 @@ const  project = {}
 
 
 const m_project= require ('../models/model_project')
-
+const m_proforma= require ('../models/model_proforma_data')
 
 project.get = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
@@ -20,22 +20,73 @@ project.getOnly = async (req, res)=>{
 }
 project.add= async (req, res)=>{
 
-    //console.log(req.body) // imprime lo que el ususario envio al body
-    const {name, details, date, img } =  req.body;
-    const project = new m_project({
-        name,
-        details,
-        date,
-        img,
-    })
-    await project.save()
-    console.log(project)
+    console.log(req.body) // imprime lo que el ususario envio al body
+    // req.body;
 
+    let project = new m_project({
+        name : req.body.name,
+        details: req.body.details,
+        date: req.body.date,
+        img: req.body.img,
+        proforma: [
+            {
+                processor:[
+                    {
+                        name: 'nombre',
+                        brand: "",
+                        link: 'esto es un link',
+                        store: 'impacto',
+                        price_sol: 'ghfh',
+                        price_dol: 'jhkghkjg'
+                    }
+                ]
+
+            }
+        ]
+
+    })
+
+    console.log('creuqea q1')
+    console.log(project)
+    console.log('creuqea q2')
+
+    await project.save()
 
     res.json({
         status: 'saved ok '
     })
 }
+
+project.add_proforma =  async (req, res) =>{
+    console.log(req.body) // imprime lo que el ususario envio al body
+    // req.body;
+
+    let proforma = new m_proforma({
+
+        processor:[
+            {
+                name: 'nombre',
+                brand: "",
+                link: 'esto es un link',
+                store: 'impacto',
+                price_sol: 'ghfh',
+                price_dol: 'jhkghkjg'
+            }
+        ]
+    })
+
+    console.log('proforma 1')
+    console.log(proforma)
+    console.log('proforma 2')
+
+    //await project.save()
+    await m_project.findByIdAndUpdate(req.params.id, proforma)
+
+    res.json({
+        status: 'saved ok '
+    })
+}
+
 project.update = async (req, res)=>{
     const {name, details, date, img} =  req.body
     const newTask = {name, details, date, img}
