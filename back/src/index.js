@@ -35,7 +35,8 @@ app.use(express.urlencoded({
 
 
 // routers
-app.use('/api/', require('./routers/index')) //  router index
+app.use('/api/', require('./routers/proforma')) //  router index
+app.use('/api/', require('./routers/others')) //  router index
 
 // starting server
 app.listen(app.get('port'),()=>{

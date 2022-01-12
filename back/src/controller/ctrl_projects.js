@@ -1,12 +1,10 @@
 const project = {}
 const pool = require('../database')
 
-const m_project= require ('../models/model_project')
-const m_proforma= require ('../models/model_proforma_data')
+//const m_project= require ('../models/model_project')
+//const m_proforma= require ('../models/model_proforma_data')
 
 project.get = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
-
-
 
     const proforma = await pool.query('SELECT * from proforma')
 
@@ -14,10 +12,12 @@ project.get = async (req, res)=>{ // esto es de la vista principal, no es de pro
     res.json(proforma)
 
 }
-project.get_Only = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
+project.get_only = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
     const {id} = req.params
+
     console.log(req.params)
     console.log('entro:?? ')
+     // está detectando store como un id
 
     const proforma = await pool.query('SELECT * from proforma where id = ? ', [req.params.id])
 

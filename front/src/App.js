@@ -47,7 +47,7 @@ function App() {
                         <ListProject/>
                     </div>
                 </Route>
-                <Route path="/:_id" >
+                <Route path="/:id" >
                     <Navbar/>
                     <div className="container-fluid p-5">
                         <Proforma/>

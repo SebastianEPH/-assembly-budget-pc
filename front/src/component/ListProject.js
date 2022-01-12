@@ -114,8 +114,8 @@ export default function ListProject (p){
 
     }
     const  consultarApi = async ()=>    {
-        console.log('consultado API ')
-        const queryProjects = await connectionAPI.get('/')
+        console.log('consultado API principal ')
+        const queryProjects = await connectionAPI.get('/proforma')
         console.log(queryProjects )
         const json = queryProjects.data
         console.log(json)
@@ -143,11 +143,9 @@ export default function ListProject (p){
                             <div className="card-body">
                                 <h5 className="card-title">{p.name}</h5>
                                 <p className="card-text">{p.details}</p>
-                                <Link to={p._id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
+                                <Link to={`/`+p.id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
                                     ver
                                 </Link>
-
-                                <p>{p._id}</p>
                             </div>
                             <div className="card-header-pills">
                                 <h6 className="card-subtitle mb-2 text-muted text-end">{p.date} </h6>
