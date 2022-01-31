@@ -55,8 +55,14 @@ export default function Proforma(){
 
     return(
      <div>
-         <div className="col-auto">
-             <ModalAddProcessor/>
+         <div className="container">
+           <div className="row justify-content-center">
+               <ModalAddProcessor/>
+               <ModalAddProcessor/>
+               <ModalAddProcessor/>
+               <ModalAddProcessor/>
+           </div>
+
          </div>
 
          {/* Processor */}
