@@ -19,7 +19,10 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
 
     console.log(req.params)
     console.log('entro:?? ')
-     // está detectando store como un id
+     // está detectando store como un i
+
+
+    // verificar el id, por que hay problemas si no mandas un id que no se aun numero .
 
     const proforma = await pool.query('SELECT * from proforma where id = ? ', [req.params.id])
 

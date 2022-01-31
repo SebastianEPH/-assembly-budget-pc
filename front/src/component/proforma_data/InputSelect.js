@@ -1,8 +1,8 @@
-import {Link, } from "react-router-dom";
-import connectionAPI from "../../config/axios";
+import connectionAPI from "../../config/axios"
 import {useEffect, useState} from "react";
 
-export default function InputProcessor (data){
+
+export default function (props){
 
     const [store, setstore] = useState([]);
     useEffect(()=>{
@@ -13,7 +13,7 @@ export default function InputProcessor (data){
 
     const  consultarApi = async ()=>    {
         console.log('consultado API principal ')
-        const queryProjects = await connectionAPI.get('/store')
+        const queryProjects = await connectionAPI.get(`${props.URL}`)
         console.log(queryProjects )
         const json = queryProjects.data
         console.log(json)
@@ -21,22 +21,21 @@ export default function InputProcessor (data){
     }
 
     return(
-
-        <div className={`col-md-`+ data.col}>
-            {data.children}
-            <select name="store" id={data.id} className="form-select">
+        <div className={`col-md-`+ props.col}>
+            {props.children}
+            <select name={props.name}  className="form-select">
                 <option value="">---</option>
                 {
                     store.map(function(p){
                         return(
 
-                            <option selected={data.id_select===p.id?'selected':false} value={p.id} >{p.name}</option>
+                            <option selected={props.id_select===p.id?'selected':false} value={p.id} >{p.name}</option>
                         )
                     })
                 }
             </select>
 
         </div>
+    )
 
-    );
 }

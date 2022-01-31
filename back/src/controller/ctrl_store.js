@@ -2,7 +2,7 @@ const store = {}
 const pool = require('../database')
 
 
-store.get = async (req, res)=>{
+store.get = async (req, res, DB)=>{
 
     const store = await pool.query('SELECT * from store')
     console.log('esntro al de store ' +
@@ -16,6 +16,7 @@ store.post = async(req, res)=>{
         ok:'ok pex'
     })
 }
+
 
 
 

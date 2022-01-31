@@ -37,6 +37,7 @@ function model_processor (proforma_id , name,store_id ,link ,active,price_dol,pr
         store_id:this.store_id,
         link:this.link,
         active:this.active,
+        brand_id:this.brand_id = active || null,
         price_dol:this.price_dol,
         price_sol:this.price_sol
 
@@ -49,22 +50,24 @@ processor.add = async (req, res) =>{
     console.log(req.body)
     console.log(req.params)
     console.log("antes params ")
-    const {id_proforma} = req.params
+    const {proforma_id} = req.params
     const {
         name,
         store_id,
         link,
         active,
+        brand_id,
         price_dol,
         price_sol
     } = req.body
 
     const me = model_processor(
-        id_proforma,
+        proforma_id,
         name,
         store_id,
         link,
         active,
+        brand_id,
         price_dol,
         price_sol
     )

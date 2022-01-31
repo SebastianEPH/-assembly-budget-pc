@@ -1,8 +1,7 @@
 import {Button, Modal} from "react-bootstrap";
-
-import InputStore from "../InputStore";
 import {useState} from "react";
 import connectionAPI from "../../../config/axios";
+import InputSelect from "../InputSelect";
 
 export default function ModalAddProcessor (){
 
@@ -15,7 +14,7 @@ export default function ModalAddProcessor (){
         name: "",
         link: "",
         active: "",
-        store_id: "",
+        store: "",
         price_dol: "",
         price_sol: ""
     }) // para form
@@ -65,7 +64,7 @@ export default function ModalAddProcessor (){
                     <div className="row p-1">
                         <div className="col-md-12">
                             <div className="input-group">
-                                <label className="form-label col-auto ">Processor <code>()</code></label>
+                                <label className="form-label col-auto ">Processor</label>
                                 <div className="form-check form-switch col-auto">
                                     <input name="active" onChange={handleChangeProcessor} className="form-check-input" type="checkbox" role="switch" />
                                     <label className="form-check-label" htmlFor="flexSwitchCheckChecked">Predeterminado</label>
@@ -85,7 +84,7 @@ export default function ModalAddProcessor (){
                                         <path
                                             d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
                                     </svg></div>
-                                <input name="link" onChange={handleChangeProcessor} type="link" className="form-control" id="proce_link" placeholder="Link" />
+                                <input name="link" onChange={handleChangeProcessor} type="link" className="form-control" placeholder="Link" />
                                 <a className="btn btn-primary" href={`{}`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                          className="bi bi-box-arrow-up-right" viewBox="0 0 20 20">
@@ -99,16 +98,14 @@ export default function ModalAddProcessor (){
                     </div>
 
                     <div className="row p-1">
-                        <InputStore id="input_storre_processor" col="4">
-                            <label className="form-label col-auto ">Store</label>
-                        </InputStore>
-                        <div className="col-md-3">
-                            <label htmlFor="inputPassword4" className="form-label">Marca</label>
-                            <select name="brand" id="proce_brand" className="form-select">
-                                <option defaultValue>AMD</option>
-                                <option>Intel</option>
-                            </select>
-                        </div>{/* Brand */}
+
+                        <InputSelect name="store_id" col="4" URL="/store">
+                            <label className="form-label col-auto ">Store 2</label>
+                        </InputSelect>
+
+                        <InputSelect name="brand_id" col="3" URL="/brand">
+                            <label className="form-label col-auto ">Brand 2</label>
+                        </InputSelect>
 
                         <div className="col-md-5">
                             <label htmlFor="inputCity" className="form-label">Price</label>

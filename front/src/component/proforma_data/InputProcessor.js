@@ -1,6 +1,6 @@
 import {Link, } from "react-router-dom";
-import InputStore from "./InputStore";
 import {useState} from "react";
+import InputSelect from "./InputSelect";
 export default function InputProcessor (p){
 
 
@@ -18,13 +18,13 @@ export default function InputProcessor (p){
                         <input name="name"  type="text" className="form-control col-auto" id={`processor_name_${p.index+1}`} placeholder="Name and model"  defaultValue={p.name} />
                     </div>
                 </div>{/* input */}
-                <div className="col-md-1">
-                    <label htmlFor="inputPassword4" className="form-label">Marca</label>
-                    <select name="brand" id="proce_brand" className="form-select">
-                        <option defaultValue>AMD</option>
-                        <option>Intel</option>
-                    </select>
-                </div>{/* Brand */}
+
+
+                <InputSelect name="brand_id" col="1" URL="/brand">
+                    <label className="form-label col-auto ">Brand 2</label>
+                </InputSelect>
+
+
                 <div className="col-md-2">
                     <label htmlFor="inputCity" className="form-label">Price</label>
                     <div className="input-group">
@@ -39,11 +39,16 @@ export default function InputProcessor (p){
             </div>
 
             <div className="row p-1">
-                {<InputStore  id="input_processor" id_select={p.store_id} col="2"/>}
+
+                <InputSelect name="store_id" id_select={p.store_id}  col="2" URL="/store">
+                    <label className="form-label col-auto ">Store 2</label>
+                </InputSelect>
 
                 <div className="col-md-10">
+                    <label className="form-label col-auto ">Link</label>
                     <div className="input-group">
                         <div className="input-group-text">
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  className="bi bi-link-45deg" viewBox="0 0 16 16">
                                 <path
