@@ -5,7 +5,7 @@ export default function InputProcessor (p){
 
 
     return(
-        <div  className="border border-danger">
+        <div  className="border border-danger ">
             <div className="row p-1">
                 <div className="col-md-9">
                     <div className="row">

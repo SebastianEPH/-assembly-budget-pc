@@ -2,6 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 import {useState} from "react";
 import connectionAPI from "../../../config/axios";
 import InputSelect from "../InputSelect";
+import ButtonModal from "../ButtonModal";
 
 export default function ModalAddProcessor (){
 
@@ -43,9 +44,18 @@ export default function ModalAddProcessor (){
 
     return(
     <>
+        {/*
         <Button variant="primary" onClick={handleShow}>
             Added new processor
         </Button>
+         */}
+
+        <ButtonModal
+            name="Add new Processor"
+            size="15"
+            icon_size="60"
+            funct={handleShow}
+        />
 
         <Modal
             show={show}

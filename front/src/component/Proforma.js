@@ -20,10 +20,8 @@ export default function Proforma(){
         //setPro({...pro, [e.target.name]: e.target.value})
     }
 
-
     const {id} = useParams();
     console.log(id)
-
 
     useEffect(()=>{
         //getProjects();
@@ -36,8 +34,6 @@ export default function Proforma(){
         //    console.log(`No existe el id${id}`)
         //    // consumir api
         //}
-
-
     },[])
 
     const  consultarApi = async (id)=>    {
@@ -59,43 +55,31 @@ export default function Proforma(){
 
     return(
      <div>
+         <div className="col-auto">
+             <ModalAddProcessor/>
+         </div>
 
-         <form className="g-3 "  onSubmit={handleSubmit}>
-             {/* Processor */}
-             <div className="row">
-                 <div className="col-auto">
-                     <ModalAddProcessor/>
-                 </div>
-
-                 <div className="col-auto">
-                     <h4>Procesador</h4>
-                 </div>
-
-             </div>
-             { processor.map(function(p ,handlechange, index){
-                 return(
-                    <InputProcessor
-                        handlechange={handlechange}
-                        id={p.id}
-                        index={"indexPEEE"}
-                        name={p.name}
-                        link={p.link}
-                        active={p.active}
-                        brand_id={p.brand_id}
-                        store_id={p.store_id}
-                        price_dol={p.price_dol}
-                        price_sol={p.price_sol}/>
-                 )
-             })}
-
-
-
-             {/*  */}
-             <button type="submit" className="btn btn-primary">
-                Save
-             </button>
-         </form>
-
+         {/* Processor */}
+         { processor.toString() !== ""
+             ? <div className="col-auto">
+                    <h4>Procesador</h4>
+                </div>
+             :""}
+        { processor.map(function(p , index){
+            return(
+               <InputProcessor
+                   id={p.id}
+                   index={index}
+                   name={p.name}
+                   link={p.link}
+                   active={p.active}
+                   brand_id={p.brand_id}
+                   store_id={p.store_id}
+                   price_dol={p.price_dol}
+                   price_sol={p.price_sol}
+               />
+            )
+        })}
      </div>
     )
 }

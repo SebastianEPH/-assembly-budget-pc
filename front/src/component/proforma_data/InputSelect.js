@@ -23,13 +23,14 @@ export default function (props){
     return(
         <div className={`col-md-`+ props.col}>
             {props.children}
-            <select name={props.name}  className="form-select">
-                <option defaultValue="">---</option>
+            <select name={props.name}   className="form-select"> {/*value={props.id_select} */}
+                <option  key="0">---</option>
                 {
-                    store.map(function(p){
+                    store.map(function(p, index){
                         return(
+                            <option  selected={props.id_select===p.id?'selected':false} defaultValue={p.id} key={index}>{p.name}</option>
 
-                            <option selected={props.id_select===p.id?'selected':false} defaultValue={p.id} >{p.name}</option>
+
                         )
                     })
                 }
