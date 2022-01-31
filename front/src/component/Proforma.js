@@ -3,15 +3,16 @@ import connectionAPI from "../config/axios";
 import {Link} from "react-router-dom";
 import "../App.css"
 import {useEffect, useState} from "react";
-import InputProcessor from "./proforma_data/InputProcessor";
+import InputProcessor from "./proforma_data/processor/InputProcessor";
 import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
 
 
 
 
 export default function Proforma(){
-    const [proforma, setproforma] = useState([]); // array vacio
-    const [processor, setprocessor] = useState([]); // array vacio
+    //const [proforma, setproforma] = useState([]); // array vacio
+    const [processor, setProcessor] = useState([]); // array vacio
+    const [motherboard, setMotherboard] = useState([]); // array vacio
 
 
     //console.log('el id es ', p.id)
@@ -25,7 +26,8 @@ export default function Proforma(){
 
     useEffect(()=>{
         //getProjects();
-        consultarApi(id);
+        //consultarApi(id);
+        consultarApi(id)
         //if (id !== ''){
         //    console.log(`Si se encontró id ${id}`)
         //   consultarApi(id);
@@ -41,54 +43,88 @@ export default function Proforma(){
         const queryProjects = await connectionAPI.get(`/proforma/${id}`)
         //console.log(queryProjects )
         const json = queryProjects.data
-        console.log('esto es el proforma normal')
         console.log(json)
-        console.log('esto es el processreor')
-        console.log(json[0].processor)
-        setproforma(json)
-        setprocessor(json[0].processor)
+        //console.log('esto es el proforma normal')
+        //console.log(json)
+        //console.log('esto es el processreor')
+        //console.log(json[0].processor)
+        ///setproforma(json)
+        setProcessor(json[0].processor)
+        setMotherboard(json[0].motherboard)
     }
+
+    //const  consultarApi = async (proforma_id, processor_id)=>    {
+    //    console.log('consultado API denbtro ')
+
+    //    const processor= await connectionAPI.get(`/proforma/${id}/processor`)
+    //    const motherboard = await connectionAPI.get(`/proforma/${id}/motherboard`)
+
+    //    console.table(processor.data)
+    //    console.table(motherboard.data)
+    //    setMotherboard(motherboard.data)
+    //    setProcessor(processor.data)
+
+    //    //console.log(queryProjects )
+
+    //   //const json = queryProjects.data
+    //   //console.log('esto es el proforma normal')
+    //   //console.log(json)
+    //   //console.log('esto es el processreor')
+    //   //console.log(json[0].processor)
+    //   //setproforma(json)
+    //   //setprocessor(json[0].processor)
+    //}
+
     const handleSubmit = e=>{
         e.preventDefault();
         console.log('Summit')
     }
 
-    return(
-     <div>
-         <div className="container">
-           <div className="row justify-content-center">
-               <ModalAddProcessor/>
-               <ModalAddProcessor/>
-               <ModalAddProcessor/>
-               <ModalAddProcessor/>
-           </div>
+return(
+ <div>
+     <div className="container">
+       <div className="row justify-content-center">
+           <ModalAddProcessor/>
+           <ModalAddProcessor/>
 
-         </div>
+       </div>
 
-         {/* Processor */}
-         { processor.toString() !== ""
-             ? <div className="col-auto">
-                    <h4>Procesador</h4>
-                </div>
-             :""}
-        { processor.map(function(p , index){
-            return(
-               <InputProcessor
-                   id={p.id}
-                   index={index}
-                   name={p.name}
-                   link={p.link}
-                   active={p.active}
-                   brand_id={p.brand_id}
-                   store_id={p.store_id}
-                   price_dol={p.price_dol}
-                   price_sol={p.price_sol}
-               />
-            )
-        })}
      </div>
-    )
+
+     {/* Processor */}
+     { processor.toString() !== ""
+         ? <div className="col-auto">
+                <h4>Procesador</h4>
+            </div>
+         :""}
+     {processor.map(function(p , index){
+        return(
+           <InputProcessor
+               id={p.id}
+               index={index}
+               name={p.name}
+               link={p.link}
+               active={p.active}
+               brand_id={p.brand_id}
+               store_id={p.store_id}
+               price_dol={p.price_dol}
+               price_sol={p.price_sol}
+           />
+        )
+     })}
+
+     {/* Motherboard */}
+
+ </div>
+)
 }
+
+//{ motherboard.toString() !== ""
+//    ? <div className="col-auto">
+//        <h4>Procesador</h4>
+//    </div>
+//    :""}
+//
 
 //{/* Memory RAM */}
 //<div className="col-10">

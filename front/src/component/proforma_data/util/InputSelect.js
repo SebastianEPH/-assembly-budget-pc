@@ -1,4 +1,4 @@
-import connectionAPI from "../../config/axios"
+import connectionAPI from "../../../config/axios"
 import {useEffect, useState} from "react";
 
 

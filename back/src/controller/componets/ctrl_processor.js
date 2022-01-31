@@ -84,7 +84,11 @@ processor.update = async (req, res) =>{
     console.log("put")
 }
 processor.get = async (req, res) =>{
-    console.log("get")
+
+    const {proforma_id} =  req.params
+    const processor = await pool.query('SELECT * from processor where proforma_id = ?',proforma_id)
+
+    res.json(processor)
 }
 processor.getOnly = async (req, res) =>{
     console.log("getonly")

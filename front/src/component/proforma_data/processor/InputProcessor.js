@@ -1,9 +1,10 @@
 import {Link, } from "react-router-dom";
 import {useState} from "react";
-import InputSelect from "./InputSelect";
+import InputSelect from "../util/InputSelect";
+
+
+
 export default function InputProcessor (p){
-
-
     return(
         <div  className="border border-danger ">
             <div className="row p-1">

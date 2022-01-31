@@ -24,12 +24,14 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
 
     // verificar el id, por que hay problemas si no mandas un id que no se aun numero .
 
-    const proforma = await pool.query('SELECT * from proforma where id = ? ', [req.params.id])
+    const proforma = await pool.query('SELECT * from proforma where id = ? ', [id])
 
     //console.log(proforma)
     //array1.forEach(element => console.log(element));
 
     const processor = await pool.query('SELECT * from processor where proforma_id = ?',id)
+    const motherboard = await pool.query('SELECT * from motherboard where proforma_id = ? ',[id])
+
     // const pro = await pool.query('SELECT * from proforma RIGHT JOIN processor ON proforma.id = processor.id')
 
     //let hol = [processor[0],processor[1]]
@@ -38,11 +40,12 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
     //let new_proforma = JSON.parse(JSON.stringify(proforma))
     //new_proforma.processor = new_processor
     //console.log(new_proforma) // esta es la menera correcta
-    console.log(processor)
+    //console.log(processor)
     proforma[0].processor =  processor
-    console.log(JSON.stringify(proforma))
-    console.table(proforma)
-    console.log(Object.values(proforma))
+    proforma[0].motherboard = motherboard
+    //console.log(JSON.stringify(proforma))
+    //console.table(proforma)
+    //console.log(Object.values(proforma))
     res.json(proforma)
 
     // if result  pool.query === 0 return   res.status(404).json({message: "no se encontro la proforma, no existe  "})
