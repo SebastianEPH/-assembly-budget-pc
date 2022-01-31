@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import connectionAPI from "../config/axios";
 
-export default function ListProject (p){
+export default function ListProject (){
     const [projects, setProjects] = useState([]); // array vacio
 
 
@@ -143,7 +143,7 @@ export default function ListProject (p){
                             <div className="card-body">
                                 <h5 className="card-title">{p.name}</h5>
                                 <p className="card-text">{p.details}</p>
-                                <Link to={`/`+p.id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
+                                <Link to={`/proforma/`+p.id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
                                     ver
                                 </Link>
                             </div>

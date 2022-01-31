@@ -38,6 +38,18 @@ app.use(express.urlencoded({
 app.use('/api/', require('./routers/proforma')) //  router index
 app.use('/api/', require('./routers/others')) //  router index
 
+
+//app.use((err, req, res, next)=>{
+//    return res.json({
+//        message: 'Error pex' //  err.message
+//    })
+//})
+// uso // req, res, next
+// next(error) (del catch )
+//
+// crear errores personalizados
+// thorow new Error ('No puede realizar eso ')
+
 // starting server
 app.listen(app.get('port'),()=>{
     console.log('Server un port', app.get('port'));

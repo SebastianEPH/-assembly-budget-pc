@@ -1,27 +1,41 @@
 import {useParams} from "react-router-dom";
 import connectionAPI from "../config/axios";
 import {Link} from "react-router-dom";
+import "../App.css"
 import {useEffect, useState} from "react";
 import InputProcessor from "./proforma_data/InputProcessor";
+import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
+
+
 
 
 export default function Proforma(){
     const [proforma, setproforma] = useState([]); // array vacio
     const [processor, setprocessor] = useState([]); // array vacio
+
+
+    //console.log('el id es ', p.id)
+    const handlechange = (e) =>{
+        console.log(e.target.name, e.target.value)
+        //setPro({...pro, [e.target.name]: e.target.value})
+    }
+
+
     const {id} = useParams();
     console.log(id)
 
 
     useEffect(()=>{
         //getProjects();
-        if (id !== ''){
-            console.log(`Si se encontró id ${id}`)
-           consultarApi(id);
-            //procesor_name()
-        }else{
-            console.log(`No existe el id${id}`)
-            // consumir api
-        }
+        consultarApi(id);
+        //if (id !== ''){
+        //    console.log(`Si se encontró id ${id}`)
+        //   consultarApi(id);
+        //    //procesor_name()
+        //}else{
+        //    console.log(`No existe el id${id}`)
+        //    // consumir api
+        //}
 
 
     },[])
@@ -38,35 +52,41 @@ export default function Proforma(){
         setproforma(json)
         setprocessor(json[0].processor)
     }
-    const procesor_name= ()=>{
-        if (proforma){
-            console.log('estoy dentro de la fuincion el sigueinte es el enombre ')
-            console.log(proforma.name)
-            console.log(proforma)
-            return proforma[0].name
-
-        }else{
-            return ""
-        }
+    const handleSubmit = e=>{
+        e.preventDefault();
+        console.log('Summit')
     }
 
     return(
      <div>
 
-         <form className="g-3 " action="/" method="post" >
+         <form className="g-3 "  onSubmit={handleSubmit}>
              {/* Processor */}
-             { processor.map(function(p , index){
+             <div className="row">
+                 <div className="col-auto">
+                     <ModalAddProcessor/>
+                 </div>
+
+                 <div className="col-auto">
+                     <h4>Procesador</h4>
+                 </div>
+
+             </div>
+             { processor.map(function(p ,handlechange, index){
                  return(
                     <InputProcessor
-                        index={index}
+                        handlechange={handlechange}
+                        id={p.id}
+                        index={"indexPEEE"}
                         name={p.name}
                         link={p.link}
+                        active={p.active}
                         store_id={p.store_id}
                         price_dol={p.price_dol}
                         price_sol={p.price_sol}/>
-
                  )
              })}
+
 
 
              {/*  */}
@@ -74,6 +94,7 @@ export default function Proforma(){
                 Save
              </button>
          </form>
+
      </div>
     )
 }

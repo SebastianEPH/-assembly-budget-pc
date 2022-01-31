@@ -1,17 +1,26 @@
 import {Link, } from "react-router-dom";
 import InputStore from "./InputStore";
+import {useState} from "react";
 export default function InputProcessor (p){
 
+
     return(
-        <div className="border border-danger">
+        <div onChange={p.handlechange} className="border border-danger">
             <div className="row p-1">
                 <div className="col-md-9">
-                    <label className="form-label">Processor <code>({p.index+1})</code></label>
-                    <input type="text" className="form-control" id="processor" placeholder="Name and model"  defaultValue={p.name} />
+                    <div className="row">
+                        <label className="form-label col-auto ">Processor <code>({p.index+1})</code></label>
+                        <div className="form-check form-switch col-auto">
+                            <input name="active" onChange={p.handlechange} className="form-check-input" type="checkbox" role="switch" id={`processor_active_${p.index+1}`}
+                                   defaultChecked={p.active === 1? 'checked': ''}/>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckChecked">Predeterminado{p.active}</label>
+                        </div>
+                        <input name="name"  type="text" className="form-control col-auto" id={`processor_name_${p.index+1}`} placeholder="Name and model"  defaultValue={p.name} />
+                    </div>
                 </div>{/* input */}
                 <div className="col-md-1">
                     <label htmlFor="inputPassword4" className="form-label">Marca</label>
-                    <select id="proce_brand" className="form-select">
+                    <select name="brand" id="proce_brand" className="form-select">
                         <option defaultValue>AMD</option>
                         <option>Intel</option>
                     </select>
@@ -20,23 +29,19 @@ export default function InputProcessor (p){
                     <label htmlFor="inputCity" className="form-label">Price</label>
                     <div className="input-group">
                         <div className="input-group-text">$</div>
-                        <input type="text" className="form-control" id="proce_dolar"
+                        <input name="price_dol" onChange={p.handlechange} type="text" className="form-control" id="proce_dolar"
                                placeholder="0" defaultValue={p.price_dol}/>
                         <div className="input-group-text">S/</div>
-                        <input type="text" className="form-control" id="proce_Sol"
+                        <input name="price_sol" onChange={p.handlechange} type="text" className="form-control" id="proce_Sol"
                                placeholder="0" defaultValue={p.price_sol} readOnly/>
                     </div>
                 </div>{/* Price */}
             </div>
 
             <div className="row p-1">
+                {<InputStore  id="input_processor" id_select={p.store_id} col="2"/>}
 
-                {<InputStore
-                    id={p.store_id}
-                />}
-
-
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="input-group">
                         <div className="input-group-text">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -46,8 +51,8 @@ export default function InputProcessor (p){
                                 <path
                                     d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
                             </svg></div>
-                        <input type="link" className="form-control" id="proce_link" placeholder="Link" defaultValue={p.link}/>
-                        <a className="btn btn-primary">
+                        <input name="link" onChange={p.handlechange} type="link" className="form-control" id="proce_link" placeholder="Link" defaultValue={p.link}/>
+                        <a className="btn btn-primary" href={`${p.link}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                  className="bi bi-box-arrow-up-right" viewBox="0 0 20 20">
                                 <path fillRule="evenodd"
@@ -57,7 +62,7 @@ export default function InputProcessor (p){
                             </svg></a>
                     </div>
                 </div>{/* link */}
-                <Link to={`/`} className="btn btn-primary col-md-1">Save</Link>
+                {/*<Link to={'/'} method='post' className="btn btn-primary col-md-1">Save</Link>*/}
             </div>
         </div>
     );

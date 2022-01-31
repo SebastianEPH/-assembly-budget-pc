@@ -11,6 +11,8 @@ project.get = async (req, res)=>{ // esto es de la vista principal, no es de pro
     console.log(proforma)
     res.json(proforma)
 
+    // res.json proforma.rows .
+
 }
 project.get_only = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
     const {id} = req.params
@@ -39,6 +41,11 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
     console.table(proforma)
     console.log(Object.values(proforma))
     res.json(proforma)
+
+    // if result  pool.query === 0 return   res.status(404).json({message: "no se encontro la proforma, no existe  "})
+    //
+
+    // added try catch, return res.jason(err: error.message)
 
 }
 

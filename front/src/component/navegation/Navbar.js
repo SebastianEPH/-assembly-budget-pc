@@ -9,14 +9,14 @@ export default function NewProject (){
                 <div className="container-fluid">
                     <a className="navbar-brand">Navbar</a>
                     <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        <Link to="/" className="btn btn-dark">
-                            onlylink principal
-                        </Link>
-
-                        <NavLink to="/about" className="btn btn-dark" activeClassName="active">
-                        navlink about
+                        <NavLink to="/about" className={({isActive})=> isActive? "btn btn-success":"btn btn-dark"} > {/* activeClassName="active" es del propio navlink*/}
+                        about
+                        </NavLink>
+                        <NavLink to="/" className={({isActive})=> isActive? "btn btn-success":"btn btn-dark"}>
+                            main
+                        </NavLink>
+                        <NavLink to="/proforma/1" className={({isActive})=> isActive? "btn btn-success":"btn btn-dark"}>
+                             item 1
                         </NavLink>
 
                     </form>

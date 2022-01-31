@@ -5,22 +5,12 @@ import {useEffect, useState} from "react";
 export default function InputProcessor (data){
 
     const [store, setstore] = useState([]);
-    const [select, setselect] = useState("");
     useEffect(()=>{
         //getProjects();
         consultarApi()
 
     },[])
-    useEffect(()=>{
-        //getProjects();
-        verifySelect()
 
-    },[])
-    const verifySelect = async ()=>{
-        ///data.id
-       // if data
-        console.log()
-    }
     const  consultarApi = async ()=>    {
         console.log('consultado API principal ')
         const queryProjects = await connectionAPI.get('/store')
@@ -28,17 +18,19 @@ export default function InputProcessor (data){
         const json = queryProjects.data
         console.log(json)
         setstore(json)
-
     }
 
     return(
 
-        <div className="col-md-2">
-            <select id="proce_store" className="form-select">
+        <div className={`col-md-`+ data.col}>
+            {data.children}
+            <select name="store" id={data.id} className="form-select">
+                <option value="">---</option>
                 {
                     store.map(function(p){
                         return(
-                            <option selected={data.id===p.id?'selected':''} value={p.id} >{p.name}   </option>
+
+                            <option selected={data.id_select===p.id?'selected':false} value={p.id} >{p.name}</option>
                         )
                     })
                 }

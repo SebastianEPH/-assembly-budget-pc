@@ -1,8 +1,10 @@
 import  {Fragment} from 'react';
 import React from "react";
+import "./App.css"
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
     Switch,
+    Routes,
     Route,
     Link,
     useRouteMatch,
@@ -18,27 +20,11 @@ import Navbar from "./component/navegation/Navbar";
 function App() {
 
     return (
-        <Router>
-           <div className="btn-group">
-
-           </div>
-            <Switch>
-                <Route path="/proforma">
-                    <Navbar/>
-                    <div className="container-fluid p-5">
-                        <Proforma/>
-                    </div>
-                </Route>
-                <Route path="/about">
-                    <Navbar/>
-                    <div className="container-fluid p-5">
-                        <h1>acerca de?? </h1>
-                    </div>
-                </Route>
-                <Route path="/" exact>
-                    <Navbar/>
-                    <br/>
-                    <br/>
+        <BrowserRouter>
+            <Navbar/>
+            <Routes>
+                <Route path="/proforma/:id" element={<Proforma/>}/>
+                <Route path="/" exact element={
                     <div className="container">
                         <NewProject/>
                         <br/>
@@ -46,38 +32,16 @@ function App() {
                         <br/>
                         <ListProject/>
                     </div>
-                </Route>
-                <Route path="/:id" >
-                    <Navbar/>
+                }/>
+                <Route path="/about" element={
                     <div className="container-fluid p-5">
-                        <Proforma/>
+                        <h1>acerca de?? </h1>
                     </div>
-                </Route>
-
-
-
-            </Switch>
-
-        </Router>
+                }/>
+                <Route path="*" element={<h1>Error 404, el URL no existe </h1>}/>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
 export default App;
-/*
-*     <div className="p-5">
-                         <h1>Proformas</h1>
-                         <br/>
-                         <Proforma/>
-
-
-                 </div>
-                 *
-* <div className="container">
-
-                         <NewProject/>
-                         <br/>
-                         <SearchProject/>
-                         <br/>
-                         <ListProject/>
-                 </div>
-                 * */
