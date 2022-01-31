@@ -81,6 +81,7 @@ export default function Proforma(){
                         name={p.name}
                         link={p.link}
                         active={p.active}
+                        brand_id={p.brand_id}
                         store_id={p.store_id}
                         price_dol={p.price_dol}
                         price_sol={p.price_sol}/>
