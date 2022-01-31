@@ -28,9 +28,10 @@ export default function ModalAddProcessor (){
 
     const saveProcessor = async() =>{
         console.log('save procesor ')
-        /*
-        const queryProjects = await connectionAPI.post(`/proforma/`)
+
+        const queryprocessor = await connectionAPI.post(`/proforma/1/processor`, pro)
         //console.log(queryProjects )
+        /*
         const json = queryProjects.data
         console.log('esto es el proforma normal')
         console.log(json)
