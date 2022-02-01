@@ -1,10 +1,9 @@
-import {Link, } from "react-router-dom";
-import {useState} from "react";
+
 import InputSelect from "../util/InputSelect";
 
 
 
-export default function InputProcessor (p){
+export default function ShowProcessor (p){
     return(
         <div  className="border border-danger ">
             <div className="row p-1">
@@ -21,8 +20,8 @@ export default function InputProcessor (p){
                 </div>{/* input */}
 
 
-                <InputSelect name="brand_id"  id_select={p.brand_id}  col="1" URL="/brand">
-                    <label className="form-label col-auto ">Brand 2</label>
+                <InputSelect name="brand_processor_id"  id_select={p.brand_id}  col="1" DATA={p.DATA_brand_processor}>
+                    <label className="form-label col-auto ">Socket Type</label>
                 </InputSelect>
 
 
@@ -41,8 +40,8 @@ export default function InputProcessor (p){
 
             <div className="row p-1">
 
-                <InputSelect name="store_id" id_select={p.store_id}  col="2" URL="/store">
-                    <label className="form-label col-auto ">Store 2</label>
+                <InputSelect name="brand_processor_id"  id_select={p.brand_id}  col="1" DATA={p.DATA_brand_processor}>
+                    <label className="form-label col-auto ">Socket Type</label>
                 </InputSelect>
 
                 <div className="col-md-10">

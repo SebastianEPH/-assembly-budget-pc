@@ -3,8 +3,9 @@ import connectionAPI from "../config/axios";
 import {Link} from "react-router-dom";
 import "../App.css"
 import {useEffect, useState} from "react";
-import InputProcessor from "./proforma_data/processor/InputProcessor";
+import ShowProcessor from "./proforma_data/processor/ShowProcessor";
 import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
+import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
 
 
 
@@ -13,7 +14,8 @@ export default function Proforma(){
     //const [proforma, setproforma] = useState([]); // array vacio
     const [processor, setProcessor] = useState([]); // array vacio
     const [motherboard, setMotherboard] = useState([]); // array vacio
-
+    const [brandProcessor, setBrandProcessor] = useState([]);
+    const [brand, setBrand] = useState([]);
 
     //console.log('el id es ', p.id)
     const handlechange = (e) =>{
@@ -21,26 +23,24 @@ export default function Proforma(){
         //setPro({...pro, [e.target.name]: e.target.value})
     }
 
+
     const {id} = useParams();
-    console.log(id)
+    console.log("El ID de le proforma es: "+ id)
 
     useEffect(()=>{
         //getProjects();
-        //consultarApi(id);
         consultarApi(id)
-        //if (id !== ''){
-        //    console.log(`Si se encontró id ${id}`)
-        //   consultarApi(id);
-        //    //procesor_name()
-        //}else{
-        //    console.log(`No existe el id${id}`)
-        //    // consumir api
-        //}
+
     },[])
+
 
     const  consultarApi = async (id)=>    {
         console.log('consultado API ')
         const queryProjects = await connectionAPI.get(`/proforma/${id}`)
+
+        const brand= await connectionAPI.get(`/brand`)
+        const brandProcessor= await connectionAPI.get(`/brand_processor`)
+
         //console.log(queryProjects )
         const json = queryProjects.data
         console.log(json)
@@ -49,6 +49,10 @@ export default function Proforma(){
         //console.log('esto es el processreor')
         //console.log(json[0].processor)
         ///setproforma(json)
+
+        setBrand(brand.data)
+        setBrandProcessor(brandProcessor.data)
+
         setProcessor(json[0].processor)
         setMotherboard(json[0].motherboard)
     }
@@ -92,14 +96,10 @@ return(
      </div>
 
      {/* Processor */}
-     { processor.toString() !== ""
-         ? <div className="col-auto">
-                <h4>Procesador</h4>
-            </div>
-         :""}
+     { processor.toString() !== ""? <div className="col-auto"><h4>Procesador</h4></div> :""}
      {processor.map(function(p , index){
         return(
-           <InputProcessor
+           <ShowProcessor
                id={p.id}
                index={index}
                name={p.name}
@@ -109,11 +109,31 @@ return(
                store_id={p.store_id}
                price_dol={p.price_dol}
                price_sol={p.price_sol}
+               DATA_brand_processor={brandProcessor}
+               DATA_brand={brand}
            />
         )
      })}
 
      {/* Motherboard */}
+     { motherboard.toString() !== "" ? <div className="col-auto"><h4>Motherboard</h4></div> :""}
+     {motherboard.map(function(data, index){
+         return(
+             <ShowMotherboard
+                 motherboard_id = {data.id}
+                 index={index}
+                 proforma_id={data.proforma_id}
+                 name={data.name}
+                 brand_id={data.brand_id}
+                 img={data.img}
+                 cpi_id={data.cpu_id}
+                 active={data.active}
+                 DATA_brand_processor={brandProcessor}
+                 DATA_brand={brand}
+             />
+         )
+     })}
+
 
  </div>
 )

@@ -1,12 +1,12 @@
 const brand = {}
+
 const pool = require('../database')
 
 
-brand.get = async (req, res, DB)=>{
+brand.get = async (req, res)=>{
 
-    const brand = await pool.query('SELECT * from processor_brand')
-    console.log('esntro al de brand ' +
-        '/?  ')
+    const brand = await pool.query('SELECT * from brand')
+    console.log('esntro al de brand ' )
     console.table(brand)
     res.json(brand)
 

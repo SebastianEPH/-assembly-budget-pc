@@ -18,7 +18,7 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
     const {id} = req.params
 
     console.log(req.params)
-    console.log('entro:?? ')
+    console.log('entro:propforma get  ')
      // está detectando store como un i
 
 
@@ -41,6 +41,8 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
     //new_proforma.processor = new_processor
     //console.log(new_proforma) // esta es la menera correcta
     //console.log(processor)
+    console.table(processor)
+    console.table(motherboard)
     proforma[0].processor =  processor
     proforma[0].motherboard = motherboard
     //console.log(JSON.stringify(proforma))

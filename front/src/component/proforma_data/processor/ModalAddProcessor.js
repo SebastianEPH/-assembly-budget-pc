@@ -113,8 +113,8 @@ export default function ModalAddProcessor (){
                             <label className="form-label col-auto ">Store 2</label>
                         </InputSelect>
 
-                        <InputSelect name="brand_id" col="3" URL="/brand">
-                            <label className="form-label col-auto ">Brand 2</label>
+                        <InputSelect name="brand_id" col="3" URL="/brand_processor">
+                            <label className="form-label col-auto ">Brand processor</label>
                         </InputSelect>
 
                         <div className="col-md-5">
