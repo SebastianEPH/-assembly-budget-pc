@@ -1,6 +1,5 @@
 import  {Fragment} from 'react';
 import React from "react";
-import "./App.css"
 import {
     BrowserRouter,
     Switch,
@@ -11,7 +10,7 @@ import {
     useParams
 } from "react-router-dom";
 
-import ListProject from "./component/ListProject";
+import ListProforma from "./component/ListProforma";
 import SearchProject from "./component/SearchProject";
 import NewProject from "./component/NewProject";
 import Proforma from "./component/Proforma";
@@ -30,7 +29,7 @@ function App() {
                         <br/>
                         <SearchProject/>
                         <br/>
-                        <ListProject/>
+                        <ListProforma/>
                     </div>
                 }/>
                 <Route path="/about" element={

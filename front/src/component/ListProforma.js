@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import connectionAPI from "../config/axios";
 
-export default function ListProject (){
+export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
 
 
@@ -131,24 +131,28 @@ export default function ListProject (){
     //    return (<htmlProject name="PC gaby " details="esta pc nunca se concreto " date="mayo" active="0"/>)
     //})}
     // ricki morty
-    //<ListProject index={p.id}  name={p.name} details={p.status} location={p.location.name} date={p.created} active="0" img={p.image}/>
+    //<ListProforma index={p.id}  name={p.name} details={p.status} location={p.location.name} date={p.created} active="0" img={p.image}/>
 
     return(
         <div className="container">
             <div className="row justify-content-center">
-                {projects.map(function ( p, index){
+                {projects.map(function ( {id, name, details, date, img}, index){
                     return (
-                        <div className="card m-2" style={{width: '18rem'}}>
-                            <img src={p.img} className="card-img-top" alt=""/>
+                        <div className="card m-2" style={{width: '18rem'}} key={id+index}>
+                            <img src={img} className="card-img-top" alt=""/>
                             <div className="card-body">
-                                <h5 className="card-title">{p.name}</h5>
-                                <p className="card-text">{p.details}</p>
-                                <Link to={`/proforma/`+p.id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
-                                    ver
+                                <h5 className="card-title">{name}</h5>
+                                <p className="card-text">{details}</p>
+                                <Link to={`/proforma/`+id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
+                                    Edit
+                                </Link>
+
+                                <Link to={`/proforma/`+id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
+                                    View
                                 </Link>
                             </div>
                             <div className="card-header-pills">
-                                <h6 className="card-subtitle mb-2 text-muted text-end">{p.date} </h6>
+                                <h6 className="card-subtitle mb-2 text-muted text-end">{date} </h6>
                             </div>
                         </div>
                     )

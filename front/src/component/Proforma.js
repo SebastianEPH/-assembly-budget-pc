@@ -1,20 +1,21 @@
 import {useParams} from "react-router-dom";
 import connectionAPI from "../config/axios";
-import {Link} from "react-router-dom";
-import "../App.css"
 import {useEffect, useState} from "react";
 import ShowProcessor from "./proforma_data/processor/ShowProcessor";
 import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
 import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
-
-
-
+import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
+import {Container, Row} from "react-bootstrap";
+import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 
 export default function Proforma(){
-    //const [proforma, setproforma] = useState([]); // array vacio
     const [processor, setProcessor] = useState([]); // array vacio
     const [motherboard, setMotherboard] = useState([]); // array vacio
     const [brandProcessor, setBrandProcessor] = useState([]);
+    const [memoryRAM, setMemoryRAM] = useState([]);
+    const [memoryRAMType, setMemoryRAMType] = useState([]);
+    const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
+    const [memoryRAMSize, setMemoryRAMSize] = useState([]);
     const [brand, setBrand] = useState([]);
 
     //console.log('el id es ', p.id)
@@ -23,16 +24,13 @@ export default function Proforma(){
         //setPro({...pro, [e.target.name]: e.target.value})
     }
 
-
     const {id} = useParams();
     console.log("El ID de le proforma es: "+ id)
 
     useEffect(()=>{
-        //getProjects();
         consultarApi(id)
 
     },[])
-
 
     const  consultarApi = async (id)=>    {
         console.log('consultado API ')
@@ -55,6 +53,11 @@ export default function Proforma(){
 
         setProcessor(json[0].processor)
         setMotherboard(json[0].motherboard)
+
+        setMemoryRAM(json[0].memory_ram)
+        setMemoryRAMType(json[0].memory_ram_type)
+        setMemoryRAMFrequency(json[0].memory_ram_frequency)
+        setMemoryRAMSize(json[0].memory_ram_size)
     }
 
     //const  consultarApi = async (proforma_id, processor_id)=>    {
@@ -79,60 +82,77 @@ export default function Proforma(){
     //   //setprocessor(json[0].processor)
     //}
 
-    const handleSubmit = e=>{
-        e.preventDefault();
-        console.log('Summit')
-    }
 
 return(
  <div>
-     <div className="container">
-       <div className="row justify-content-center">
-           <ModalAddProcessor/>
-           <ModalAddProcessor/>
-
-       </div>
-
-     </div>
-
-     {/* Processor */}
-     { processor.toString() !== ""? <div className="col-auto"><h4>Procesador</h4></div> :""}
-     {processor.map(function(p , index){
-        return(
-           <ShowProcessor
-               id={p.id}
-               index={index}
-               name={p.name}
-               link={p.link}
-               active={p.active}
-               brand_id={p.brand_id}
-               store_id={p.store_id}
-               price_dol={p.price_dol}
-               price_sol={p.price_sol}
-               DATA_brand_processor={brandProcessor}
-               DATA_brand={brand}
-           />
-        )
-     })}
-
-     {/* Motherboard */}
-     { motherboard.toString() !== "" ? <div className="col-auto"><h4>Motherboard</h4></div> :""}
-     {motherboard.map(function(data, index){
-         return(
-             <ShowMotherboard
-                 motherboard_id = {data.id}
-                 index={index}
-                 proforma_id={data.proforma_id}
-                 name={data.name}
-                 brand_id={data.brand_id}
-                 img={data.img}
-                 cpi_id={data.cpu_id}
-                 active={data.active}
-                 DATA_brand_processor={brandProcessor}
-                 DATA_brand={brand}
+     <h1>Proforma Mode Editor</h1>
+     <Row className="justify-content-center">
+         <ModalMemoryRam title={"Add New Memory"}>
+             <MemoryRam data={{
+                            name:'',
+                            type:0,
+                            size:0,
+                            freq:0
+                        }}
+                 dataType={memoryRAMType}
+                 dataFreq={memoryRAMFrequency}
+                 dataSize={memoryRAMSize}
              />
-         )
-     })}
+         </ModalMemoryRam>
+
+         <ModalAddProcessor/>
+     </Row>
+
+
+     {/* Memory RAM */}
+     {memoryRAM.toString() !== ""? <div className="col-auto"><h4>Memory RAM </h4></div> :""}
+     {memoryRAM.map((data, index)=> <MemoryRam
+                                                key={index}
+                                                data={data}
+                                                dataType={memoryRAMType}
+                                                dataSize={memoryRAMSize}
+                                                dataFreq={memoryRAMFrequency}
+                                                />)}
+
+     {/*/!* Processor *!/*/}
+     {/*{ processor.toString() !== ""? <div className="col-auto"><h4>Procesador</h4></div> :""}*/}
+
+     {/*{processor.map(function(p , index){*/}
+     {/*   return(*/}
+     {/*      <ShowProcessor*/}
+     {/*          id={p.id}*/}
+     {/*          index={index}*/}
+     {/*          name={p.name}*/}
+     {/*          link={p.link}*/}
+     {/*          active={p.active}*/}
+     {/*          brand_id={p.brand_id}*/}
+     {/*          store_id={p.store_id}*/}
+     {/*          price_dol={p.price_dol}*/}
+     {/*          price_sol={p.price_sol}*/}
+     {/*          DATA_brand_processor={brandProcessor}*/}
+     {/*          DATA_brand={brand}*/}
+     {/*      />*/}
+     {/*   )*/}
+     {/*})}*/}
+
+     {/*/!* Motherboard *!/*/}
+     {/*{ motherboard.toString() !== "" ? <div className="col-auto"><h4>Motherboard</h4></div> :""}*/}
+     {/*{motherboard.map(function(data, index){*/}
+     {/*    return(*/}
+     {/*        <ShowMotherboard*/}
+     {/*            motherboard_id = {data.id}*/}
+     {/*            index={index}*/}
+     {/*            proforma_id={data.proforma_id}*/}
+     {/*            name={data.name}*/}
+     {/*            brand_id={data.brand_id}*/}
+     {/*            img={data.img}*/}
+     {/*            cpu_id={data.cpu_id}*/}
+     {/*            active={data.active}*/}
+     {/*            DATA_brand_processor={brandProcessor}*/}
+     {/*            DATA_brand={brand}*/}
+     {/*        />*/}
+     {/*    )*/}
+     {/*})}*/}
 
 
  </div>

@@ -2,8 +2,9 @@ import InputSelect from "../util/InputSelect";
 import {useState} from "react";
 import connectionAPI from "../../../config/axios";
 import {useParams} from "react-router-dom";
+import PropTypes from "prop-types"
 
-export default function ShowMotherboard({index, motherboard_id, active, name, brand_id, price_dol, price_sol, link ,DATA_brand_processor, DATA_brand}){
+const ShowMotherboard = ({index, test, motherboard_id, cpu_id, active, name, brand_id, price_dol, price_sol, link ,DATA_brand_processor, DATA_brand})=>{
     const [motherboard, setMotherboard] = useState({
         name: null,
         cpu_id:null,
@@ -13,6 +14,16 @@ export default function ShowMotherboard({index, motherboard_id, active, name, br
         price_dol:null,
         price_sol:null
     })
+    const [defaultMotherboard, setDefaultMotherboard] = useState({
+        name: name,
+        cpu_id:cpu_id,
+        brand_id:brand_id,
+        //active:"",
+        link:link,
+        price_dol:price_dol,
+        price_sol:price_sol
+    })
+    console.log(test)
     const {id} = useParams();
     console.log("El ID de le proforma es YTTYTYTYTY : "+ id)
 
@@ -26,13 +37,12 @@ export default function ShowMotherboard({index, motherboard_id, active, name, br
         console.log('creo nque se envio ')
 
     }
-    function restore (){
-
+    function clear (){
 
     }
     function discard(){
-
-
+        console.log('despues es el default ')
+        console.log(defaultMotherboard)
     }
 
 
@@ -59,14 +69,8 @@ export default function ShowMotherboard({index, motherboard_id, active, name, br
                         </div>
                     </div>{/* input */}
 
-                    <InputSelect name="cpu_id"  id_select={brand_id}  col="1" DATA={DATA_brand_processor}>
-                        <label className="form-label col-auto ">Socket Type</label>
-                    </InputSelect>
-
-                    <InputSelect name="brand_id"  id_select={brand_id}  col="1" DATA={DATA_brand}>
-                        <label className="form-label col-auto ">Brand</label>
-                    </InputSelect>
-
+                    <InputSelect name="cpu_id" title={"Socket Type"} id_select={cpu_id}  col="1" data={DATA_brand_processor}/>
+                    <InputSelect name="brand_id" title={"Brand"} id_select={brand_id}  col="1" data={DATA_brand}/>
                     <div className="col-md-1">
                         <button style={{width: "100%", height: "100%"}} className="btn btn-danger"  onClick={discard}>
                             Discard
@@ -118,3 +122,13 @@ export default function ShowMotherboard({index, motherboard_id, active, name, br
 
     )
 }
+
+ShowMotherboard.protoTypes = {
+    test: PropTypes.string.isRequired
+}
+ShowMotherboard.defaultProps = {
+    test : "soy el texto tesat "
+}
+
+
+export default ShowMotherboard;

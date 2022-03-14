@@ -20,9 +20,7 @@ export default function ShowProcessor (p){
                 </div>{/* input */}
 
 
-                <InputSelect name="brand_processor_id"  id_select={p.brand_id}  col="1" DATA={p.DATA_brand_processor}>
-                    <label className="form-label col-auto ">Socket Type</label>
-                </InputSelect>
+                <InputSelect name="brand_processor_id" title={"Socket Type"} id_select={p.brand_id}  col="1" data={p.DATA_brand_processor}/>
 
 
                 <div className="col-md-2">
@@ -40,9 +38,7 @@ export default function ShowProcessor (p){
 
             <div className="row p-1">
 
-                <InputSelect name="brand_processor_id"  id_select={p.brand_id}  col="1" DATA={p.DATA_brand_processor}>
-                    <label className="form-label col-auto ">Socket Type</label>
-                </InputSelect>
+                <InputSelect name="brand_processor_id" title={"Socket Type"} id_select={p.brand_id}  col="1" data={p.DATA_brand_processor}/>
 
                 <div className="col-md-10">
                     <label className="form-label col-auto ">Link</label>

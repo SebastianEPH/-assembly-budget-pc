@@ -31,6 +31,10 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
 
     const processor = await pool.query('SELECT * from processor where proforma_id = ?',id)
     const motherboard = await pool.query('SELECT * from motherboard where proforma_id = ? ',[id])
+    const memory_ram = await pool.query('SELECT * from memory_ram where proforma_id = ? ',[id])
+    const memory_ram_type = await pool.query('SELECT * from memory_ram_type ')
+    const memory_ram_size = await pool.query('SELECT * from memory_ram_size ')
+    const memory_ram_frequency = await pool.query('SELECT * from memory_ram_frequency ')
 
     // const pro = await pool.query('SELECT * from proforma RIGHT JOIN processor ON proforma.id = processor.id')
 
@@ -43,8 +47,13 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
     //console.log(processor)
     console.table(processor)
     console.table(motherboard)
+    console.table(memory_ram)
     proforma[0].processor =  processor
     proforma[0].motherboard = motherboard
+    proforma[0].memory_ram = memory_ram
+    proforma[0].memory_ram_size = memory_ram_size
+    proforma[0].memory_ram_type = memory_ram_type
+    proforma[0].memory_ram_frequency = memory_ram_frequency
     //console.log(JSON.stringify(proforma))
     //console.table(proforma)
     //console.log(Object.values(proforma))
