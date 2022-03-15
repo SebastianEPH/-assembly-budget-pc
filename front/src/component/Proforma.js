@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import connectionAPI from "../config/axios";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import ShowProcessor from "./proforma_data/processor/ShowProcessor";
 import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
 import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
@@ -17,6 +17,7 @@ export default function Proforma(){
     const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
     const [memoryRAMSize, setMemoryRAMSize] = useState([]);
     const [brand, setBrand] = useState([]);
+
 
     //console.log('el id es ', p.id)
     const handlechange = (e) =>{
@@ -92,15 +93,17 @@ return(
                             name:'',
                             type:0,
                             size:0,
-                            freq:0
+                            freq:0,
+                            dol:0,
+                            sol:0
                         }}
                  dataType={memoryRAMType}
                  dataFreq={memoryRAMFrequency}
+                 dataBrand={brand}
                  dataSize={memoryRAMSize}
              />
          </ModalMemoryRam>
-
-         <ModalAddProcessor/>
+         {/*<ModalAddProcessor/>*/}
      </Row>
 
 
@@ -111,6 +114,7 @@ return(
                                                 data={data}
                                                 dataType={memoryRAMType}
                                                 dataSize={memoryRAMSize}
+                                                dataBrand={brand}
                                                 dataFreq={memoryRAMFrequency}
                                                 />)}
 

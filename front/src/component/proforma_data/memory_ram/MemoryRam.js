@@ -1,23 +1,23 @@
-import InputSelect from "../util/InputSelect";
-import {useForm} from "../hooks/useForm";
+import InputSelect from "../../util/InputSelect";
+import {useForm} from "../../hooks/useForm";
 import {Button, Container, Row, Modal, Form, Col} from "react-bootstrap";
-import {useState} from "react";
-
-const MemoryRam = ({ data, dataType, dataSize , dataFreq}) =>{
-
-    const {form, update, save, reset} = useForm(data)
-
-    let  {name, type, size, freq} = form
+import {useContext, useState} from "react";
+import {UserContext} from "../../hooks/UserContext"
 
 
-    // const [fre, setFre]  = useState({});
-    // console.table("data, type : ", data.type +"   "+ name)
-    // console.table("type solo: ", type+ "    "+ name )
+const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
 
-    // if(data.type === fre)
-    // console.log("esto es el tipe ",type)
-    // console.table(dataType)
-    // console.log('type ',type)
+    const {form, update, updateHook, save, reset} = useForm(data)
+
+    let  {name, type, size, freq, brand, dol, sol} = form
+
+    const {dollar, setDollar} = useContext(UserContext );
+
+    console.log("Type change ",dollar)
+
+
+
+
     return(
         <Row className={" border border-info p-1 m-1"}>
             <Col md={11}>
@@ -36,10 +36,6 @@ const MemoryRam = ({ data, dataType, dataSize , dataFreq}) =>{
 
                     <InputSelect name={"size"} title={"Size"} update={update} select={size} col={2} data={dataSize}/>
                 </Row>
-                <Row>
-                    <InputSelect name={"type"} title={"type RAM"} update={update} select={type} col={6} data={dataType}/>
-                    <InputSelect name={"freq"} idCondition={type} title={"Frequency"} update={update} select={freq} col={6} data={dataFreq}/>
-                </Row>
             </Col>
             <Col md={1}>
                 <Row>
@@ -52,6 +48,35 @@ const MemoryRam = ({ data, dataType, dataSize , dataFreq}) =>{
                     <button className="btn btn-danger" onClick={reset}>Clean</button>
                 </Row>
             </Col>
+            <Row>
+                <InputSelect name={"type"} title={"type RAM"} update={update} select={type} col={2} data={dataType}/>
+                <InputSelect name={"freq"} idCondition={type} title={"Frequency"} update={update} select={freq} col={3} data={dataFreq}/>
+                <InputSelect name={"brand"} title={"Brand"} update={update} select={brand} col={3} data={dataBrand}/>
+                <Col md="2">
+                    <label className="form-label col-auto ">Soles</label>
+                    <input name="sol"
+                           type="number"
+                           className="form-control col-auto"
+                           placeholder="S/ 0"
+                           //defaultValue={''}
+                           value={sol}
+                           pattern={"[0-9]{10}"}
+                           onChange={(e)=>updateHook(e,"dol")}
+                    />
+                </Col>
+                <Col md="2">
+                    <label className="form-label col-auto ">Dollar</label>
+                    <input name="dol"
+                           type="number"
+                           className="form-control col-auto"
+                           placeholder="$0"
+                           pattern={"[0-9]{10}"}
+                           // defaultValue={''}
+                           value={dol}
+                           onChange={(e)=>updateHook(e, "sol")}
+                    />
+                </Col>
+            </Row>
         </Row>
     )
 }

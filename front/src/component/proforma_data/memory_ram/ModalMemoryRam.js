@@ -1,4 +1,4 @@
-import ButtonModal from "../util/ButtonModal";
+import ButtonModal from "../../util/ButtonModal";
 import {Button, Container, Row, Modal, Form, Col} from "react-bootstrap";
 import {useState} from "react";
 const ModalMemoryRam = ({children, title}) =>{

@@ -1,9 +1,5 @@
-import connectionAPI from "../../../config/axios"
-import {useEffect, useState} from "react";
 import { Col} from "react-bootstrap";
 import PropTypes from "prop-types";
-import ShowMotherboard from "../motherboard/ShowMotherboard";
-
 
 /**
  * Element Select / option
@@ -15,16 +11,17 @@ import ShowMotherboard from "../motherboard/ShowMotherboard";
  * @return {JSX.Element}
  */
 export default function ({name, title ,select, col, update, data, idCondition}){
+    // console.log("id de la condicion ",idCondition)
     return(
         <Col md={col}>
             {title !== undefined &&  <label className="form-label col-auto ">{title}</label>}
             <select name={name}  value={select} onChange={(e)=>update(e)} className="form-select"> {/*value={props.id_select} */}
                 <option value={null} key="0">---</option>
-                {data.map((p, index)=>{
-                    if(!p.type){
+                {data.map((p={name}, index)=>{
+                    if(!p.condition){
                         return<option value={p.id} key={index+p.id}>{p.name}</option>
                     }else{
-                        if (idCondition.toString() === p.type.toString()){
+                        if (idCondition.toString() === p.condition.toString()){
                             return<option value={p.id} key={index+p.id}>{p.name}</option>
                         }
                     }
@@ -35,12 +32,12 @@ export default function ({name, title ,select, col, update, data, idCondition}){
 
 }
 
-
-ShowMotherboard.protoTypes = {
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    id_select: PropTypes.string.isRequired,
-    col: PropTypes.number.isRequired,
-    data: PropTypes.array.isRequired
-}
-
+//
+// ShowMotherboard.protoTypes = {
+//     name: PropTypes.string.isRequired,
+//     title: PropTypes.string,
+//     id_select: PropTypes.string.isRequired,
+//     col: PropTypes.number.isRequired,
+//     data: PropTypes.array.isRequired
+// }
+//

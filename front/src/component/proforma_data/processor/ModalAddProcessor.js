@@ -1,8 +1,8 @@
 import {Button, Modal} from "react-bootstrap";
 import {useState} from "react";
 import connectionAPI from "../../../config/axios";
-import InputSelect from "../util/InputSelect";
-import ButtonModal from "../util/ButtonModal";
+import InputSelect from "../../util/InputSelect";
+import ButtonModal from "../../util/ButtonModal";
 
 export default function ModalAddProcessor (){
 

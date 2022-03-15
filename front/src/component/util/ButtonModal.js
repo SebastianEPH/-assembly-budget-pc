@@ -1,7 +1,6 @@
 
 export default function (props){
     return(
-
         <div className="col-auto justify-content-center p-2 m-2 " onClick={props.funct}>
             <button className="btn btn-outline-success" type="button" style={{ width:`${props.size}rem`, height:`${props.size}rem` }}>
                 <h4 className="" >{props.name}</h4>

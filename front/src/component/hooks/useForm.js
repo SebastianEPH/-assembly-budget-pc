@@ -1,24 +1,41 @@
 //@ts-check
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {UserContext} from "./UserContext";
 
 export const useForm= (initialState = {}) =>{
+    const {dollar} = useContext(UserContext );
+    const [form, setForm]  = useState(initialState);
+
 
     const cleanObj = (obj) => {
         const newObj = {}
         Object.entries(obj).forEach(([key, value]) => {
             newObj[key] = ''
+            if(newObj[key] === "proforma_id" || newObj[key] === "id" ){
+
+            }
+
         });
         return  newObj
     }
 
 
-    const [form, setForm]  = useState(initialState);
+    const update = ({target}) => setForm({...form, [target.name]: target.value})
 
-
-    const update = ({target}) =>{
-        // console.log(e.target.name, e.target.value)
-        setForm({...form, [target.name]: target.value})
+    const updateHook = ({target}, name) =>{
+        let value1 = target.value * dollar
+        let value2 = parseInt(target.value)
+        if(!target.value || target.value.isNaN){
+            value1= 0
+            value2 = 0
+        }
+        setForm({...form,
+                [name]: value1.toFixed(2),
+                [target.name]: value2})
     }
+
+
+
     const reset = () =>{
         console.log("form:",form,"initial: ",initialState)
         const hola = cleanObj(form)
@@ -40,11 +57,11 @@ export const useForm= (initialState = {}) =>{
         // retorna el formulario inicial // reset
     }
 
-
     return{
         form,
         // add,
         // remove,
+        updateHook,
         save,
         update,
         reset,
