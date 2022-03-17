@@ -1,29 +1,33 @@
 //@ts-check
 import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
-import pool from "../../config/conextion"
-import conextion from "../../config/conextion";
-// import MessageContext from "./MessageContext";
+import conextion from "../../config/connection";
 import toast from 'react-hot-toast';
 
-
 export const useForm= (initialState = {}) =>{
-    // const {message, setMessage} = useContext(MessageContext)
     const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
 
     const update = ({target}) => setForm({...form, [target.name]: target.value})
 
-    const updateHook = ({target}, name) =>{
-        let value1 = target.value * dollar
-        let value2 = parseInt(target.value)
-        if(!target.value || target.value.isNaN){
-            value1= 0
-            //value2 = 0
-        }
-        setForm({...form,
+    const updateHook= ({target}, name) =>{
+        let value2 = target.value
+        let value1 = null
+        console.log("value2:  ",value2)
+        if(!isNaN(target.value)){
+            value1 = name ==="sol"? target.value * dollar: value1 = target.value / dollar
+            // if(name.toString() ==="sol"){
+            //     value1 = target.value * dollar
+            // }else{
+            //     value1 = target.value / dollar
+            // }
+            if(!target.value || target.value.isNaN){value1= 0}
+            setForm({...form,
                 [name]: value1.toFixed(2),
                 [target.name]: value2})
+        }else{
+            toast.error("Please insert numbers", {duration: 1000})//{ className: 'bg-outline-success'}
+        }
     }
 
     const clean = () =>{
@@ -44,24 +48,13 @@ export const useForm= (initialState = {}) =>{
         setForm(form + "hola")
         // retorna el formulario inicial // reset
     }
-    // const updateInitial = () =>{
-    //     setForm( dataDefault)
-    // }
     const saveMemoryRAM = () =>{
         conextion.setMemoryRam(form.proforma_id, form.id, form)
             .then((m)=>toast.success("Save Memory RAM success"))//{ className: 'bg-outline-success'}
             .catch((m)=>toast.error("Error Save Memory RAM") )//{  className: 'outline-success'}
     }
-    // const savrte = () =>{
-    //     console.log(form)
-    //     conextion.setMemoryRam(form.proforma_id, form.id, form)
-    //         .then((m)=>toast.success("Save Memory RAM success"))//{ className: 'bg-outline-success'}
-    //         .catch((m)=>toast.error("Error Save Memory RAM") )//{  className: 'outline-success'}
-    // }
     return{
         form,
-        // add,
-        // remove,
         updateHook,
         saveMemoryRAM,
         update,

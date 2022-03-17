@@ -6,7 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
 import {Container, Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
-import pool from "../config/conextion"
+import pool from "../config/connection"
 // import {AlertMessage} from "./navegation/alertMessage";
 // import MessageContext from "./hooks/MessageContext";
 import { Toaster } from 'react-hot-toast';

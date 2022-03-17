@@ -48,24 +48,23 @@ const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
                 <Col md="2">
                     <label className="form-label col-auto ">Soles</label>
                     <input name="sol"
-                           type="number"
+                           type="text"
                            className="form-control col-auto"
                            placeholder="S/ 0"
                            //defaultValue={''}
                            value={sol}
-                           step={1}
                            onChange={(e)=>updateHook(e,"dol")}
                     />
                 </Col>
                 <Col md="2">
                     <label className="form-label col-auto ">Dollar</label>
                     <input name="dol"
-                           type="number"
+                           type="text"
                            className="form-control col-auto"
                            placeholder="$0"
                            // defaultValue={''}
                            value={dol}
-                           step={1}
+                           // step={1}
                            onChange={(e)=>updateHook(e, "sol")}
                     />
                 </Col>
