@@ -1,17 +1,21 @@
 import {useParams} from "react-router-dom";
-import connectionAPI from "../config/axios";
 import {useContext, useEffect, useState} from "react";
-import ShowProcessor from "./proforma_data/processor/ShowProcessor";
-import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
-import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
+// import ShowProcessor from "./proforma_data/processor/ShowProcessor";
+// import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
+// import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
 import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
 import {Container, Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
+import pool from "../config/conextion"
+// import {AlertMessage} from "./navegation/alertMessage";
+// import MessageContext from "./hooks/MessageContext";
+import { Toaster } from 'react-hot-toast';
+
 
 export default function Proforma(){
-    const [processor, setProcessor] = useState([]); // array vacio
-    const [motherboard, setMotherboard] = useState([]); // array vacio
-    const [brandProcessor, setBrandProcessor] = useState([]);
+    // const [processor, setProcessor] = useState([]); // array vacio
+    // const [motherboard, setMotherboard] = useState([]); // array vacio
+    // const [brandProcessor, setBrandProcessor] = useState([]);
     const [memoryRAM, setMemoryRAM] = useState([]);
     const [memoryRAMType, setMemoryRAMType] = useState([]);
     const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
@@ -19,74 +23,36 @@ export default function Proforma(){
     const [brand, setBrand] = useState([]);
 
 
-    //console.log('el id es ', p.id)
-    const handlechange = (e) =>{
-        console.log(e.target.name, e.target.value)
-        //setPro({...pro, [e.target.name]: e.target.value})
-    }
-
     const {id} = useParams();
     console.log("El ID de le proforma es: "+ id)
 
-    useEffect(()=>{
-        consultarApi(id)
 
+    useEffect(async ()=>{
+        await pool.getBrand()
+            .then((data)=>setBrand(data))
+            .catch((err)=>console.log("there Was an Error getting the data ",err))
     },[])
 
-    const  consultarApi = async (id)=>    {
-        console.log('consultado API ')
-        const queryProjects = await connectionAPI.get(`/proforma/${id}`)
-
-        const brand= await connectionAPI.get(`/brand`)
-        const brandProcessor= await connectionAPI.get(`/brand_processor`)
-
-        //console.log(queryProjects )
-        const json = queryProjects.data
-        console.log(json)
-        //console.log('esto es el proforma normal')
-        //console.log(json)
-        //console.log('esto es el processreor')
-        //console.log(json[0].processor)
-        ///setproforma(json)
-
-        setBrand(brand.data)
-        setBrandProcessor(brandProcessor.data)
-
-        setProcessor(json[0].processor)
-        setMotherboard(json[0].motherboard)
-
-        setMemoryRAM(json[0].memory_ram)
-        setMemoryRAMType(json[0].memory_ram_type)
-        setMemoryRAMFrequency(json[0].memory_ram_frequency)
-        setMemoryRAMSize(json[0].memory_ram_size)
-    }
-
-    //const  consultarApi = async (proforma_id, processor_id)=>    {
-    //    console.log('consultado API denbtro ')
-
-    //    const processor= await connectionAPI.get(`/proforma/${id}/processor`)
-    //    const motherboard = await connectionAPI.get(`/proforma/${id}/motherboard`)
-
-    //    console.table(processor.data)
-    //    console.table(motherboard.data)
-    //    setMotherboard(motherboard.data)
-    //    setProcessor(processor.data)
-
-    //    //console.log(queryProjects )
-
-    //   //const json = queryProjects.data
-    //   //console.log('esto es el proforma normal')
-    //   //console.log(json)
-    //   //console.log('esto es el processreor')
-    //   //console.log(json[0].processor)
-    //   //setproforma(json)
-    //   //setprocessor(json[0].processor)
-    //}
+    useEffect(async()=>{
+        await pool.getProforma(id)
+            .then((data)=>{
+                setMemoryRAM(data.memory_ram)
+                setMemoryRAMType(data.memory_ram_type)
+                setMemoryRAMFrequency(data.memory_ram_frequency)
+                setMemoryRAMSize(data.memory_ram_size)
+                console.log('proforma ')
+            })
+            .catch((err)=>console.log("there Was an Error getting the data ",err))
+    },[])
 
 
 return(
  <div>
      <h1>Proforma Mode Editor</h1>
+
+     {/*<AlertMessage/>*/}
+     <Toaster position={"top-center"} />
+
      <Row className="justify-content-center">
          <ModalMemoryRam title={"Add New Memory"}>
              <MemoryRam data={{

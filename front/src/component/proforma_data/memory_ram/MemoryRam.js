@@ -2,21 +2,15 @@ import InputSelect from "../../util/InputSelect";
 import {useForm} from "../../hooks/useForm";
 import {Button, Container, Row, Modal, Form, Col} from "react-bootstrap";
 import {useContext, useState} from "react";
-import {UserContext} from "../../hooks/UserContext"
-
+import DollarContext from "../../hooks/DollarContext"
 
 const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
 
-    const {form, update, updateHook, save, reset} = useForm(data)
+    const {form, update, updateHook, saveMemoryRAM, clean} = useForm(data)
 
     let  {name, type, size, freq, brand, dol, sol} = form
 
-    const {dollar, setDollar} = useContext(UserContext );
-
-    console.log("Type change ",dollar)
-
-
-
+    const {dollar, setDollar} = useContext(DollarContext );
 
     return(
         <Row className={" border border-info p-1 m-1"}>
@@ -33,19 +27,18 @@ const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
                                onChange={(e)=>update(e)}
                         />
                     </Col>
-
                     <InputSelect name={"size"} title={"Size"} update={update} select={size} col={2} data={dataSize}/>
                 </Row>
             </Col>
             <Col md={1}>
                 <Row>
-                    <button className="btn btn-success" onClick={save}>Save</button>
+                    <button className="btn btn-success" onClick={saveMemoryRAM}>Save</button>
                 </Row>
                 {/*<Row>*/}
                 {/*    <button className="btn btn-primary" onClick={reset}>return</button>*/}
                 {/*</Row>*/}
                 <Row>
-                    <button className="btn btn-danger" onClick={reset}>Clean</button>
+                    <button className="btn btn-info" onClick={clean}>Clean</button>
                 </Row>
             </Col>
             <Row>
@@ -60,7 +53,7 @@ const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
                            placeholder="S/ 0"
                            //defaultValue={''}
                            value={sol}
-                           pattern={"[0-9]{10}"}
+                           step={1}
                            onChange={(e)=>updateHook(e,"dol")}
                     />
                 </Col>
@@ -70,9 +63,9 @@ const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
                            type="number"
                            className="form-control col-auto"
                            placeholder="$0"
-                           pattern={"[0-9]{10}"}
                            // defaultValue={''}
                            value={dol}
+                           step={1}
                            onChange={(e)=>updateHook(e, "sol")}
                     />
                 </Col>

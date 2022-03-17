@@ -1,24 +1,16 @@
 //@ts-check
 import {useContext, useState} from "react";
-import {UserContext} from "./UserContext";
+import DollarContext from "./DollarContext";
+import pool from "../../config/conextion"
+import conextion from "../../config/conextion";
+// import MessageContext from "./MessageContext";
+import toast from 'react-hot-toast';
+
 
 export const useForm= (initialState = {}) =>{
-    const {dollar} = useContext(UserContext );
+    // const {message, setMessage} = useContext(MessageContext)
+    const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
-
-
-    const cleanObj = (obj) => {
-        const newObj = {}
-        Object.entries(obj).forEach(([key, value]) => {
-            newObj[key] = ''
-            if(newObj[key] === "proforma_id" || newObj[key] === "id" ){
-
-            }
-
-        });
-        return  newObj
-    }
-
 
     const update = ({target}) => setForm({...form, [target.name]: target.value})
 
@@ -27,20 +19,26 @@ export const useForm= (initialState = {}) =>{
         let value2 = parseInt(target.value)
         if(!target.value || target.value.isNaN){
             value1= 0
-            value2 = 0
+            //value2 = 0
         }
         setForm({...form,
                 [name]: value1.toFixed(2),
                 [target.name]: value2})
     }
 
-
-
-    const reset = () =>{
-        console.log("form:",form,"initial: ",initialState)
-        const hola = cleanObj(form)
-        console.log('nuevo forn limpio pex',hola)
-        setForm(hola)
+    const clean = () =>{
+        const newObj = {}
+        console.log("clean ", form)
+        Object.entries(form).forEach(([key, value]) => {
+            if(key === "proforma_id" || key === "id" ){
+                newObj[key] = value
+            }else{
+                newObj[key] = ''
+            }
+        });
+        setForm(newObj)
+        // toast("Clean form",{icon:"👏",  className: 'bg-primary'})
+        toast.success("Clean form ")
     }
     const adding = () =>{
         setForm(form + "hola")
@@ -49,23 +47,25 @@ export const useForm= (initialState = {}) =>{
     // const updateInitial = () =>{
     //     setForm( dataDefault)
     // }
-    const save = () =>{
-        console.log(form)
-        //save in database
-        // setForm(form + "hola")
-        // setForm(...form)
-        // retorna el formulario inicial // reset
+    const saveMemoryRAM = () =>{
+        conextion.setMemoryRam(form.proforma_id, form.id, form)
+            .then((m)=>toast.success("Save Memory RAM success"))//{ className: 'bg-outline-success'}
+            .catch((m)=>toast.error("Error Save Memory RAM") )//{  className: 'outline-success'}
     }
-
+    // const savrte = () =>{
+    //     console.log(form)
+    //     conextion.setMemoryRam(form.proforma_id, form.id, form)
+    //         .then((m)=>toast.success("Save Memory RAM success"))//{ className: 'bg-outline-success'}
+    //         .catch((m)=>toast.error("Error Save Memory RAM") )//{  className: 'outline-success'}
+    // }
     return{
         form,
         // add,
         // remove,
         updateHook,
-        save,
+        saveMemoryRAM,
         update,
-        reset,
+        clean,
         adding
     };
-
 }
