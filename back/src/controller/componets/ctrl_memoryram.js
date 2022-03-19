@@ -16,7 +16,7 @@ memoryram.add = async (req, res) =>{
 
     // chack if the object data matches
     const parseBody= parse.ObjDB(req.body,["name","dol","sol"], ["type","proforma_id","size", "freq","brand"])
-    if(!parseBody.status){return res.status(parseBody.status).json({message:parseBody.message})}
+    if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
     console.log(req.body)
 
     console.log(parseBody.data)
@@ -55,7 +55,7 @@ memoryram.update=async (req, res) =>{
 
     // chack if the object data matches
     const parseBody= parse.ObjDB(req.body,["name","dol","sol"], ["type","size", "freq","brand"])
-    if(!parseBody.status){return res.status(parseBody.status).json({message:parseBody.message})}
+    if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
     try{ // try connection
         const  update = await pool.query('UPDATE memory_ram set ? WHERE id =? AND proforma_id = ?', [parseBody.data,memoryram_id,proforma_id])

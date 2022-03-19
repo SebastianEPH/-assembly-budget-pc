@@ -142,7 +142,7 @@ helpers.parse.ObjDB = (objBody, keysOriginal=[], IDs=[]) => {
     if((Object.keys(newObj).length === 0)){
         console.log("no hubo ninguna coinicdencia los datos enviados, con los datos que recivve")
         obj.passed = false
-        obj.message = "submitted fields do not match database  "
+        obj.message = "submitted fields do not match database "
         obj.status = 402
     }
     return  obj
