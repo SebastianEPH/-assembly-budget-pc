@@ -54,31 +54,30 @@ helpers.parse.IdForDB =  (words) =>{
         obj.passed = false
         obj.message = "Error fatal en el server, contacte con el soporte técnico "
         obj.status = 500
-        return obj
+    }else{
+        words.forEach(word =>{
+            if (word === undefined || word === null ){
+                obj.passed = false
+                obj.message = "El ID del params enviado es undefined o null "
+                obj.status = 400
+            }else if(isNaN(word)){
+                obj.passed = false
+                obj.message = "El ID enviado no es un número"
+                obj.status = 400
+            } else if (word.toString().trim() === ""){
+                obj.passed = false
+                obj.message = `El ID enviado de la posición ${words.indexOf(word)} está vacio, porfavor actualice la página`
+                obj.status = 400
+            }
+        })
     }
-    words.forEach(word =>{
-        if (word === undefined || word === null ){
-            obj.passed = false
-            obj.message = "El ID del params enviado es undefined o null "
-            obj.status = 400
-        }else if(isNaN(word)){
-            obj.passed = false
-            obj.message = "El ID enviado no es un número"
-            obj.status = 400
-        } else if (word.toString().trim() === ""){
-            obj.passed = false
-            obj.message = `El ID enviado de la posición ${words.indexOf(word)} está vacio, porfavor actualice la página`
-            obj.status = 400
-        }
-    })
+
     return obj
 }
 
-
-helpers.verify = async(params=[],body)=>{
-
+helpers.parse.dataBody = (obj)=>{
+    return !(Object.keys(obj).length === 0 || obj === null || obj === undefined)
 }
-
 
 
 // helpers.parse.ObjDB = (obj, keysOriginal=[], keysClean=[]) => {
@@ -97,28 +96,33 @@ helpers.verify = async(params=[],body)=>{
  * quita espacios de ambos extremos
  * keyClean : quita espacios en blanco, tabulaciones, saltos de linea
  * convierte a lowercase
- * @param {object} obj el objeto con todos los datos
+ * @param {object} objBody el objeto con todos los datos
  * @param {Array<String>} keysOriginal elimina epacios al comienzo y al final
  * @param {Array<String>} IDs Solo ID, convierte vacios a null
  * @return {Object} retorna un objeto nuevo
  * @constructor
  */
-helpers.parse.ObjDB = async(obj, keysOriginal=[], IDs=[]) => {
-    console.log("el objto mandado es: ",obj)
-
-        // console.log("el objeto estuvo vacio comienzo")
-        // throw new Error("El formulario no coincide o está vacio")
+helpers.parse.ObjDB = (objBody, keysOriginal=[], IDs=[]) => {
 
     const newObj = {}
-    Object.entries(obj).forEach(([key, value]) => {
-        /* Si key del objeto tiene como valor vacio, o nulo, no se agrega al objeto final  */
+
+    const obj = {data: newObj, passed:true, message: "parse ok", status:200}
+
+    if(objBody === null || objBody === undefined ||objBody.length === 0 ){
+        obj.passed = false
+        obj.message = "Error fatal en el server, contacte con el soporte técnico "
+        obj.status = 500
+        return obj
+    }
+
+    Object.entries(objBody).forEach(([key, value]) => {
         keysOriginal.forEach(word=>{
             if(word === key){
                 console.log(word, " => ", value)
                 if(value === undefined || value=== null){
                     newObj[key] = null
                 }else{
-                    newObj[key] = value
+                    newObj[key] = value.toString().trim()
                 }
 
             }
@@ -129,16 +133,19 @@ helpers.parse.ObjDB = async(obj, keysOriginal=[], IDs=[]) => {
                 if(value==="" || value === undefined || value=== null){
                     newObj[key] = null
                 }else{
-                    newObj[key] = value
+                    newObj[key] = value.toString().trim()
                 }
             }
         })
     });
-    // if (newObj ==={}){
-    //     console.log("el objeto estuvo vacio ")
-    //     throw("El formulario no coincide o está vacio")
-    // }
-    return  newObj
+
+    if((Object.keys(newObj).length === 0)){
+        console.log("no hubo ninguna coinicdencia los datos enviados, con los datos que recivve")
+        obj.passed = false
+        obj.message = "submitted fields do not match database  "
+        obj.status = 402
+    }
+    return  obj
 }
 helpers.parse.objDBVerifiyCall = (obj, callback) =>{
      if (obj ==={}){

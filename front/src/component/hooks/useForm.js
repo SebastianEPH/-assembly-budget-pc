@@ -49,16 +49,15 @@ export const useForm= (initialState = {}) =>{
         // retorna el formulario inicial // reset
     }
     const saveMemoryRAM = async() =>{
-
-           await  conextion.setMemoryRam(form.proforma_id, form.id, form)
-                .then((m)=>{
-                    toast.success(m.data.message)
-                    console.log(m)
-                    console.log("todo ok dice ")
-                })//{ className: 'bg-outline-success'}
-                .catch(({response})=>{
-                    toast.error(response.data.message)//, m.data.message
-                } )//{  className: 'outline-success'}
+        await  conextion.setMemoryRam(form.proforma_id, form.id, form)
+             .then((m)=>{
+                 toast.success(m.data.message)
+                 console.log(m)
+             })
+             .catch((m)=>{
+                  console.log(m)
+                  toast.error(m.response.data.message)
+             })
     }
     return{
         form,
