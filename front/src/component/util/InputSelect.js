@@ -16,14 +16,19 @@ export default function ({name, title ,select, col, update, data, idCondition}){
         <Col md={col}>
             {title !== undefined &&  <label className="form-label col-auto ">{title}</label>}
             <select name={name}  value={select} onChange={(e)=>update(e)} className="form-select"> {/*value={props.id_select} */}
-                <option value={null} key="0">---</option>
+                <option value={null} key="0"> </option>
                 {data.map((p={name}, index)=>{
                     if(!p.condition){
                         return<option value={p.id} key={index+p.id}>{p.name}</option>
                     }else{
-                        if (idCondition.toString() === p.condition.toString()){
-                            return<option value={p.id} key={index+p.id}>{p.name}</option>
+                        if(idCondition === null || idCondition === undefined){ // is condicion es null como valor,
+                                return<option value={p.id} key={index+p.id}>{p.name}</option>
+                        }else{
+                            if (idCondition.toString() === p.condition.toString()){
+                                return<option value={p.id} key={index+p.id}>{p.name}</option>
+                            }
                         }
+
                     }
                 })}
             </select>

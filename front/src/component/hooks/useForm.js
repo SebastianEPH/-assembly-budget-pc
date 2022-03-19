@@ -3,7 +3,11 @@ import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
 import conextion from "../../config/connection";
 import toast from 'react-hot-toast';
+import axios from "../../config/axios";
+const connectionAPI =  axios.create({
+    baseURL: "http://127.0.0.1:5000/api/"
 
+})
 export const useForm= (initialState = {}) =>{
     const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
@@ -15,13 +19,9 @@ export const useForm= (initialState = {}) =>{
         let value1 = null
         console.log("value2:  ",value2)
         if(!isNaN(target.value)){
-            value1 = name ==="sol"? target.value * dollar: value1 = target.value / dollar
-            // if(name.toString() ==="sol"){
-            //     value1 = target.value * dollar
-            // }else{
-            //     value1 = target.value / dollar
-            // }
+            value1 = name ==="sol"? target.value * dollar: target.value / dollar
             if(!target.value || target.value.isNaN){value1= 0}
+
             setForm({...form,
                 [name]: value1.toFixed(2),
                 [target.name]: value2})
@@ -48,10 +48,17 @@ export const useForm= (initialState = {}) =>{
         setForm(form + "hola")
         // retorna el formulario inicial // reset
     }
-    const saveMemoryRAM = () =>{
-        conextion.setMemoryRam(form.proforma_id, form.id, form)
-            .then((m)=>toast.success("Save Memory RAM success"))//{ className: 'bg-outline-success'}
-            .catch((m)=>toast.error("Error Save Memory RAM") )//{  className: 'outline-success'}
+    const saveMemoryRAM = async() =>{
+
+           await  conextion.setMemoryRam(form.proforma_id, form.id, form)
+                .then((m)=>{
+                    toast.success(m.data.message)
+                    console.log(m)
+                    console.log("todo ok dice ")
+                })//{ className: 'bg-outline-success'}
+                .catch(({response})=>{
+                    toast.error(response.data.message)//, m.data.message
+                } )//{  className: 'outline-success'}
     }
     return{
         form,
