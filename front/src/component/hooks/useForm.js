@@ -48,8 +48,8 @@ export const useForm= (initialState = {}) =>{
         setForm(form + "hola")
         // retorna el formulario inicial // reset
     }
-    const saveMemoryRAM = async() =>{
-        await  conextion.setMemoryRam(form.proforma_id, form.id, form)
+    const updateMemoryRAM = async() =>{
+        await  conextion.updateMemoryRam(form.proforma_id, form.id, form)
              .then((m)=>{
                  toast.success(m.data.message)
                  console.log(m)
@@ -59,10 +59,23 @@ export const useForm= (initialState = {}) =>{
                   toast.error(m.response.data.message)
              })
     }
+    const createMemoryRAM = async() =>{
+        await  conextion.addMemoryRam(form.proforma_id, form)
+            .then((m)=>{
+                toast.success(m.data.message)
+                console.log(m)
+            })
+            .catch((m)=>{
+                console.log(m)
+                toast.error(m.response.data.message)
+            })
+    }
+
     return{
         form,
         updateHook,
-        saveMemoryRAM,
+        createMemoryRAM,
+        updateMemoryRAM,
         update,
         clean,
         adding

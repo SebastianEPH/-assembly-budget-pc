@@ -25,7 +25,7 @@ function App() {
                 <BrowserRouter>
                     <Navbar/>
                     <Routes>
-                        <Route path="/proforma/:id" element={<Proforma/>}/>
+                        <Route path="/proforma/:proforma_id" element={<Proforma/>}/>
                         <Route path="/" exact element={
                             <div className="container">
                                 <NewProject/>

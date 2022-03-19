@@ -4,13 +4,12 @@ import {Button, Container, Row, Modal, Form, Col} from "react-bootstrap";
 import {useContext, useState} from "react";
 import DollarContext from "../../hooks/DollarContext"
 
-const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
+const MemoryRam = ({ data, dataType, modal=false, dataSize , dataBrand, dataFreq}) =>{
 
-    const {form, update, updateHook, saveMemoryRAM, clean} = useForm(data)
+    const {form, update, updateHook,  createMemoryRAM, updateMemoryRAM, clean} = useForm(data)
 
     let  {name, type, size, freq, brand, dol, sol} = form
 
-    const {dollar, setDollar} = useContext(DollarContext );
 
     return(
         <Row className={" border border-info p-1 m-1"}>
@@ -32,7 +31,7 @@ const MemoryRam = ({ data, dataType, dataSize , dataBrand, dataFreq}) =>{
             </Col>
             <Col md={1}>
                 <Row>
-                    <button className="btn btn-success" onClick={saveMemoryRAM}>Save</button>
+                    <button className="btn btn-success" onClick={modal?createMemoryRAM:updateMemoryRAM}>{modal?"Create":"Save"}</button>
                 </Row>
                 {/*<Row>*/}
                 {/*    <button className="btn btn-primary" onClick={reset}>return</button>*/}

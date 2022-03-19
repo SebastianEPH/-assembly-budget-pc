@@ -16,8 +16,11 @@ pool.getBrand = async ()=>{
     const brand= await connectionAPI.get(`/brand`)
     return brand.data
 }
-pool.setMemoryRam = async (proforma_id, memory_id, data)=>{
+pool.updateMemoryRam = async (proforma_id, memory_id, data)=>{
     return await connectionAPI.put(`/proforma/${proforma_id}/memoryram/${memory_id}`,data) //body:JSON.stringify(motherboard)
+}
+pool.addMemoryRam = async (proforma_id, data)=>{
+    return await connectionAPI.post(`/proforma/${proforma_id}/memoryram`,data)
 }
 
 pool.hola = async (id)=>{

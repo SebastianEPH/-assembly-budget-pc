@@ -23,8 +23,9 @@ export default function Proforma(){
     const [brand, setBrand] = useState([]);
 
 
-    const {id} = useParams();
-    console.log("El ID de le proforma es: "+ id)
+    const {proforma_id} = useParams();
+    console.log("#$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", useParams())
+    console.log(" $$$$El ID de le proforma es: "+ proforma_id)
 
 
     useEffect(async ()=>{
@@ -34,7 +35,7 @@ export default function Proforma(){
     },[])
 
     useEffect(async()=>{
-        await pool.getProforma(id)
+        await pool.getProforma(proforma_id)
             .then((data)=>{
                 setMemoryRAM(data.memory_ram)
                 setMemoryRAMType(data.memory_ram_type)
@@ -56,6 +57,7 @@ return(
      <Row className="justify-content-center">
          <ModalMemoryRam title={"Add New Memory"}>
              <MemoryRam data={{
+                            proforma_id,
                             name:'',
                             type:0,
                             size:0,
@@ -63,6 +65,7 @@ return(
                             dol:0,
                             sol:0
                         }}
+                 modal={true}
                  dataType={memoryRAMType}
                  dataFreq={memoryRAMFrequency}
                  dataBrand={brand}
