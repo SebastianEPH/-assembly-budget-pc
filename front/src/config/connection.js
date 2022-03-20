@@ -27,6 +27,10 @@ pool.addMemoryRam = async (proforma_id, data)=>{
     console.log('esto es del front', data)
     return await connectionAPI.post(`/proforma/${proforma_id}/memoryram`,data)
 }
+pool.delMemoryRam = async (proforma_id, memory_id)=>{
+    console.log('Delete memory id = ', memory_id)
+    return await connectionAPI.delete(`/proforma/${proforma_id}/memoryram/${memory_id}`)
+}
 
 pool.hola = async (id)=>{
     console.log('consultado API [proforma]')

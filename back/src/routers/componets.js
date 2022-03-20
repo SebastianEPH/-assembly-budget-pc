@@ -20,6 +20,7 @@ router.put("/proforma/:proforma_id/motherboard/:motherboard_id", motherboard.upd
 //router.get("/:proforma_id/motherboard/:motherboard_id", processor.getOnly)
 // MemoryRAM
 router.post("/proforma/:proforma_id/memoryram", memoryram.add)
+router.delete("/proforma/:proforma_id/memoryram/:memoryram_id", memoryram.delete)
 router.put("/proforma/:proforma_id/memoryram/:memoryram_id", memoryram.update)
 
 

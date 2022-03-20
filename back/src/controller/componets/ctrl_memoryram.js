@@ -41,4 +41,18 @@ memoryram.update=async (req, res) =>{
         return res.status(400).json({message:"The submitted data cannot be processed"})
     }
 }
+memoryram.delete = async (req, res) =>{
+    const { proforma_id, memoryram_id } = req.params
+    console.log('DELETE BACK esto es el proforma id',req.params)
+    //parse IDs from params
+    const parseIds = parse.IdForDB([ proforma_id, memoryram_id])
+    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
+    try{ // try connection
+        const querySQL = 'DELETE FROM memory_ram WHERE proforma_id = ? AND id=? '
+        const response =  responseDB(await pool.query(querySQL , [ proforma_id, memoryram_id]))
+        return res.status(response.status).json({message:response.message})
+    }catch (E){
+        return res.status(400).json({message:"The submitted data cannot be processed"})
+    }
+}
 module.exports  =  memoryram;

@@ -1,7 +1,7 @@
 //@ts-check
 import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
-import conextion from "../../config/connection";
+import connection from "../../config/connection";
 import toast from 'react-hot-toast';
 import axios from "../../config/axios";
 
@@ -27,12 +27,11 @@ export const useForm= (initialState = {}) =>{
         if(!isNaN(target.value)){
             value1 = name ==="sol"? target.value * dollar: target.value / dollar
             if(!target.value || target.value.isNaN){value1= 0}
-
             setForm({...form,
                 [name]: value1.toFixed(2),
                 [target.name]: value2})
         }else{
-            toast.error("Please insert numbers", {duration: 1000})//{ className: 'bg-outline-success'}
+            toast.error("Please insert numbers", {duration: 1000})
         }
     }
 
@@ -52,10 +51,19 @@ export const useForm= (initialState = {}) =>{
     }
 
     const remove= async() =>{
-
+        await  connection.delMemoryRam(form.proforma_id, form.id)
+            .then((m)=>{
+                toast.success(m.data.message)
+                console.log(m)
+                // clean(false) // clean  inputs
+            })
+            .catch((m)=>{
+                console.log(m)
+                toast.error(m.response.data.message)
+            })
     }
     const updateMemoryRAM = async() =>{
-        await  conextion.updateMemoryRam(form.proforma_id, form.id, form)
+        await  connection.updateMemoryRam(form.proforma_id, form.id, form)
              .then((m)=>{
                  toast.success(m.data.message)
                  console.log(m)
@@ -66,7 +74,7 @@ export const useForm= (initialState = {}) =>{
              })
     }
     const addMemoryRAM = async() =>{
-        await  conextion.addMemoryRam(form.proforma_id, form)
+        await  connection.addMemoryRam(form.proforma_id, form)
             .then((m)=>{
                 toast.success(m.data.message)
                 console.log(m)
