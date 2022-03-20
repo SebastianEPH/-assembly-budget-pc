@@ -4,20 +4,26 @@ import DollarContext from "./DollarContext";
 import conextion from "../../config/connection";
 import toast from 'react-hot-toast';
 import axios from "../../config/axios";
+
 const connectionAPI =  axios.create({
     baseURL: "http://127.0.0.1:5000/api/"
 
 })
+
+
 export const useForm= (initialState = {}) =>{
     const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
 
-    const update = ({target}) => setForm({...form, [target.name]: target.value})
+    const update = ({target}) => {
+
+        setForm({...form, [target.name]: target.value})
+        console.log(form)
+    }
 
     const updateHook= ({target}, name) =>{
         let value2 = target.value
         let value1 = null
-        console.log("value2:  ",value2)
         if(!isNaN(target.value)){
             value1 = name ==="sol"? target.value * dollar: target.value / dollar
             if(!target.value || target.value.isNaN){value1= 0}
@@ -30,7 +36,7 @@ export const useForm= (initialState = {}) =>{
         }
     }
 
-    const clean = () =>{
+    const clean = (toast = true) =>{
         const newObj = {}
         console.log("clean ", form)
         Object.entries(form).forEach(([key, value]) => {
@@ -42,11 +48,11 @@ export const useForm= (initialState = {}) =>{
         });
         setForm(newObj)
         // toast("Clean form",{icon:"👏",  className: 'bg-primary'})
-        toast.success("Clean form ")
+        if(toast){toast.success("Clean form ")}
     }
-    const adding = () =>{
-        setForm(form + "hola")
-        // retorna el formulario inicial // reset
+
+    const remove= async() =>{
+
     }
     const updateMemoryRAM = async() =>{
         await  conextion.updateMemoryRam(form.proforma_id, form.id, form)
@@ -59,11 +65,12 @@ export const useForm= (initialState = {}) =>{
                   toast.error(m.response.data.message)
              })
     }
-    const createMemoryRAM = async() =>{
+    const addMemoryRAM = async() =>{
         await  conextion.addMemoryRam(form.proforma_id, form)
             .then((m)=>{
                 toast.success(m.data.message)
                 console.log(m)
+                clean(false) // clean  inputs
             })
             .catch((m)=>{
                 console.log(m)
@@ -74,10 +81,10 @@ export const useForm= (initialState = {}) =>{
     return{
         form,
         updateHook,
-        createMemoryRAM,
+        addMemoryRAM,
         updateMemoryRAM,
         update,
         clean,
-        adding
+        remove
     };
 }

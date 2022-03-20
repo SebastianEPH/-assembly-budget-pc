@@ -3,7 +3,7 @@ import {useContext, useEffect, useState} from "react";
 // import ShowProcessor from "./proforma_data/processor/ShowProcessor";
 // import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
 // import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
-import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
+import ModalComponent from "./util/ModalComponent";
 import {Container, Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import pool from "../config/connection"
@@ -21,13 +21,16 @@ export default function Proforma(){
     const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
     const [memoryRAMSize, setMemoryRAMSize] = useState([]);
     const [brand, setBrand] = useState([]);
+    const [store, setStore] = useState([]);
 
 
     const {proforma_id} = useParams();
-    console.log("#$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", useParams())
-    console.log(" $$$$El ID de le proforma es: "+ proforma_id)
 
-
+    useEffect(async ()=>{
+        await pool.getStore()
+            .then((data)=>setStore(data))
+            .catch((err)=>console.log("there Was an Error getting the data ",err))
+    },[])
     useEffect(async ()=>{
         await pool.getBrand()
             .then((data)=>setBrand(data))
@@ -43,7 +46,7 @@ export default function Proforma(){
                 setMemoryRAMSize(data.memory_ram_size)
                 console.log('proforma ')
             })
-            .catch((err)=>console.log("there Was an Error getting the data ",err))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
     },[])
 
 
@@ -51,14 +54,14 @@ return(
  <div>
      <h1>Proforma Mode Editor</h1>
 
-     {/*<AlertMessage/>*/}
      <Toaster position={"top-center"} />
 
      <Row className="justify-content-center">
-         <ModalMemoryRam title={"Add New Memory"}>
+         <ModalComponent title={"Add New Memory"}>
              <MemoryRam data={{
                             proforma_id,
                             name:'',
+                            select:0,
                             type:0,
                             size:0,
                             freq:0,
@@ -67,11 +70,12 @@ return(
                         }}
                  modal={true}
                  dataType={memoryRAMType}
+                 dataStore={store}
                  dataFreq={memoryRAMFrequency}
                  dataBrand={brand}
                  dataSize={memoryRAMSize}
              />
-         </ModalMemoryRam>
+         </ModalComponent>
          {/*<ModalAddProcessor/>*/}
      </Row>
 
@@ -84,6 +88,7 @@ return(
                                                 dataType={memoryRAMType}
                                                 dataSize={memoryRAMSize}
                                                 dataBrand={brand}
+                                                dataStore={store}
                                                 dataFreq={memoryRAMFrequency}
                                                 />)}
 

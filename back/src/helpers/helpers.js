@@ -75,9 +75,6 @@ helpers.parse.IdForDB =  (words) =>{
     return obj
 }
 
-helpers.parse.dataBody = (obj)=>{
-    return !(Object.keys(obj).length === 0 || obj === null || obj === undefined)
-}
 
 
 // helpers.parse.ObjDB = (obj, keysOriginal=[], keysClean=[]) => {
@@ -103,43 +100,35 @@ helpers.parse.dataBody = (obj)=>{
  * @constructor
  */
 helpers.parse.ObjDB = (objBody, keysOriginal=[], IDs=[]) => {
+    const obj = {data: {}, passed:true, message: "parse ok", status:200}
 
-    const newObj = {}
-
-    const obj = {data: newObj, passed:true, message: "parse ok", status:200}
-
-    if(objBody === null || objBody === undefined ||objBody.length === 0 ){
+    if(Object.keys(objBody).length === 0){
+        obj.passed = false
+        obj.message = "Error, no se está enviando nugún valor del, req.body"
+        obj.status = 402
+        return obj
+    }else if(objBody === null || objBody === undefined){
         obj.passed = false
         obj.message = "Error fatal en el server, contacte con el soporte técnico "
         obj.status = 500
         return obj
     }
-
     Object.entries(objBody).forEach(([key, value]) => {
         keysOriginal.forEach(word=>{
             if(word === key){
                 console.log(word, " => ", value)
-                if(value === undefined || value=== null){
-                    newObj[key] = null
-                }else{
-                    newObj[key] = value.toString().trim()
-                }
-
+                obj.data[key]= value === undefined || value=== null? null: value.toString().trim()
             }
         })
         IDs.forEach(word=>{// only Values ForenKey
             if(word === key){
                 console.log(word, " => ", value)
-                if(value==="" || value === undefined || value=== null){
-                    newObj[key] = null
-                }else{
-                    newObj[key] = value.toString().trim()
-                }
+                obj.data[key] = value==="" || value === undefined || value=== null || value === 0 ||value ==='0' ? null:value.toString().trim()
             }
         })
     });
 
-    if((Object.keys(newObj).length === 0)){
+    if((Object.keys(obj.data).length === 0)){
         console.log("no hubo ninguna coinicdencia los datos enviados, con los datos que recivve")
         obj.passed = false
         obj.message = "submitted fields do not match database "
@@ -147,6 +136,29 @@ helpers.parse.ObjDB = (objBody, keysOriginal=[], IDs=[]) => {
     }
     return  obj
 }
+
+helpers.responseDB = (response)=>{
+    const obj = { passed:true, message: "Database Parse Ok", status:200}
+    if(response.serverStatus ===2 ){
+        if(response.affectedRows === 0  ){
+            obj.passed = false
+            obj.message = "You do not have the necessary permissions or the data does not exist"
+            obj.status = 406
+        }else if(response.affectedRows === 1 || response.insertId !== 0 ){
+            obj.passed = true
+            obj.message = "Was updated successfully"
+            obj.status = 200
+        }else{
+            console.log("No hubo datos que actualizar")
+            obj.passed = true
+            obj.message = "no changed to update"
+            obj.status = 202
+        }
+    }
+    console.log(obj.message, response)
+    return obj
+}
+
 helpers.parse.objDBVerifiyCall = (obj, callback) =>{
      if (obj ==={}){
          callback("Usted esta enviando un objeto vacio ")
