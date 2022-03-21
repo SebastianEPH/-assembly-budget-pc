@@ -11,6 +11,7 @@ pool.getProforma = async (id)=>  {
     const query = await connectionAPI.get(`/proforma/${id}`)
     const json = query.data
     return json[0]
+
 }
 pool.getBrand = async ()=>{
     const brand= await connectionAPI.get(`/brand`)
@@ -30,6 +31,18 @@ pool.addMemoryRam = async (proforma_id, data)=>{
 pool.delMemoryRam = async (proforma_id, memory_id)=>{
     console.log('Delete memory id = ', memory_id)
     return await connectionAPI.delete(`/proforma/${proforma_id}/memoryram/${memory_id}`)
+}
+pool.getMemoryRam = async (proforma_id)=>{
+    return await connectionAPI.get(`/proforma/${proforma_id}/memoryram`)
+}
+pool.getMemoryRamType = async ()=>{
+    return await connectionAPI.get(`/memoryram_type`)
+}
+pool.getMemoryRamSize = async ()=>{
+    return await connectionAPI.get(`/memoryram_size`)
+}
+pool.getMemoryRamFrequency = async ()=>{
+    return await connectionAPI.get(`/memoryram_frequency`)
 }
 
 pool.hola = async (id)=>{

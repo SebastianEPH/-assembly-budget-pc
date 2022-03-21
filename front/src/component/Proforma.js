@@ -1,22 +1,89 @@
 import {useParams} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
-// import ShowProcessor from "./proforma_data/processor/ShowProcessor";
-// import ModalAddProcessor from "./proforma_data/processor/ModalAddProcessor";
-// import ShowMotherboard from "./proforma_data/motherboard/ShowMotherboard";
+import { useEffect, useState} from "react";
 import ModalComponent from "./util/ModalComponent";
 import { Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import { Toaster } from 'react-hot-toast';
-import {UseProforma} from "./UseProforma";
+
+import pool from "../config/connection";
 
 export default function Proforma(){
     const {proforma_id} = useParams();
-    const {memoryRAM, memoryRAMType, memoryRAMFrequency, memoryRAMSize, brand, loadMemoryRAM, loadBrand, loadStore, store} = UseProforma(proforma_id)
-    console.log("id front ",proforma_id)
+
+    const [memoryRAM, setMemoryRAM] = useState([]);
+    const [memoryRAMType, setMemoryRAMType] = useState([]);
+    const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
+    const [memoryRAMSize, setMemoryRAMSize] = useState([]);
+    const [brand, setBrand] = useState([]);
+    const [store, setStore] = useState([]);
+
+
+    console.log("id dentro de useProforma",proforma_id)
+
+    const loadMemoryRAM = async () =>{
+        console.log("entro al load ram")
+        const hola = await pool.getMemoryRam(proforma_id)
+            .then(({data})=>{
+                console.log("data.memory_ram",data)
+                setMemoryRAM(data)
+
+            })
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+        console.log('esto es el hola... ', hola)
+    }
+    const loadMemoryRAMType = async () =>{
+        console.log("entro al load ram")
+        const hola = await pool.getMemoryRamType()
+            .then(({data})=>{
+                console.log("RAM Type=> data only",data)
+                setMemoryRAMType(data)
+
+            })
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+        console.log('esto es el hola... ', hola)
+    }
+    const loadMemoryRAMFrequency = async () =>{
+        console.log("entro al load ram")
+        const hola = await pool.getMemoryRamFrequency()
+            .then(({data})=>{
+                console.log("RAM Frequency=> data only",data)
+                console.log("data.memory_ram",data[0])
+                setMemoryRAMFrequency(data)
+
+            })
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+        console.log('esto es el hola... ', hola)
+    }
+    const loadMemoryRAMSize = async () =>{
+        console.log("entro al load ram")
+        const hola = await pool.getMemoryRamSize()
+            .then(({data})=>{
+                console.log(" RAM Size=> data only",data)
+                setMemoryRAMSize(data)
+            })
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+        console.log('esto es el hola... ', hola)
+    }
+
+    const loadStore = async() =>{
+        await pool.getStore()
+            .then((data)=>setStore(data))
+            .catch((err)=>console.log("there Was an Error getting the data ",err))
+    }
+    const loadBrand = async() =>{
+        await pool.getBrand()
+            .then((data)=>setBrand(data))
+            .catch((err)=>console.log("there Was an Error getting the data ",err))
+    }
+
+
+        console.log("id front ",proforma_id)
 
     useEffect(async()=>{
         await loadMemoryRAM()
-
+        await loadMemoryRAMType()
+        await loadMemoryRAMSize()
+        await loadMemoryRAMFrequency()
         await loadBrand()
         await loadStore()
 
@@ -50,6 +117,7 @@ return(
                 <MemoryRam
                     key={index +"memory"}
                     data={data}
+                    modal={false}
                     dataType={memoryRAMType}
                     dataSize={memoryRAMSize}
                     dataBrand={brand}

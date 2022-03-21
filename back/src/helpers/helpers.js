@@ -163,15 +163,12 @@ responseDBType = (response,nameType)=>{
             permissions:"You do not have the necessary permissions for update",
             noUpdate:"no changed to update",
         },
-        get:{
-            successfully:"Getting data is successfully",
-            permissions:"You do not have the necessary permissions for get",
-        },
         del:{
             successfully:"The item was remove successfully",
             permissions:"You do not have the necessary permissions for remove",
         }
     }
+    console.log("esto nes el res completo",response)
     const obj = { passed:true, message: "", status:200}
     if(response.serverStatus ===2 ){
         if(response.affectedRows === 0  ){

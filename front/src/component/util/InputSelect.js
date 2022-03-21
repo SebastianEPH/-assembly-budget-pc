@@ -10,12 +10,12 @@ import PropTypes from "prop-types";
  * @param {Array<$ObjMap>} data Data list
  * @return {JSX.Element}
  */
-export default function ({name, title ,select, col, update, data, idCondition}){
+export default function ({name, title ,select = '', col, update, data, idCondition}){
     // console.log("id de la condicion ",idCondition)
     return(
         <Col md={col}  >
           <div className="form-floating">
-              <select name={name} value={select || ''} onChange={(e)=>update(e)} className="form-select"
+              <select name={name} value={select} onChange={(e)=>update(e)} className="form-select"
                       id="floatingSelect" aria-label="Floating label select example">
                   <option value={''} key="0"> </option>
                   {data.map((p={name}, index)=>{
