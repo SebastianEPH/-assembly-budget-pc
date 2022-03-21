@@ -2,7 +2,7 @@ import ButtonModal from "./ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 
-const ModalComponent = ({children, title}) =>{
+const ModalComponent = ({ proforma_id, title, MemoryRam, dataType, dataSize , dataBrand, dataStore, dataFreq,loadMemoryRAM}) =>{
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -20,7 +20,7 @@ const ModalComponent = ({children, title}) =>{
                 onHide={handleClose}
                 backdrop="static"
                 centered
-                contentClassName={"my-modalp"}
+                // contentClassName={"my-modalp"}
                 size={"xl"}
                 keyboard={false}
             >
@@ -31,9 +31,9 @@ const ModalComponent = ({children, title}) =>{
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                              className="bi bi-x-lg" >
-                            <path fill-rule="evenodd"
+                            <path fillRule="event"
                                   d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                            <path fill-rule="evenodd"
+                            <path fillRule="event"
                                   d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
                         </svg>
                     </button>
@@ -41,7 +41,26 @@ const ModalComponent = ({children, title}) =>{
 
 
                 <Modal.Body>
-                        {children }
+                    <MemoryRam data={{
+                                   proforma_id,
+                                   name:'',
+                                   select:0,
+                                   type:0,
+                                   link:'',
+                                   size:0,
+                                   freq:0,
+                                   dol:0,
+                                   sol:0
+                               }}
+                        modalHandleClose ={handleClose}
+                        loadMemoryRAM={loadMemoryRAM}
+                        modal={true} // if true, then use added, otherwise use update function
+                        dataType={dataType}
+                        dataStore={dataStore}
+                        dataFreq={dataFreq}
+                        dataBrand={dataBrand}
+                        dataSize={dataSize}
+                    />
                 </Modal.Body>
             </Modal>
         </>

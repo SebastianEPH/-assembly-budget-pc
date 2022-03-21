@@ -1,6 +1,6 @@
 const memoryram = {}
 const pool = require('../../database')
-const {parse,responseDB} = require("../../helpers/helpers")
+const {parse,DB} = require("../../helpers/helpers")
 
 memoryram.add = async (req, res) =>{
     const { proforma_id } = req.params
@@ -15,7 +15,7 @@ memoryram.add = async (req, res) =>{
 
     try{ // try connection
         const querySQL = 'INSERT INTO memory_ram SET ?'
-        const response =  responseDB(await pool.query(querySQL , [parseBody.data]))
+        const response =  DB.responseAdd(await pool.query(querySQL , [parseBody.data]))
         return res.status(response.status).json({message:response.message})
     }catch (E){
         return res.status(400).json({message:"The submitted data cannot be processed"})
@@ -35,7 +35,7 @@ memoryram.update=async (req, res) =>{
 
     try{ // try connection
         const querySQL = 'UPDATE memory_ram set ? WHERE id =? AND proforma_id = ?'
-        const response =  responseDB(await pool.query(querySQL, [parseBody.data,memoryram_id,proforma_id]))
+        const response =  DB.responseUpd(await pool.query(querySQL, [parseBody.data,memoryram_id,proforma_id]))
         return res.status(response.status).json({message:response.message})
     }catch (E){
         return res.status(400).json({message:"The submitted data cannot be processed"})
@@ -49,7 +49,7 @@ memoryram.delete = async (req, res) =>{
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
     try{ // try connection
         const querySQL = 'DELETE FROM memory_ram WHERE proforma_id = ? AND id=? '
-        const response =  responseDB(await pool.query(querySQL , [ proforma_id, memoryram_id]))
+        const response =  DB.responseDel(await pool.query(querySQL , [ proforma_id, memoryram_id]))
         return res.status(response.status).json({message:response.message})
     }catch (E){
         return res.status(400).json({message:"The submitted data cannot be processed"})

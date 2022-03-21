@@ -1,15 +1,7 @@
 //@ts-check
 import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
-import connection from "../../config/connection";
 import toast from 'react-hot-toast';
-import axios from "../../config/axios";
-
-const connectionAPI =  axios.create({
-    baseURL: "http://127.0.0.1:5000/api/"
-
-})
-
 
 export const useForm= (initialState = {}) =>{
     const {dollar} = useContext(DollarContext );
@@ -46,53 +38,13 @@ export const useForm= (initialState = {}) =>{
             }
         });
         setForm(newObj)
-        // toast("Clean form",{icon:"👏",  className: 'bg-primary'})
         if(toast){toast.success("Clean form ")}
-    }
-
-    const remove= async() =>{
-        await  connection.delMemoryRam(form.proforma_id, form.id)
-            .then((m)=>{
-                toast.success(m.data.message)
-                console.log(m)
-                // clean(false) // clean  inputs
-            })
-            .catch((m)=>{
-                console.log(m)
-                toast.error(m.response.data.message)
-            })
-    }
-    const updateMemoryRAM = async() =>{
-        await  connection.updateMemoryRam(form.proforma_id, form.id, form)
-             .then((m)=>{
-                 toast.success(m.data.message)
-                 console.log(m)
-             })
-             .catch((m)=>{
-                  console.log(m)
-                  toast.error(m.response.data.message)
-             })
-    }
-    const addMemoryRAM = async() =>{
-        await  connection.addMemoryRam(form.proforma_id, form)
-            .then((m)=>{
-                toast.success(m.data.message)
-                console.log(m)
-                clean(false) // clean  inputs
-            })
-            .catch((m)=>{
-                console.log(m)
-                toast.error(m.response.data.message)
-            })
     }
 
     return{
         form,
         updateHook,
-        addMemoryRAM,
-        updateMemoryRAM,
         update,
         clean,
-        remove
     };
 }

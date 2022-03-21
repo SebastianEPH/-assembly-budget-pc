@@ -1,5 +1,6 @@
 helpers = {}
 helpers.parse = {}
+helpers.DB = {}
 
 helpers.parse.spacesAndLowerCase = text => {
     return  text.replace(/\s+/g, '').toLowerCase().trim()
@@ -137,21 +138,58 @@ helpers.parse.ObjDB = (objBody, keysOriginal=[], IDs=[]) => {
     return  obj
 }
 
-helpers.responseDB = (response)=>{
-    const obj = { passed:true, message: "Database Parse Ok", status:200}
+helpers.DB.responseAdd =(response)=>{
+    return responseDBType(response, "add");
+}
+helpers.DB.responseDel =(response)=>{
+    return responseDBType(response, "del");
+}
+helpers.DB.responseUpd =(response)=>{
+    return responseDBType(response, "upd");
+}
+helpers.DB.responseDBGet =(response)=>{
+    return responseDBType(response, "get");
+}
+
+responseDBType = (response,nameType)=>{
+    const type={
+        add:{
+            successfully:"Was Added successfully",
+            permissions:"You do not have the necessary permissions for added",
+            noUpdate:"no changed to update",
+        },
+        upd:{
+            successfully:"Was update successfully",
+            permissions:"You do not have the necessary permissions for update",
+            noUpdate:"no changed to update",
+        },
+        get:{
+            successfully:"Getting data is successfully",
+            permissions:"You do not have the necessary permissions for get",
+        },
+        del:{
+            successfully:"The item was remove successfully",
+            permissions:"You do not have the necessary permissions for remove",
+        }
+    }
+    const obj = { passed:true, message: "", status:200}
     if(response.serverStatus ===2 ){
         if(response.affectedRows === 0  ){
             obj.passed = false
-            obj.message = "You do not have the necessary permissions or the data does not exist"
+            obj.message = type[nameType].permissions
             obj.status = 406
-        }else if(response.affectedRows === 1 || response.insertId !== 0 ){
+        }else if(response.affectedRows === 1 || response.insertId !== 0 ) {
             obj.passed = true
-            obj.message = "Was updated successfully"
+            obj.message = type[nameType].successfully
             obj.status = 200
+        }else if(response.affectedRows === 1 || response.insertId !== 0 ){
+                obj.passed = true
+                obj.message = type[nameType].successfully
+                obj.status = 200
         }else{
             console.log("No hubo datos que actualizar")
             obj.passed = true
-            obj.message = "no changed to update"
+            obj.message = type.add.noUpdate
             obj.status = 202
         }
     }
@@ -159,37 +197,37 @@ helpers.responseDB = (response)=>{
     return obj
 }
 
-helpers.parse.objDBVerifiyCall = (obj, callback) =>{
-     if (obj ==={}){
-         callback("Usted esta enviando un objeto vacio ")
-     }else{
-         callback(null, obj)
-     }
-
-}
-
-helpers.parse.isObjEmpty= async(obj)=>{
-    return obj !== {}
-}
-helpers.parse.objDBVerifiyPromesa = (obj)=>{
-    return new Promise((resolve, reject)=>{
-        if (!obj){
-            reject("El objeto está vacio")
-        }else{
-            resolve("todo oexitoso ")
-
-        }
-    })
-}
-
-
-helpers.parse.objDBVerifiyAsync = async(obj)=>{
-    if (!obj){
-        throw new Error("No existe la base de datos ")
-    }
-    return obj
-}
-
-
-
 module.exports = helpers;
+
+
+
+// helpers.parse.objDBVerifiyCall = (obj, callback) =>{
+//      if (obj ==={}){
+//          callback("Usted esta enviando un objeto vacio ")
+//      }else{
+//          callback(null, obj)
+//      }
+//
+// }
+//
+// helpers.parse.objDBVerifiyPromesa = (obj)=>{
+//     return new Promise((resolve, reject)=>{
+//         if (!obj){
+//             reject("El objeto está vacio")
+//         }else{
+//             resolve("todo oexitoso ")
+//
+//         }
+//     })
+// }
+//
+//
+// helpers.parse.objDBVerifiyAsync = async(obj)=>{
+//     if (!obj){
+//         throw new Error("No existe la base de datos ")
+//     }
+//     return obj
+// }
+//
+//
+
