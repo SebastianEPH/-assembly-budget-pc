@@ -1,4 +1,4 @@
-import InputSelect from "../../util/InputSelect";
+import InputSelect from "../../util/InputSelectC";
 import {useState} from "react";
 import connectionAPI from "../../../config/axios";
 import {useParams} from "react-router-dom";

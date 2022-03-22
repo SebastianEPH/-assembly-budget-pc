@@ -1,13 +1,8 @@
 import React from "react";
-
 import {
     BrowserRouter,
-    Switch,
     Routes,
     Route,
-    Link,
-    useRouteMatch,
-    useParams
 } from "react-router-dom";
 
 import ListProforma from "./component/ListProforma";
@@ -19,7 +14,6 @@ import {DollarProvider} from "./component/hooks/DollarContext"
 import {MessageProvider} from "./component/hooks/MessageContext";
 
 function App() {
-    // const [dollar, setDollar] = useState(3.7)
     return (
         <MessageProvider>
             <DollarProvider>

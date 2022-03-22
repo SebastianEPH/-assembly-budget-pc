@@ -1,62 +1,38 @@
 import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import connectionAPI from "../config/axios";
 
 export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
 
-
-    const url = 'http://127.0.0.1:5000/api/';
+    //
+    // const url = 'http://127.0.0.1:5000/api/';
 
     useEffect(()=>{
         consultarApi()
 
     },[])
 
-
-
-    const getProjects =async () =>{
-
-        const response = await fetch(url, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            //mode: 'no-cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                "Accept":'application/json',
-                'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-                "Access-Control-Allow-Credentials" : true
-                //"Access-Control-Allow-Origin": "*",
-            },
-            //redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            //body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        console.log(response)
-        console.log('response.data')
-        const ga3 =  await response.data
-        console.log(ga3)
-        console.log('response.text()')
-        const ga2 =  await response.text();
-        console.log(ga2)
-        console.log('response.json ')
-        const ga =  await response.json();
-        console.log(ga)
-
-        console.log('response.json al de previamente TEXT  ')
-        const gar =  await ga2.json();
-        console.log(gar)
-        //const ga = await response.parse()
-        //console.log(ga)
-        //console.log(ga)
-
-        //console.log(ga.results)
-        //setProjects(ga.results)
-
-
-
-    }
+    // const getProjects =async () =>{
+    //
+    //     const response = await fetch(url, {
+    //         method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    //         //mode: 'no-cors', // no-cors, *cors, same-origin
+    //         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //         credentials: 'same-origin', // include, *same-origin, omit
+    //         headers: {
+    //             "Accept":'application/json',
+    //             'Content-Type': 'application/json',
+    //             // 'Content-Type': 'application/x-www-form-urlencoded',
+    //             "Access-Control-Allow-Credentials" : true
+    //             //"Access-Control-Allow-Origin": "*",
+    //         },
+    //         //redirect: 'follow', // manual, *follow, error
+    //         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    //         //body: JSON.stringify(data) // body data type must match "Content-Type" header
+    //     });
+    //
+    // }
     const  consultarApi = async ()=>    {
         console.log('consultado API principal ')
         const queryProjects = await connectionAPI.get('/proforma')

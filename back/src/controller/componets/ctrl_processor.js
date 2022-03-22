@@ -1,98 +1,38 @@
 const processor= {}
-const pool = require('../../database')
-
-const model_processortttt = {
-        proforma_id:null,
-        name:null,
-        store_id:null,
-        link:null,
-        active:null,
-        price_sol:null,
-        price_dol:null
-}
-const me = Object.create({
-
-    proforma_id:null,
-    name:null,
-    store_id:null,
-    link:null,
-    active:null,
-    price_sol:null,
-    price_dol:null
-});
-
-
-function model_processor (proforma_id , name,store_id ,link ,active,price_dol,price_sol) {
-    this.proforma_id = proforma_id || null;
-    this.name = name || null;
-    this.store_id = store_id || null;
-    this.link = link || null;
-    this.active = active || null;
-    this.price_dol = price_dol || null;
-    this.price_sol = price_sol || null;
-
-    return{
-        proforma_id:this.proforma_id,
-        name:this.name,
-        store_id:this.store_id,
-        link:this.link,
-        active:this.active,
-        brand_id:this.brand_id = active || null,
-        price_dol:this.price_dol,
-        price_sol:this.price_sol
-
-    }
-}
-
+const databaseHelper = require("./querysDataBase");
 
 processor.add = async (req, res) =>{
-    console.log("post 1 start ")
-    console.log(req.body)
-    console.log(req.params)
-    console.log("antes params ")
-    const {proforma_id} = req.params
-    const {
-        name,
-        store_id,
-        link,
-        active,
-        brand_id,
-        price_dol,
-        price_sol
-    } = req.body
-
-    const me = model_processor(
-        proforma_id,
-        name,
-        store_id,
-        link,
-        active,
-        brand_id,
-        price_dol,
-        price_sol
-    )
-
-    console.table(me)
-    console.log("antes me  ")
-
-    console.log(model_processor)
-    console.log("post 1 finish ")
-    await pool.query('INSERT INTO processor SET ?', [me])
-
+    const data = {
+        nameDatabase: 'processor',
+        parseDataOriginal: ["name","dol","sol","item_active","link"],
+        parseDataIDS :["brand","store"],
+    }
+    return databaseHelper.add(req,res, data )
+}
+processor.getIf = async (req, res) =>{
+    const data = {
+        nameTable: "processor"
+    }
+    return databaseHelper.getIf(req,res, data )
 }
 processor.update = async (req, res) =>{
-    console.log("put")
+    const { processor_id } = req.params
+    const data = {
+        nameDatabase: 'memory_ram',
+        item_id : processor_id,
+        parseDataOriginal: ["name","dol","item_active","sel", "link"],
+        parseDataID : ["store","type","size", "freq","brand"],
+    }
+    return databaseHelper.update(req,res, data )
 }
-processor.get = async (req, res) =>{
+processor.delete = async (req, res) =>{
+    const {processor_id} = req.params
+    const data = {
+        nameDatabase: 'processor',
+        item_id : processor_id,
+    }
+    return databaseHelper.delete(req,res, data )
 
-    const {proforma_id} =  req.params
-    const processor = await pool.query('SELECT * from processor where proforma_id = ?',proforma_id)
-
-    res.json(processor)
 }
-processor.getOnly = async (req, res) =>{
-    console.log("getonly")
-}
-
 
 module.exports = processor;

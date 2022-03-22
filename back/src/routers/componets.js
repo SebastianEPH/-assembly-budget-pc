@@ -7,12 +7,11 @@ const memoryram =  require("../controller/componets/ctrl_memoryram")
 
 const router = express.Router();
 
-// processor
-router.get("/proforma/:proforma_id/processor", processor.get)
+// Processor
+router.get("/proforma/:proforma_id/processor", processor.getIf)
 router.post("/proforma/:proforma_id/processor", processor.add)
+router.delete("/proforma/:proforma_id/processor/:processor_id", memoryram.delete)
 router.put("/proforma/:proforma_id/processor/:processor_id", processor.update)
-//router.get("/:id_proforma/processor/:id_processor", processor.get_only)
-//router.get("/:id_proforma/processor", processor.get)
 
 // Motherboard
 router.get("/proforma/:proforma_id/motherboard", motherboard.get)
@@ -21,7 +20,7 @@ router.put("/proforma/:proforma_id/motherboard/:motherboard_id", motherboard.upd
 // MemoryRAM
 
 // Memory RAM
-router.get("/proforma/:proforma_id/memoryram", memoryram.get)
+router.get("/proforma/:proforma_id/memoryram", memoryram.getIf)
 router.post("/proforma/:proforma_id/memoryram", memoryram.add)
 router.delete("/proforma/:proforma_id/memoryram/:memoryram_id", memoryram.delete)
 router.put("/proforma/:proforma_id/memoryram/:memoryram_id", memoryram.update)

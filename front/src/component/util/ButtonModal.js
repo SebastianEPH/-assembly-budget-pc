@@ -4,7 +4,7 @@ export default function (props){
         <div className="col-auto justify-content-center p-2 m-2 " onClick={props.funct}>
             <button className="btn btn-outline-success" type="button" style={{ width:`${props.size}rem`, height:`${props.size}rem` }}>
                 <h4 className="" >{props.name}</h4>
-                <p> </p>
+                <br/>
                 <svg xmlns="http://www.w3.org/2000/svg" width={props.icon_size} height={props.icon_size} fill="currentColor"
                      className=" bi bi-plus-circle-dotted" viewBox="0 0 16 16">
                     <path

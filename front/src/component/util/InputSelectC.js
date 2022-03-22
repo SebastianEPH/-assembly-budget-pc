@@ -1,5 +1,5 @@
 import { Col} from "react-bootstrap";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 /**
  * Element Select / option
@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  * @param {Array<$ObjMap>} data Data list
  * @return {JSX.Element}
  */
-export default function ({name, title ,select = '', col, update, data, idCondition}){
+export default function ({name, title ,select = '', col, update, data, idCondition = null}){
     // console.log("id de la condicion ",idCondition)
     return(
         <Col md={col} >
@@ -22,8 +22,10 @@ export default function ({name, title ,select = '', col, update, data, idConditi
                         if(!p.condition){
                             return<option value={p.id || ''} key={index+"l"}>{p.name}</option>
                         }else{
-                            if(idCondition === null || idCondition === undefined){ // is condicion es null como valor,
-                                return<option value={p.id || ''} key={index+"t"}>{p.name}</option>
+                            if(idCondition ===null){
+                                // existe una condición en la base de datos, está vacia el objeto que recibe
+                            } else if ( idCondition === undefined){ // is condicion es null como valor,
+                                return<option value={p.id || ''} key={index+"t"}>{p.name }</option>
                             }else{
                                 if (idCondition.toString() === p.condition.toString()){
                                     return<option value={p.id || ''} key={index+"y"}>{p.name}</option>
@@ -36,7 +38,6 @@ export default function ({name, title ,select = '', col, update, data, idConditi
             </div>
         </Col>
     )
-
 }
 
 //

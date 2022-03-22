@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import { useEffect, useState} from "react";
+import { useEffect} from "react";
 import ModalComponent from "./util/ModalComponent";
 import { Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
@@ -14,20 +14,21 @@ export default function Proforma(){
         memoryRAMType,
         memoryRAMFrequency,
         memoryRAMSize,
-        loadMemoryRAM, loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
+        loadMemoryRAM,
+        loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
         loadBrand,
         loadStore,
         brand,
         store
     } = UseProforma(proforma_id)
 
-    useEffect(async()=>{
-        await loadMemoryRAM()
-        await loadMemoryRAMType()
-        await loadMemoryRAMSize()
-        await loadMemoryRAMFrequency()
-        await loadBrand()
-        await loadStore()
+    useEffect(()=>{
+        loadMemoryRAM().then(r => {})
+        loadMemoryRAMType().then(r => {})
+        loadMemoryRAMSize().then(r => {})
+        loadMemoryRAMFrequency().then(r => {})
+        loadBrand().then(r => {})
+        loadStore().then(r => {})
 
     },[])
 
