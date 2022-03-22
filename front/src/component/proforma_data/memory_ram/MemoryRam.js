@@ -4,6 +4,7 @@ import {Row, Col, Modal, Button, Form, FloatingLabel, Card, InputGroup, FormCont
 import ModalConfirmation from "../../util/ModalConfirmation";
 import connection from "../../../config/connection";
 import toast from "react-hot-toast";
+import {forEach} from "react-bootstrap/ElementChildren";
 
 // MODAL: if true, then use added, otherwise use update function
 const MemoryRam = ({ data, dataType, modal=false, dataSize , dataBrand, dataStore, dataFreq,loadMemoryRAM,modalHandleClose}) =>{
@@ -51,12 +52,17 @@ const MemoryRam = ({ data, dataType, modal=false, dataSize , dataBrand, dataStor
                 toast.error(m.response.data.message)
             })
     }
+    console.log('size',size)
+
+    console.log('data size',dataSize[id])
+
+
     return(
 
-        <Card id={'memoryRAM_'+id}  >
+        <Card id={'memoryRAM_'+id} className={'m-2'}  >
             {/*className={"border border-danger"}*/}
+            {/*<Card.Header>MemoryRAM: {title}</Card.Header>*/}
             <Card.Body>
-                <Card.Title>Card Title</Card.Title>
                 <Card.Text>
                     <Row >
                         <Col md={11}>
@@ -65,7 +71,7 @@ const MemoryRam = ({ data, dataType, modal=false, dataSize , dataBrand, dataStor
                                               onChange={(e)=>update(e)}/>
                             </FloatingLabel>
                             <Row>
-                                <InputSelect name={"type"} title={"type RAM"} update={update} select={type} col={2} data={dataType}/>
+                                <InputSelect name={"size"} title={"Size"} update={update} select={size} col={2} data={dataSize}/>
                                 <InputSelect name={"type"} title={"type RAM"} update={update} select={type} col={2} data={dataType}/>
                                 <InputSelect name={"freq"} idCondition={type} title={"Frequency"} update={update} select={freq} col={2} data={dataFreq}/>
                                 <Col md={3}>
@@ -97,7 +103,7 @@ const MemoryRam = ({ data, dataType, modal=false, dataSize , dataBrand, dataStor
                                 </Col>
                                 <InputSelect name={"store"} idCondition={type} title={"Store"} update={update}  col={2} data={dataStore}/>
                             </Row>
-                            
+
                         </Col>
                         <Col md={1}>
                             <div className="d-grid gap-2 ">
