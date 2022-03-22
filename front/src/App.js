@@ -28,7 +28,7 @@ function App() {
                     <Routes>
                         <Route path="/proforma/:proforma_id" element={<Proforma/>}/>
                         <Route path="/" exact element={
-                            <div className="container">
+                            <div className="container-fluid">
                                 <NewProject/>
                                 <br/>
                                 <SearchProject/>
@@ -37,7 +37,7 @@ function App() {
                             </div>
                         }/>
                         <Route path="/about" element={
-                            <div className="container-fluid p-5">
+                            <div className="container-fluid">
                                 <h1>acerca de?? </h1>
                             </div>
                         }/>

@@ -13,27 +13,27 @@ import PropTypes from "prop-types";
 export default function ({name, title ,select = '', col, update, data, idCondition}){
     // console.log("id de la condicion ",idCondition)
     return(
-        <Col md={col}  >
-          <div className="form-floating">
-              <select name={name} value={select} onChange={(e)=>update(e)} className="form-select"
-                      id="floatingSelect" aria-label="Floating label select example">
-                  <option value={''} key="0"> </option>
-                  {data.map((p={name}, index)=>{
-                      if(!p.condition){
-                          return<option value={p.id || ''} key={index+"l"}>{p.name}</option>
-                      }else{
-                          if(idCondition === null || idCondition === undefined){ // is condicion es null como valor,
-                              return<option value={p.id || ''} key={index+"t"}>{p.name}</option>
-                          }else{
-                              if (idCondition.toString() === p.condition.toString()){
-                                  return<option value={p.id || ''} key={index+"y"}>{p.name}</option>
-                              }
-                          }
-                      }
-                  })}
-              </select>
-              <label htmlFor="floatingSelect">{title !== undefined && title}</label>
-          </div>
+        <Col md={col} >
+            <div className="form-floating ">
+                <select name={name} value={select} onChange={(e)=>update(e)} className="form-select"
+                        id="floatingSelect" aria-label="Floating label select example">
+                    <option value={''} key="0"> </option>
+                    {data.map((p={name}, index)=>{
+                        if(!p.condition){
+                            return<option value={p.id || ''} key={index+"l"}>{p.name}</option>
+                        }else{
+                            if(idCondition === null || idCondition === undefined){ // is condicion es null como valor,
+                                return<option value={p.id || ''} key={index+"t"}>{p.name}</option>
+                            }else{
+                                if (idCondition.toString() === p.condition.toString()){
+                                    return<option value={p.id || ''} key={index+"y"}>{p.name}</option>
+                                }
+                            }
+                        }
+                    })}
+                </select>
+                <label htmlFor="floatingSelect">{title !== undefined && title}</label>
+            </div>
         </Col>
     )
 

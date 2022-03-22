@@ -4,80 +4,22 @@ import ModalComponent from "./util/ModalComponent";
 import { Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import { Toaster } from 'react-hot-toast';
-
-import pool from "../config/connection";
+import {UseProforma} from "./hooks/UseProforma";
 
 export default function Proforma(){
     const {proforma_id} = useParams();
 
-    const [memoryRAM, setMemoryRAM] = useState([]);
-    const [memoryRAMType, setMemoryRAMType] = useState([]);
-    const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
-    const [memoryRAMSize, setMemoryRAMSize] = useState([]);
-    const [brand, setBrand] = useState([]);
-    const [store, setStore] = useState([]);
-
-
-    console.log("id dentro de useProforma",proforma_id)
-
-    const loadMemoryRAM = async () =>{
-        console.log("entro al load ram")
-        const hola = await pool.getMemoryRam(proforma_id)
-            .then(({data})=>{
-                console.log("data.memory_ram",data)
-                setMemoryRAM(data)
-
-            })
-            .catch((err)=>console.log("there was an Error getting the data ",err))
-        console.log('esto es el hola... ', hola)
-    }
-    const loadMemoryRAMType = async () =>{
-        console.log("entro al load ram")
-        const hola = await pool.getMemoryRamType()
-            .then(({data})=>{
-                console.log("RAM Type=> data only",data)
-                setMemoryRAMType(data)
-
-            })
-            .catch((err)=>console.log("there was an Error getting the data ",err))
-        console.log('esto es el hola... ', hola)
-    }
-    const loadMemoryRAMFrequency = async () =>{
-        console.log("entro al load ram")
-        const hola = await pool.getMemoryRamFrequency()
-            .then(({data})=>{
-                console.log("RAM Frequency=> data only",data)
-                console.log("data.memory_ram",data[0])
-                setMemoryRAMFrequency(data)
-
-            })
-            .catch((err)=>console.log("there was an Error getting the data ",err))
-        console.log('esto es el hola... ', hola)
-    }
-    const loadMemoryRAMSize = async () =>{
-        console.log("entro al load ram")
-        const hola = await pool.getMemoryRamSize()
-            .then(({data})=>{
-                console.log(" RAM Size=> data only",data)
-                setMemoryRAMSize(data)
-            })
-            .catch((err)=>console.log("there was an Error getting the data ",err))
-        console.log('esto es el hola... ', hola)
-    }
-
-    const loadStore = async() =>{
-        await pool.getStore()
-            .then((data)=>setStore(data))
-            .catch((err)=>console.log("there Was an Error getting the data ",err))
-    }
-    const loadBrand = async() =>{
-        await pool.getBrand()
-            .then((data)=>setBrand(data))
-            .catch((err)=>console.log("there Was an Error getting the data ",err))
-    }
-
-
-        console.log("id front ",proforma_id)
+    const {
+        memoryRAM,
+        memoryRAMType,
+        memoryRAMFrequency,
+        memoryRAMSize,
+        loadMemoryRAM, loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
+        loadBrand,
+        loadStore,
+        brand,
+        store
+    } = UseProforma(proforma_id)
 
     useEffect(async()=>{
         await loadMemoryRAM()
@@ -90,8 +32,10 @@ export default function Proforma(){
     },[])
 
 return(
-    <>
+    <div className="container-fluid">
         <h1>Proforma Mode Editor</h1>
+
+
         {/*  Verificar el id , si no es una valido, entonces, mandar un mensaje de error  */}
         <Toaster position={"top-center"} />
 
@@ -110,8 +54,7 @@ return(
         </Row>
 
         {/* Memory RAM */}
-        {memoryRAM.toString() !== ""? <div className="col-auto"><h4>Memory RAM </h4></div> :""}
-
+        {memoryRAM.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Memory RAM </h4><hr/><br/></div> :""}
         {memoryRAM?
             memoryRAM.map((data, index)=>
                 <MemoryRam
@@ -143,5 +86,5 @@ return(
         {/*       />)}*/}
 
 
-    </>
+    </div>
 )}

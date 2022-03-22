@@ -7,8 +7,8 @@ export const useForm= (initialState = {}) =>{
     const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
 
-    const update = ({target}) => {
 
+    const update = ({target}) => {
         setForm({...form, [target.name]: target.value})
         console.log(form)
     }
