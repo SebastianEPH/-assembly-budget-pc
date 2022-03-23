@@ -20,6 +20,12 @@ processor.getIf = async (req, res) =>{
     }
     return databaseHelper.getIf(req,res, data )
 }
+processor.getType = async (req, res)=>{
+    const data = {
+        nameTable: "processor_type"
+    }
+    return databaseHelper.get(req,res, data )
+}
 processor.update = async (req, res) =>{
     const { processor_id } = req.params
     const data = {

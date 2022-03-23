@@ -8,6 +8,8 @@ import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import Processor from "./proforma_data/processor/Processor";
 import { Toaster } from 'react-hot-toast';
 import {UseProforma} from "./hooks/UseProforma";
+import Motherboard from "./proforma_data/motherboard/motherboard";
+import ModalMotherboard from "./proforma_data/motherboard/modalMotherboard";
 
 
 
@@ -15,12 +17,15 @@ export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        motherboard,
+        loadMotherboard,
         processor,
+        processorType,
+        loadProcessor,loadProcessor_type,
         memoryRAM,
         memoryRAMType,
         memoryRAMFrequency,
         memoryRAMSize,
-        loadProcessor,
         loadMemoryRAM, loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
         loadBrand,
         loadStore,
@@ -29,7 +34,9 @@ export default function Proforma(){
     } = UseProforma(proforma_id)
 
     useEffect(async()=>{
+        await loadMotherboard()
         await loadProcessor()
+        await loadProcessor_type()
         await loadMemoryRAM()
         await loadMemoryRAMType()
         await loadMemoryRAMSize()
@@ -47,6 +54,14 @@ return(
         <Toaster position={"top-center"} />
 
         <Row className="justify-content-center">
+            <ModalProcessor
+                Processor={ Processor }
+                proforma_id={proforma_id}
+                reloadForDB ={loadProcessor}
+                modal={true} // if true, then use added, otherwise use update function
+                dataStore={store}
+                processorType={processorType}
+            />
             <ModalMemoryRam
                             MemoryRam={ MemoryRam }
                             proforma_id={proforma_id}
@@ -58,18 +73,42 @@ return(
                             dataBrand={brand}
                             dataSize={memoryRAMSize}
             />
-            <ModalProcessor
-                            Processor={ Processor }
-                            proforma_id={proforma_id}
-                            reloadForDB ={loadProcessor}
-                            modal={true} // if true, then use added, otherwise use update function
-                            dataStore={store}
-                            dataBrand={brand}
+            <ModalMotherboard
+                Motherboardr={ Motherboard }
+                proforma_id={proforma_id}
+                reloadForDB ={loadMotherboard}
+                modal={true} // if true, then use added, otherwise use update function
+                dataStore={store}
+                processorType={processorType}
             />
+
         </Row>
 
+        {/* Processor */}
+        {processor.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Processor</h4><hr/><br/></div> :""}
+        {processor?
+            processor.map((data, index)=>
+                <Processor
+                    key={index +"processor"}
+                    data={data}
+                    processorType={processorType}
+                    dataStore={store}
+                    reloadForDB ={loadProcessor}
+                />)
+            :"loading"}
 
-
+        {/* Motherboard*/}
+        {motherboard.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Motherboard</h4><hr/><br/></div> :""}
+        {motherboard?
+            motherboard.map((data, index)=>
+                <Motherboard
+                    key={index +"motherboard"}
+                    data={data}
+                    processorType={processorType}
+                    dataStore={store}
+                    reloadForDB ={loadMotherboard}
+                />)
+            :"loading"}
 
         {/* Memory RAM */}
         {memoryRAM.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Memory RAM</h4><hr/><br/></div> :""}
@@ -82,39 +121,10 @@ return(
                     dataSize={memoryRAMSize}
                     dataBrand={brand}
                     dataStore={store}
-                    reloadForDB ={loadMemoryRAM}
                     dataFreq={memoryRAMFrequency}
+                    reloadForDB ={loadMemoryRAM}
                 />)
             :"loading"}
-
-
-        {/* Processor */}
-        {processor.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Processor</h4><hr/><br/></div> :""}
-        {processor?
-            processor.map((data, index)=>
-                <Processor
-                    key={index +"processor"}
-                    data={data}
-                    dataBrand={brand}
-                    dataStore={store}
-                    reloadForDB ={loadProcessor}
-                />)
-            :"loading"}
-
-
-
-
-        {/*{memoryRAM.map((data, index)=>*/}
-        {/*    <MemoryRam*/}
-        {/*       key={index}*/}
-        {/*       data={data}*/}
-        {/*       dataType={memoryRAMType}*/}
-        {/*       dataSize={memoryRAMSize}*/}
-        {/*       dataBrand={brand}*/}
-        {/*       dataStore={store}*/}
-        {/*       loadMemoryRAM={loadMemoryRAM}*/}
-        {/*       dataFreq={memoryRAMFrequency}*/}
-        {/*       />)}*/}
 
 
     </div>

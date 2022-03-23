@@ -8,6 +8,11 @@ const connectionAPI =  axios.create({
 export const UseProforma = (proforma_id)=>{
     // processor
     const [processor, setProcessor] = useState([]);
+    const [processorType, setProcessorType] = useState([]);
+
+    // motherboard
+    const [motherboard, setMotherboard] = useState([]);
+
     // memory ram
     const [memoryRAM, setMemoryRAM] = useState([]);
     const [memoryRAMType, setMemoryRAMType] = useState([]);
@@ -17,52 +22,39 @@ export const UseProforma = (proforma_id)=>{
     const [brand, setBrand] = useState([]);
     const [store, setStore] = useState([]);
 
-
-    console.log("id dentro de useProforma",proforma_id)
-
-    const loadMemoryRAM = async () =>{
-        await connectionAPI.get(`/proforma/${proforma_id}/memoryram`)
-            .then(({data})=>{
-                console.log("data.memoryram",data)
-                setMemoryRAM(data)
-
-            })
+    const loadMotherboard = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/motherboard`)
+            .then(({data})=>setMotherboard(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadProcessor = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/processor`)
-            .then(({data})=>{
-                console.log("data.processor",data)
-                setProcessor(data)
-
-            })
+            .then(({data})=>setProcessor(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadProcessor_type= async () =>{
+        await connectionAPI.get(`/processor_type`)
+            .then(({data})=>setProcessorType(data))
+            .catch((err)=>console.log("there Was an Error getting the data ",err))
+    }
+    const loadMemoryRAM = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/memoryram`)
+            .then(({data})=>setMemoryRAM(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMemoryRAMType = async () =>{
          await connectionAPI.get(`/memoryram_type`)
-            .then(({data})=>{
-                console.log("RAM Type=> data only",data)
-                setMemoryRAMType(data)
-
-            })
+            .then(({data})=>setMemoryRAMType(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMemoryRAMFrequency = async () =>{
         await connectionAPI.get(`/memoryram_frequency`)
-            .then(({data})=>{
-                console.log("RAM Frequency=> data only",data)
-                console.log("data.memory_ram",data[0])
-                setMemoryRAMFrequency(data)
-
-            })
+            .then(({data})=>setMemoryRAMFrequency(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMemoryRAMSize = async () =>{
         await connectionAPI.get(`/memoryram_size`)
-            .then(({data})=>{
-                console.log(" RAM Size=> data only",data)
-                setMemoryRAMSize(data)
-            })
+            .then(({data})=>setMemoryRAMSize(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
 
@@ -77,12 +69,15 @@ export const UseProforma = (proforma_id)=>{
             .catch((err)=>console.log("there Was an Error getting the data ",err))
     }
     return {
+        motherboard,
+        loadMotherboard,
         processor,
+        processorType,
+        loadProcessor,loadProcessor_type,
         memoryRAM,
         memoryRAMType,
         memoryRAMFrequency,
         memoryRAMSize,
-        loadProcessor,
         loadMemoryRAM, loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
         loadBrand,
         loadStore,

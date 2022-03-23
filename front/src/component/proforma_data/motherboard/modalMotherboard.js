@@ -1,9 +1,9 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import Processor from "./Processor";
+import Motherboard from "./motherboard";
 
-const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB }) =>{
+const ModalMotherboard = ({ proforma_id,  processorType, dataStore, reloadForDB }) =>{
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -11,7 +11,7 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
     return(
         <>
             <ButtonModal
-                name="Add Processor"
+                name="Add Motherboard"
                 size="15"
                 icon_size="60"
                 funct={handleShow}
@@ -27,7 +27,7 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Processor
+                        Add Motherboard
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -42,7 +42,9 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
 
 
                 <Modal.Body>
-                    <Processor
+
+
+                    <Motherboard
                         data={{
                             store:'',
                             proforma_id,
@@ -61,11 +63,11 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
                         dataStore={dataStore}
                         processorType={processorType}>
 
-                    </Processor>
+                    </Motherboard>
 
                 </Modal.Body>
             </Modal>
         </>
     )
 }
-export default ModalMemoryRam;
+export default ModalMotherboard;
