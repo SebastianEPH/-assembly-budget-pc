@@ -1,38 +1,41 @@
 const processor= {}
 const databaseHelper = require("./querysDataBase");
 
+
+const nameDatabase = 'processor'
+const parseDataOriginal = ["name","dol","sol","item_active","link"]
+const parseDataIDs = ["store","type","size", "freq","brand", "proforma_id"]
+
 processor.add = async (req, res) =>{
     const data = {
-        nameDatabase: 'processor',
-        parseDataOriginal: ["name","dol","sol","item_active","link"],
-        parseDataIDS :["brand","store"],
+        nameDatabase,
+        parseDataOriginal ,
+        parseDataIDs,
     }
     return databaseHelper.add(req,res, data )
 }
 processor.getIf = async (req, res) =>{
     const data = {
-        nameTable: "processor"
+        nameDatabase,
     }
     return databaseHelper.getIf(req,res, data )
 }
 processor.update = async (req, res) =>{
     const { processor_id } = req.params
     const data = {
-        nameDatabase: 'memory_ram',
+        nameDatabase,
         item_id : processor_id,
-        parseDataOriginal: ["name","dol","item_active","sel", "link"],
-        parseDataID : ["store","type","size", "freq","brand"],
+        parseDataOriginal,
+        parseDataIDs,
     }
     return databaseHelper.update(req,res, data )
 }
 processor.delete = async (req, res) =>{
     const {processor_id} = req.params
     const data = {
-        nameDatabase: 'processor',
+        nameDatabase,
         item_id : processor_id,
     }
     return databaseHelper.delete(req,res, data )
-
 }
-
 module.exports = processor;

@@ -10,7 +10,7 @@ const router = express.Router();
 // Processor
 router.get("/proforma/:proforma_id/processor", processor.getIf)
 router.post("/proforma/:proforma_id/processor", processor.add)
-router.delete("/proforma/:proforma_id/processor/:processor_id", memoryram.delete)
+router.delete("/proforma/:proforma_id/processor/:processor_id", processor.delete)
 router.put("/proforma/:proforma_id/processor/:processor_id", processor.update)
 
 // Motherboard

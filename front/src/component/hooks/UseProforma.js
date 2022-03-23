@@ -1,10 +1,19 @@
 import {useState} from "react";
-import pool from "../../config/connection"
+import axios from "../../config/axios";
+const connectionAPI =  axios.create({
+    baseURL: "http://127.0.0.1:5000/api/"
+
+})
+
 export const UseProforma = (proforma_id)=>{
+    // processor
+    const [processor, setProcessor] = useState([]);
+    // memory ram
     const [memoryRAM, setMemoryRAM] = useState([]);
     const [memoryRAMType, setMemoryRAMType] = useState([]);
     const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
     const [memoryRAMSize, setMemoryRAMSize] = useState([]);
+    // other
     const [brand, setBrand] = useState([]);
     const [store, setStore] = useState([]);
 
@@ -12,16 +21,25 @@ export const UseProforma = (proforma_id)=>{
     console.log("id dentro de useProforma",proforma_id)
 
     const loadMemoryRAM = async () =>{
-        await pool.getMemoryRam(proforma_id)
+        await connectionAPI.get(`/proforma/${proforma_id}/memoryram`)
             .then(({data})=>{
-                console.log("data.memory_ram",data)
+                console.log("data.memoryram",data)
                 setMemoryRAM(data)
 
             })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
+    const loadProcessor = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/processor`)
+            .then(({data})=>{
+                console.log("data.processor",data)
+                setProcessor(data)
+
+            })
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
     const loadMemoryRAMType = async () =>{
-         await pool.getMemoryRamType()
+         await connectionAPI.get(`/memoryram_type`)
             .then(({data})=>{
                 console.log("RAM Type=> data only",data)
                 setMemoryRAMType(data)
@@ -30,7 +48,7 @@ export const UseProforma = (proforma_id)=>{
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMemoryRAMFrequency = async () =>{
-        await pool.getMemoryRamFrequency()
+        await connectionAPI.get(`/memoryram_frequency`)
             .then(({data})=>{
                 console.log("RAM Frequency=> data only",data)
                 console.log("data.memory_ram",data[0])
@@ -40,7 +58,7 @@ export const UseProforma = (proforma_id)=>{
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMemoryRAMSize = async () =>{
-        await pool.getMemoryRamSize()
+        await connectionAPI.get(`/memoryram_size`)
             .then(({data})=>{
                 console.log(" RAM Size=> data only",data)
                 setMemoryRAMSize(data)
@@ -49,20 +67,22 @@ export const UseProforma = (proforma_id)=>{
     }
 
     const loadStore = async () =>{
-        await pool.getStore()
-            .then((data)=>setStore(data))
+        await connectionAPI.get(`/store`)
+            .then(({data})=>setStore(data))
             .catch((err)=>console.log("there Was an Error getting the data ",err))
     }
     const loadBrand = async () =>{
-        await pool.getBrand()
-            .then((data)=>setBrand(data))
+        await connectionAPI.get(`/brand`)
+            .then(({data})=>setBrand(data))
             .catch((err)=>console.log("there Was an Error getting the data ",err))
     }
     return {
+        processor,
         memoryRAM,
         memoryRAMType,
         memoryRAMFrequency,
         memoryRAMSize,
+        loadProcessor,
         loadMemoryRAM, loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
         loadBrand,
         loadStore,

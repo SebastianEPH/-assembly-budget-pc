@@ -1,35 +1,41 @@
 import {useParams} from "react-router-dom";
 import { useEffect} from "react";
-import ModalComponent from "./util/ModalComponent";
+import ModalMemoryRam from "./proforma_data/memory_ram/modalMemoryRam";
+
+import ModalProcessor from "./proforma_data/processor/modalProcessor";
 import { Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
+import Processor from "./proforma_data/processor/Processor";
 import { Toaster } from 'react-hot-toast';
 import {UseProforma} from "./hooks/UseProforma";
+
+
 
 export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        processor,
         memoryRAM,
         memoryRAMType,
         memoryRAMFrequency,
         memoryRAMSize,
-        loadMemoryRAM,
-        loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
+        loadProcessor,
+        loadMemoryRAM, loadMemoryRAMType, loadMemoryRAMSize, loadMemoryRAMFrequency,
         loadBrand,
         loadStore,
         brand,
         store
     } = UseProforma(proforma_id)
 
-    useEffect(()=>{
-        loadMemoryRAM().then(r => {})
-        loadMemoryRAMType().then(r => {})
-        loadMemoryRAMSize().then(r => {})
-        loadMemoryRAMFrequency().then(r => {})
-        loadBrand().then(r => {})
-        loadStore().then(r => {})
-
+    useEffect(async()=>{
+        await loadProcessor()
+        await loadMemoryRAM()
+        await loadMemoryRAMType()
+        await loadMemoryRAMSize()
+        await loadMemoryRAMFrequency()
+        await loadBrand()
+        await loadStore()
     },[])
 
 return(
@@ -41,10 +47,10 @@ return(
         <Toaster position={"top-center"} />
 
         <Row className="justify-content-center">
-            <ModalComponent title={"Add New Memory"}
+            <ModalMemoryRam
                             MemoryRam={ MemoryRam }
                             proforma_id={proforma_id}
-                            loadMemoryRAM={loadMemoryRAM}
+                            reloadForDB ={loadMemoryRAM}
                             modal={true} // if true, then use added, otherwise use update function
                             dataType={memoryRAMType}
                             dataStore={store}
@@ -52,22 +58,46 @@ return(
                             dataBrand={brand}
                             dataSize={memoryRAMSize}
             />
+            <ModalProcessor
+                            Processor={ Processor }
+                            proforma_id={proforma_id}
+                            reloadForDB ={loadProcessor}
+                            modal={true} // if true, then use added, otherwise use update function
+                            dataStore={store}
+                            dataBrand={brand}
+            />
         </Row>
 
+
+
+
         {/* Memory RAM */}
-        {memoryRAM.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Memory RAM </h4><hr/><br/></div> :""}
+        {memoryRAM.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Memory RAM</h4><hr/><br/></div> :""}
         {memoryRAM?
             memoryRAM.map((data, index)=>
                 <MemoryRam
                     key={index +"memory"}
                     data={data}
-                    modal={false}
                     dataType={memoryRAMType}
                     dataSize={memoryRAMSize}
                     dataBrand={brand}
                     dataStore={store}
-                    loadMemoryRAM={loadMemoryRAM}
+                    reloadForDB ={loadMemoryRAM}
                     dataFreq={memoryRAMFrequency}
+                />)
+            :"loading"}
+
+
+        {/* Processor */}
+        {processor.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Processor</h4><hr/><br/></div> :""}
+        {processor?
+            processor.map((data, index)=>
+                <Processor
+                    key={index +"processor"}
+                    data={data}
+                    dataBrand={brand}
+                    dataStore={store}
+                    reloadForDB ={loadProcessor}
                 />)
             :"loading"}
 

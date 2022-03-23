@@ -5,46 +5,12 @@ const connectionAPI =  axios.create({
 })
 const pool = {}
 
-
 pool.getProforma = async (id)=>  {
     console.log('consultado API [proforma]')
     const query = await connectionAPI.get(`/proforma/${id}`)
     const json = query.data
     return json[0]
-
 }
-pool.getBrand = async ()=>{
-    const brand= await connectionAPI.get(`/brand`)
-    return brand.data
-}
-pool.getStore = async ()=>{
-    const brand= await connectionAPI.get(`/store`)
-    return brand.data
-}
-pool.updateMemoryRam = async (proforma_id, memory_id, data)=>{
-    return await connectionAPI.put(`/proforma/${proforma_id}/memoryram/${memory_id}`,data) //body:JSON.stringify(motherboard)
-}
-pool.addMemoryRam = async (proforma_id, data)=>{
-    console.log('esto es del front', data)
-    return await connectionAPI.post(`/proforma/${proforma_id}/memoryram`,data)
-}
-pool.delMemoryRam = async (proforma_id, memory_id)=>{
-    console.log('Delete memory id = ', memory_id)
-    return await connectionAPI.delete(`/proforma/${proforma_id}/memoryram/${memory_id}`)
-}
-pool.getMemoryRam = async (proforma_id)=>{
-    return await connectionAPI.get(`/proforma/${proforma_id}/memoryram`)
-}
-pool.getMemoryRamType = async ()=>{
-    return await connectionAPI.get(`/memoryram_type`)
-}
-pool.getMemoryRamSize = async ()=>{
-    return await connectionAPI.get(`/memoryram_size`)
-}
-pool.getMemoryRamFrequency = async ()=>{
-    return await connectionAPI.get(`/memoryram_frequency`)
-}
-
 pool.hola = async (id)=>{
     console.log('consultado API [proforma]')
     const queryProjects = await connectionAPI.get(`/proforma/${id}`)

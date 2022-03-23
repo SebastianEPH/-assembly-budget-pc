@@ -1,26 +1,20 @@
-import InputSelect from "../../util/InputSelectC";
 import {useForm} from "../../hooks/useForm";
-import {Row, Col, Form, FloatingLabel, Card} from "react-bootstrap";
+import {Card, Col, FloatingLabel, Form, Row} from "react-bootstrap";
+import InputSelect from "../../util/InputSelectC";
 import ModalConfirmation from "../../util/ModalConfirmation";
 
-
-const MemoryRam = ({ data,
-                       dataType = [],
+const Processor = ({ data,
                        modal=false,
-                       dataSize = [],
                        dataBrand = [],
                        dataStore = [],
-                       dataFreq = [],
                        reloadForDB  = [],
                        modalHandleClose = []}) =>{
 
-    const nameDiv = 'memoryram'
-    const {databaseAddIf, databaseRemove, databaseUpdate,  update, updateHook, clean, form} = useForm(data, nameDiv, modalHandleClose,reloadForDB )
-    let  {name, id, type,store, size, freq, brand,  link ,item_active, dol, sol} = form
-
+    const nameDiv = 'processor'
+    const {databaseAddIf, databaseRemove, databaseUpdate, update, updateHook, clean,form} = useForm(data, nameDiv, modalHandleClose,reloadForDB )
+    let  {name, id,  store, brand, link ,item_active, dol, sol} = form
 
     return(
-
         <Card id={nameDiv+'_'+id} className={modal? '': 'm-2'}  >
             {/*className={"border border-danger"}*/}
             {/*<Card.Header>MemoryRAM: {title}</Card.Header>*/}
@@ -33,11 +27,9 @@ const MemoryRam = ({ data,
                                               onChange={(e)=>update(e)}/>
                             </FloatingLabel>
                             <Row>
-                                <InputSelect name={"size"} title={"Size"} update={update} select={size} col={2} data={dataSize}/>
-                                <InputSelect name={"type"} title={"type RAM"} update={update} select={type} col={2} data={dataType}/>
-                                <InputSelect name={"freq"} title={"Frequency"} update={update} select={freq} col={2}  data={dataFreq} idCondition={type} />
-                                <InputSelect name={"brand"} title={"brand"} update={update} select={brand} col={2} data={dataBrand}/>
-                                <Col md={2}>
+                                <InputSelect name={"brand"} title={"brand"} update={update} select={brand} col={3} data={dataBrand}/>
+                                <InputSelect name={"store"}  title={"Store"} update={update} select={store}  col={3} data={dataStore}/>
+                                <Col md={3}>
                                     <FloatingLabel  label="Soles">
                                         <Form.Control name="sol"
                                                       type="text"
@@ -47,14 +39,14 @@ const MemoryRam = ({ data,
                                         />
                                     </FloatingLabel>
                                 </Col>
-                                <Col md={2}>
+                                <Col md={3}>
                                     <FloatingLabel label="Dollar">
                                         <Form.Control name="dol" type="text" className="form-control "
                                                       placeholder="$ 0" value={dol|| ""} onChange={(e)=>updateHook(e, "sol")}
                                         />
                                     </FloatingLabel>
                                 </Col>
-                                <Col md={10}>
+                                <Col md={12}>
                                     <FloatingLabel  label="Link">
                                         <Form.Control name="link"
                                                       type="link"
@@ -64,7 +56,6 @@ const MemoryRam = ({ data,
                                                       onChange={(e)=>update(e)}/>
                                     </FloatingLabel>
                                 </Col>
-                                <InputSelect name={"store"}  title={"Store"} update={update} select={store}  col={2} data={dataStore}/>
                             </Row>
 
                         </Col>
@@ -112,4 +103,5 @@ const MemoryRam = ({ data,
         </Card>
     )
 }
-export default MemoryRam;
+
+export default Processor;

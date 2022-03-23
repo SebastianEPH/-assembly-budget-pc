@@ -2,8 +2,10 @@
 import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
 import toast from 'react-hot-toast';
+import connectionAPI from "../../config/axios";
+import connection from "../../config/connection";
 
-export const useForm= (initialState = {}) =>{
+export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadForDB  ) =>{
     const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
 
@@ -27,6 +29,45 @@ export const useForm= (initialState = {}) =>{
         }
     }
 
+    const databaseAddIf = async ()=>{
+       await connectionAPI.post(`/proforma/${form.proforma_id}/${typeName}`,form)
+           .then((m)=>{
+               toast.success(m.data.message)
+               clean(false) // clean  inputs
+           })
+           .catch((m)=>{
+               toast.error(m.response.data.message)
+           })
+        modalHandleClose()
+        reloadForDB()
+    }
+    const databaseUpdate= async () =>{
+        await  connectionAPI.put(`/proforma/${form.proforma_id}/${typeName}/${form.id}`,form)
+            .then((m)=>{
+                toast.success(m.data.message)
+            })
+            .catch((m)=>{
+                toast.error(m.response.data.message)
+            })
+    }
+    const databaseRemove= async() =>{
+        await connectionAPI.delete(`/proforma/${form.proforma_id}/${typeName}/${form.id}`)
+            .then((m)=>{
+                toast.success(m.data.message)
+                const div = document.getElementById(typeName+'_'+form.id);
+                if(div !== null){
+                    while (div.hasChildNodes()){
+                        div.removeChild(div.lastChild);
+                    }
+                }else{
+                    console.log('No existe el modulo a eliminar ')
+                }
+            })
+            .catch((m)=>{
+                toast.error(m.response.data.message)
+            })
+    }
+
     const clean = (toast = true) =>{
         const newObj = {}
         console.log("clean ", form)
@@ -43,6 +84,7 @@ export const useForm= (initialState = {}) =>{
 
     return{
         form,
+        databaseAddIf,databaseUpdate,databaseRemove,
         updateHook,
         update,
         clean,

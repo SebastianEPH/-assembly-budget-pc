@@ -2,14 +2,14 @@ const {parse,DB} = require("../../helpers/helpers")
 const pool = require("../../database");
 const databaseHelper = {}
 databaseHelper.add = async (req, res, data)=>{
-    const  {nameDatabase, parseDataOriginal, parseDataIDS} = data
+    const  {nameDatabase, parseDataOriginal, parseDataIDs} = data
     const {proforma_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([ proforma_id ])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
-    const parseBody= parse.ObjDB(req.body,parseDataOriginal, parseDataIDS)
+    const parseBody= parse.ObjDB(req.body,parseDataOriginal, parseDataIDs)
     if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
     try{ // try connection
@@ -21,14 +21,14 @@ databaseHelper.add = async (req, res, data)=>{
     }
 }
 databaseHelper.update = async (req, res, data) =>{
-    const  {nameDatabase, item_id , parseDataOriginal, parseDataIDS} = data
+    const  {nameDatabase, item_id , parseDataOriginal, parseDataIDs} = data
     const {proforma_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([item_id, proforma_id ])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
-    const parseBody= parse.ObjDB(req.body,parseDataOriginal, parseDataIDS)
+    const parseBody= parse.ObjDB(req.body,parseDataOriginal, parseDataIDs)
     if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
     try{ // try connection
@@ -42,14 +42,14 @@ databaseHelper.update = async (req, res, data) =>{
     }
 }
 databaseHelper.getIf = async (req, res, data)=>{
-    const  {nameTable} = data
+    const  {nameDatabase} = data
     const {proforma_id} = req.params
     console.log(req.params)
     const parseIds = parse.IdForDB([ proforma_id ])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     try{ // try connection
-        const querySQL = `SELECT * FROM ${nameTable} WHERE proforma_id = ?`
+        const querySQL = `SELECT * FROM ${nameDatabase} WHERE proforma_id = ?`
         console.log(querySQL)
         const response  = await pool.query(querySQL , [proforma_id])
         // console.log()

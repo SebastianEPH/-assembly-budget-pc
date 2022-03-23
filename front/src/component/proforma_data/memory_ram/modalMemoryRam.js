@@ -1,8 +1,8 @@
-import ButtonModal from "./ButtonModal";
+import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 
-const ModalComponent = ({ proforma_id, title, MemoryRam, dataType, dataSize , dataBrand, dataStore, dataFreq,loadMemoryRAM}) =>{
+const ModalMemoryRam = ({ proforma_id, MemoryRam, dataType, dataSize , dataBrand, dataStore, dataFreq,reloadForDB }) =>{
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -10,7 +10,7 @@ const ModalComponent = ({ proforma_id, title, MemoryRam, dataType, dataSize , da
     return(
         <>
             <ButtonModal
-                name={title}
+                name={"Add Memory RAM"}
                 size="15"
                 icon_size="60"
                 funct={handleShow}
@@ -26,7 +26,7 @@ const ModalComponent = ({ proforma_id, title, MemoryRam, dataType, dataSize , da
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {title}
+                        Add Memory RAM
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -42,18 +42,21 @@ const ModalComponent = ({ proforma_id, title, MemoryRam, dataType, dataSize , da
 
                 <Modal.Body>
                     <MemoryRam data={{
-                                   proforma_id,
-                                   name:'',
-                                   select:0,
-                                   type:0,
-                                   link:'',
-                                   size:0,
-                                   freq:0,
-                                   dol:0,
-                                   sol:0
+                                    proforma_id,
+                                    name:'',
+                                    select:'',
+                                    item_active:0,
+                                    type:'',
+                                    link:'',
+                                    size:'',
+                                    freq:'',
+                                    brand:'',
+                                    store:'',
+                                    dol:0,
+                                    sol:0
                                }}
                         modalHandleClose ={handleClose}
-                        loadMemoryRAM={loadMemoryRAM}
+                        reloadForDB={reloadForDB}
                         modal={true} // if true, then use added, otherwise use update function
                         dataType={dataType}
                         dataStore={dataStore}
@@ -61,9 +64,10 @@ const ModalComponent = ({ proforma_id, title, MemoryRam, dataType, dataSize , da
                         dataBrand={dataBrand}
                         dataSize={dataSize}
                     />
+
                 </Modal.Body>
             </Modal>
         </>
     )
 }
-export default ModalComponent;
+export default ModalMemoryRam;
