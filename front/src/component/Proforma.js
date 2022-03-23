@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import { useEffect} from "react";
 import ModalMemoryRam from "./proforma_data/memory_ram/modalMemoryRam";
 
-import ModalProcessor from "./proforma_data/processor/modalProcessor";
+import ModalProcessor from "./proforma_data/processor/ModalProcessor";
 import { Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import Processor from "./proforma_data/processor/Processor";
@@ -10,6 +10,8 @@ import { Toaster } from 'react-hot-toast';
 import {UseProforma} from "./hooks/UseProforma";
 import Motherboard from "./proforma_data/motherboard/motherboard";
 import ModalMotherboard from "./proforma_data/motherboard/modalMotherboard";
+import ModalPowersupply from "./proforma_data/powersupply/ModalPowersupply";
+import Powersupply from "./proforma_data/powersupply/Powersupply";
 
 
 
@@ -17,6 +19,8 @@ export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        powersupplyWatts,powersupplyCertificate,powersupply,
+        loadPowersupply,loadPowersupplyCertificate,loadPowersupplyWatts,
         motherboard,
         loadMotherboard,
         processor,
@@ -34,6 +38,9 @@ export default function Proforma(){
     } = UseProforma(proforma_id)
 
     useEffect(async()=>{
+        await loadPowersupply()
+        await loadPowersupplyCertificate()
+        await loadPowersupplyWatts()
         await loadMotherboard()
         await loadProcessor()
         await loadProcessor_type()
@@ -63,7 +70,6 @@ return(
                 processorType={processorType}
             />
             <ModalMemoryRam
-                            MemoryRam={ MemoryRam }
                             proforma_id={proforma_id}
                             reloadForDB ={loadMemoryRAM}
                             modal={true} // if true, then use added, otherwise use update function
@@ -74,14 +80,24 @@ return(
                             dataSize={memoryRAMSize}
             />
             <ModalMotherboard
-                Motherboardr={ Motherboard }
                 proforma_id={proforma_id}
                 reloadForDB ={loadMotherboard}
                 modal={true} // if true, then use added, otherwise use update function
                 dataStore={store}
                 processorType={processorType}
             />
-
+            <ModalPowersupply
+                data={{
+                    proforma_id,
+                    reloadForDB :loadPowersupply,
+                    dataPowersupplyWatts:powersupplyWatts,
+                    dataPowersupplyCertificate:powersupplyCertificate,
+                    powersupply,
+                    dataStore:store,
+                    dataBrand:brand,
+                    modal:false
+                }}
+            />
         </Row>
 
         {/* Processor */}
@@ -123,6 +139,22 @@ return(
                     dataStore={store}
                     dataFreq={memoryRAMFrequency}
                     reloadForDB ={loadMemoryRAM}
+                />)
+            :"loading"}
+
+        {/* Power Supply */}
+        {powersupply.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Power Supply</h4><hr/><br/></div> :""}
+        {powersupply?
+            powersupply.map((data, index)=>
+                <Powersupply
+                    key={index +"processor"}
+                    data={data}
+                    processorType={processorType}
+                    dataStore={store}
+                    dataBrand={brand}
+                    dataPowersupplyWatts={powersupplyWatts}
+                    dataPowersupplyCertificate={powersupplyCertificate}
+                    reloadForDB ={loadProcessor}
                 />)
             :"loading"}
 

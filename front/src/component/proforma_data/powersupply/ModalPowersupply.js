@@ -1,17 +1,19 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import MemoryRam from "./MemoryRam";
+import Powersupply from "./Powersupply";
 
-const ModalMemoryRam = ({ proforma_id, dataType, dataSize , dataBrand, dataStore, dataFreq,reloadForDB }) =>{
 
+const ModalPowersupply = ({ data}) =>{
+    const {proforma_id, reloadForDB,dataStore,dataBrand, dataPowersupplyWatts, dataPowersupplyCertificate} = data
+    console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return(
         <>
             <ButtonModal
-                name={"Add Memory RAM"}
+                name="Add Power Supply"
                 size="15"
                 icon_size="60"
                 funct={handleShow}
@@ -27,7 +29,7 @@ const ModalMemoryRam = ({ proforma_id, dataType, dataSize , dataBrand, dataStore
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Memory RAM
+                        Add Power Supply
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -40,30 +42,26 @@ const ModalMemoryRam = ({ proforma_id, dataType, dataSize , dataBrand, dataStore
                     </button>
                 </div>
 
-
                 <Modal.Body>
-                    <MemoryRam data={{
-                                    proforma_id,
-                                    name:'',
-                                    select:'',
-                                    item_active:0,
-                                    type:'',
-                                    link:'',
-                                    size:'',
-                                    freq:'',
-                                    brand:'',
-                                    store:'',
-                                    dol:0,
-                                    sol:0
-                               }}
-                        modalHandleClose ={handleClose}
-                        reloadForDB={reloadForDB}
-                        modal={true} // if true, then use added, otherwise use update function
-                        dataType={dataType}
+                    <Powersupply
+                        data={{
+                            proforma_id,
+                            store:'',
+                            brand:'',
+                            link:'',
+                            select:'',
+                            name:'',
+                            item_active:'',
+                            sol:0,
+                            dol:0
+                        }}
+                        reloadForDB ={reloadForDB}
+                        modal={true}
                         dataStore={dataStore}
-                        dataFreq={dataFreq}
                         dataBrand={dataBrand}
-                        dataSize={dataSize}
+                        modalHandleClose={handleClose}
+                        dataPowersupplyWatts={dataPowersupplyWatts}
+                        dataPowersupplyCertificate={dataPowersupplyCertificate}
                     />
 
                 </Modal.Body>
@@ -71,4 +69,4 @@ const ModalMemoryRam = ({ proforma_id, dataType, dataSize , dataBrand, dataStore
         </>
     )
 }
-export default ModalMemoryRam;
+export default ModalPowersupply;

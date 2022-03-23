@@ -10,6 +10,11 @@ export const UseProforma = (proforma_id)=>{
     const [processor, setProcessor] = useState([]);
     const [processorType, setProcessorType] = useState([]);
 
+    // powersupply
+    const [powersupply, setPowersuppy] = useState([]);
+    const [powersupplyCertificate, setPowersuppyCertificate] = useState([]);
+    const [powersupplyWatts, setPowersuppyWatts] = useState([]);
+
     // motherboard
     const [motherboard, setMotherboard] = useState([]);
 
@@ -22,6 +27,21 @@ export const UseProforma = (proforma_id)=>{
     const [brand, setBrand] = useState([]);
     const [store, setStore] = useState([]);
 
+    const loadPowersupply = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/powersupply`)
+            .then(({data})=>setPowersuppy(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadPowersupplyCertificate = async () =>{
+        await connectionAPI.get(`/powersupply_certificate`)
+            .then(({data})=>setPowersuppyCertificate(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadPowersupplyWatts = async () =>{
+        await connectionAPI.get(`/powersupply_watts`)
+            .then(({data})=>setPowersuppyWatts(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
     const loadMotherboard = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/motherboard`)
             .then(({data})=>setMotherboard(data))
@@ -69,6 +89,8 @@ export const UseProforma = (proforma_id)=>{
             .catch((err)=>console.log("there Was an Error getting the data ",err))
     }
     return {
+        powersupplyWatts,powersupplyCertificate,powersupply,
+        loadPowersupply,loadPowersupplyCertificate,loadPowersupplyWatts,
         motherboard,
         loadMotherboard,
         processor,

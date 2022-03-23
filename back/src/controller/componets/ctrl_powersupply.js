@@ -4,7 +4,7 @@ const databaseHelper = require("./querysDataBase");
 
 const nameDatabase = 'powersupply'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
-const parseDataIDs = ["store","watts","certificate", "proforma_id"]
+const parseDataIDs = ["store","brand","watts","certificate", "proforma_id"]
 
 powersupply.add = async (req, res) =>{
     const data = {
