@@ -7,6 +7,7 @@ const Powersupply = ({ data,
                        modal=false,
                        reloadForDB=[],
                        dataPowersupplyWatts=[],
+                       theme=[],
                        dataPowersupplyCertificate=[],
                        dataBrand=[],
                        dataStore=[],
@@ -17,7 +18,7 @@ const Powersupply = ({ data,
     let  {name, id,  store, brand, link ,item_active, dol, sol, watts, certificate} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={'border border-warning '} >
+        <div id={nameDiv+'_'+id} className={`border border-${theme}`} >
             <Card  className={modal? '': 'm-2'}  >
                 <Card.Body>
                     <Card.Text>

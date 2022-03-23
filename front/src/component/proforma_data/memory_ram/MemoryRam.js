@@ -11,6 +11,7 @@ const MemoryRam = ({ data,
                        dataBrand = [],
                        dataStore = [],
                        dataFreq = [],
+                       theme="white",
                        reloadForDB  = [],
                        modalHandleClose = []}) =>{
 
@@ -20,7 +21,7 @@ const MemoryRam = ({ data,
 
 
     return(
-        <div id={nameDiv+'_'+id} className={'border border-primary '}>
+        <div id={nameDiv+'_'+id} className={`border border-${theme}`}>
             <Card  className={modal? '': 'm-2'}  >
                 {/*className={"border border-danger"}*/}
                 {/*<Card.Header>MemoryRAM: {title}</Card.Header>*/}

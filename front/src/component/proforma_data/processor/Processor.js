@@ -6,6 +6,7 @@ import ModalConfirmation from "../../util/ModalConfirmation";
 const Processor = ({ data,
                        modal=false,
                        processorType = [],
+                       theme="",
                        dataStore = [],
                        reloadForDB  = [],
                        modalHandleClose = []}) =>{
@@ -15,7 +16,7 @@ const Processor = ({ data,
     let  {name, id,  store, brand, link ,item_active, dol, sol} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={'border border-danger '} >
+        <div id={nameDiv+'_'+id} className={`border border-${theme}`} >
             <Card  className={modal? '': 'm-2'}  >
                 <Card.Body>
                     <Card.Text>

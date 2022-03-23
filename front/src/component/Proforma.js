@@ -1,18 +1,16 @@
 import {useParams} from "react-router-dom";
 import { useEffect} from "react";
-import ModalMemoryRam from "./proforma_data/memory_ram/modalMemoryRam";
-
+import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
 import ModalProcessor from "./proforma_data/processor/ModalProcessor";
 import { Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import Processor from "./proforma_data/processor/Processor";
 import { Toaster } from 'react-hot-toast';
 import {UseProforma} from "./hooks/UseProforma";
-import Motherboard from "./proforma_data/motherboard/motherboard";
-import ModalMotherboard from "./proforma_data/motherboard/modalMotherboard";
+import Motherboard from "./proforma_data/motherboard/Motherboard";
+import ModalMotherboard from "./proforma_data/motherboard/ModalMotherboard";
 import ModalPowersupply from "./proforma_data/powersupply/ModalPowersupply";
 import Powersupply from "./proforma_data/powersupply/Powersupply";
-
 
 
 export default function Proforma(){
@@ -67,6 +65,7 @@ return(
                 reloadForDB ={loadProcessor}
                 modal={true} // if true, then use added, otherwise use update function
                 dataStore={store}
+                theme={'primary'}
                 processorType={processorType}
             />
             <ModalMemoryRam
@@ -75,6 +74,7 @@ return(
                             modal={true} // if true, then use added, otherwise use update function
                             dataType={memoryRAMType}
                             dataStore={store}
+                            theme={"danger"}
                             dataFreq={memoryRAMFrequency}
                             dataBrand={brand}
                             dataSize={memoryRAMSize}
@@ -84,6 +84,7 @@ return(
                 reloadForDB ={loadMotherboard}
                 modal={true} // if true, then use added, otherwise use update function
                 dataStore={store}
+                theme={'info'}
                 processorType={processorType}
             />
             <ModalPowersupply
@@ -93,6 +94,7 @@ return(
                     dataPowersupplyWatts:powersupplyWatts,
                     dataPowersupplyCertificate:powersupplyCertificate,
                     powersupply,
+                    theme:'warning',
                     dataStore:store,
                     dataBrand:brand,
                     modal:false
@@ -107,6 +109,7 @@ return(
                 <Processor
                     key={index +"processor"}
                     data={data}
+                    theme={'primary'}
                     processorType={processorType}
                     dataStore={store}
                     reloadForDB ={loadProcessor}
@@ -122,6 +125,7 @@ return(
                     data={data}
                     processorType={processorType}
                     dataStore={store}
+                    theme={'info'}
                     reloadForDB ={loadMotherboard}
                 />)
             :"loading"}
@@ -137,6 +141,7 @@ return(
                     dataSize={memoryRAMSize}
                     dataBrand={brand}
                     dataStore={store}
+                    theme={"danger"}
                     dataFreq={memoryRAMFrequency}
                     reloadForDB ={loadMemoryRAM}
                 />)
@@ -152,9 +157,10 @@ return(
                     processorType={processorType}
                     dataStore={store}
                     dataBrand={brand}
+                    theme={'warning'}
                     dataPowersupplyWatts={powersupplyWatts}
                     dataPowersupplyCertificate={powersupplyCertificate}
-                    reloadForDB ={loadProcessor}
+                    reloadForDB ={loadPowersupply}
                 />)
             :"loading"}
 

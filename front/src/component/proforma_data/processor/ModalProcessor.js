@@ -3,7 +3,7 @@ import {Modal} from "react-bootstrap";
 import {useState} from "react";
 import Processor from "./Processor";
 
-const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB }) =>{
+const ModalMemoryRam = ({ proforma_id, theme,  processorType, dataStore, reloadForDB }) =>{
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -14,6 +14,7 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
                 name="Add Processor"
                 size="15"
                 icon_size="60"
+                theme={theme}
                 funct={handleShow}
             />
             <Modal
@@ -39,8 +40,6 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
                         </svg>
                     </button>
                 </div>
-
-
                 <Modal.Body>
                     <Processor
                         data={{
@@ -54,6 +53,7 @@ const ModalMemoryRam = ({ proforma_id,  processorType, dataStore, reloadForDB })
                             sol:0,
                             dol:0
                             }}
+                        theme={theme}
                         proforma_id={proforma_id}
                         modalHandleClose ={handleClose}
                         reloadForDB ={reloadForDB }

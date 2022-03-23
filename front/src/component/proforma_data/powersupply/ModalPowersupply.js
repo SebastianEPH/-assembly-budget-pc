@@ -5,7 +5,7 @@ import Powersupply from "./Powersupply";
 
 
 const ModalPowersupply = ({ data}) =>{
-    const {proforma_id, reloadForDB,dataStore,dataBrand, dataPowersupplyWatts, dataPowersupplyCertificate} = data
+    const {proforma_id, reloadForDB,dataStore,dataBrand, theme, dataPowersupplyWatts, dataPowersupplyCertificate} = data
     console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -16,6 +16,7 @@ const ModalPowersupply = ({ data}) =>{
                 name="Add Power Supply"
                 size="15"
                 icon_size="60"
+                theme={theme}
                 funct={handleShow}
             />
             <Modal
@@ -55,6 +56,7 @@ const ModalPowersupply = ({ data}) =>{
                             sol:0,
                             dol:0
                         }}
+                        theme={theme}
                         reloadForDB ={reloadForDB}
                         modal={true}
                         dataStore={dataStore}

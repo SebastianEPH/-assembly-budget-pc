@@ -1,18 +1,20 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import Motherboard from "./motherboard";
+import MemoryRam from "./MemoryRam";
 
-const ModalMotherboard = ({ proforma_id,  processorType, dataStore, reloadForDB }) =>{
+const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, dataStore, dataFreq,reloadForDB }) =>{
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     return(
         <>
             <ButtonModal
-                name="Add Motherboard"
+                name={"Add Memory RAM"}
                 size="15"
+                theme={theme}
                 icon_size="60"
                 funct={handleShow}
             />
@@ -27,7 +29,7 @@ const ModalMotherboard = ({ proforma_id,  processorType, dataStore, reloadForDB 
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Motherboard
+                        Add Memory RAM
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -42,32 +44,34 @@ const ModalMotherboard = ({ proforma_id,  processorType, dataStore, reloadForDB 
 
 
                 <Modal.Body>
-
-
-                    <Motherboard
-                        data={{
-                            store:'',
-                            proforma_id,
-                            brand:'',
-                            link:'',
-                            select:'',
-                            name:'',
-                            item_active:'',
-                            sol:0,
-                            dol:0
-                            }}
-                        proforma_id={proforma_id}
+                    <MemoryRam data={{
+                                    proforma_id,
+                                    name:'',
+                                    select:'',
+                                    item_active:0,
+                                    type:'',
+                                    link:'',
+                                    size:'',
+                                    freq:'',
+                                    brand:'',
+                                    store:'',
+                                    dol:0,
+                                    sol:0
+                               }}
+                               theme={theme}
                         modalHandleClose ={handleClose}
-                        reloadForDB ={reloadForDB }
+                        reloadForDB={reloadForDB}
                         modal={true} // if true, then use added, otherwise use update function
+                        dataType={dataType}
                         dataStore={dataStore}
-                        processorType={processorType}>
-
-                    </Motherboard>
+                        dataFreq={dataFreq}
+                        dataBrand={dataBrand}
+                        dataSize={dataSize}
+                    />
 
                 </Modal.Body>
             </Modal>
         </>
     )
 }
-export default ModalMotherboard;
+export default ModalMemoryRam;
