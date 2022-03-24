@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const display =  require("../controller/componets/display")
+const display =  require("../controller/componets/controller_display")
 
 // Processor
 router.get("/proforma/:proforma_id/display", display.getIf)

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const memoryram =  require("../controller/componets/memoryram")
+const memoryram =  require("../controller/componets/controller_memoryram")
 
 // Memory RAM
 router.get("/proforma/:proforma_id/memoryram", memoryram.getIf)

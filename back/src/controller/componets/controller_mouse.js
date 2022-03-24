@@ -1,12 +1,12 @@
-const keyboard= {}
-const databaseHelper = require("./querysDataBase");
+const mouse= {}
+const databaseHelper = require("../../helpers/querysDataBase");
 
 
-const nameDatabase = 'keyboard'
+const nameDatabase = 'mouse'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
 const parseDataIDs = ["proforma_id", "brand","store"]
 
-keyboard.add = async (req, res) =>{
+mouse.add = async (req, res) =>{
     const data = {
         nameDatabase,
         parseDataOriginal ,
@@ -14,28 +14,28 @@ keyboard.add = async (req, res) =>{
     }
     return databaseHelper.add(req,res, data )
 }
-keyboard.getIf = async (req, res) =>{
+mouse.getIf = async (req, res) =>{
     const data = {
         nameDatabase,
     }
     return databaseHelper.getIf(req,res, data )
 }
-keyboard.update = async (req, res) =>{
-    const { keyboard_id } = req.params
+mouse.update = async (req, res) =>{
+    const { mouse_id } = req.params
     const data = {
         nameDatabase,
-        item_id : keyboard_id,
+        item_id : mouse_id,
         parseDataOriginal,
         parseDataIDs,
     }
     return databaseHelper.update(req,res, data )
 }
-keyboard.delete = async (req, res) =>{
-    const {keyboard_id} = req.params
+mouse.delete = async (req, res) =>{
+    const {mouse_id} = req.params
     const data = {
         nameDatabase,
-        item_id : keyboard_id,
+        item_id : mouse_id,
     }
     return databaseHelper.delete(req,res, data )
 }
-module.exports = keyboard;
+module.exports = mouse;

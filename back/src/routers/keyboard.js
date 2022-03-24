@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const keyboard =  require("../controller/componets/keyboard")
+const keyboard =  require("../controller/componets/controller_keyboard")
 
 // Processor
 router.get("/proforma/:proforma_id/keyboard", keyboard.getIf)

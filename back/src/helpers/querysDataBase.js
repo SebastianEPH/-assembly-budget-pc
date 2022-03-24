@@ -1,5 +1,5 @@
-const {parse,DB} = require("../../helpers/helpers")
-const pool = require("../../database");
+const {parse,DB} = require("./helpers")
+const pool = require("../database");
 const databaseHelper = {}
 databaseHelper.add = async (req, res, data)=>{
     const  {nameDatabase, parseDataOriginal, parseDataIDs} = data

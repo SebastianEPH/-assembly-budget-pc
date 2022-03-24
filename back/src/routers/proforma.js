@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const proforma = require('../controller/ctrl_proforma')
+const proforma = require('../controller/controller_proforma')
 
 
 

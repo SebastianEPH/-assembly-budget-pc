@@ -1,5 +1,5 @@
 const motherboard= {}
-const databaseHelper = require("./querysDataBase");
+const databaseHelper = require("../../helpers/querysDataBase");
 
 
 const nameDatabase = 'motherboard'

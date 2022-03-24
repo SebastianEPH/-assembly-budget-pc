@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const graphicscard =  require("../controller/componets/graphicscard")
+const graphicscard =  require("../controller/componets/controller_graphicscard")
 
 // Processor
 router.get("/proforma/:proforma_id/graphicscard", graphicscard.getIf)

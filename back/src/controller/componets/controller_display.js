@@ -1,12 +1,12 @@
-const graphicscard= {}
-const databaseHelper = require("./querysDataBase");
+const display = {}
+const databaseHelper = require("../../helpers/querysDataBase");
 
 
-const nameDatabase = 'graphicscard'
+const nameDatabase = 'display'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
 const parseDataIDs = ["proforma_id", "brand","store"]
 
-graphicscard.add = async (req, res) =>{
+display.add = async (req, res) =>{
     const data = {
         nameDatabase,
         parseDataOriginal ,
@@ -14,28 +14,28 @@ graphicscard.add = async (req, res) =>{
     }
     return databaseHelper.add(req,res, data )
 }
-graphicscard.getIf = async (req, res) =>{
+display.getIf = async (req, res) =>{
     const data = {
         nameDatabase,
     }
     return databaseHelper.getIf(req,res, data )
 }
-graphicscard.update = async (req, res) =>{
-    const { graphicscard_id } = req.params
+display.update = async (req, res) =>{
+    const { display_id } = req.params
     const data = {
         nameDatabase,
-        item_id : graphicscard_id,
+        item_id : display_id,
         parseDataOriginal,
         parseDataIDs,
     }
     return databaseHelper.update(req,res, data )
 }
-graphicscard.delete = async (req, res) =>{
-    const {graphicscard_id} = req.params
+display.delete = async (req, res) =>{
+    const {display_id} = req.params
     const data = {
         nameDatabase,
-        item_id : graphicscard_id,
+        item_id : display_id,
     }
     return databaseHelper.delete(req,res, data )
 }
-module.exports = graphicscard;
+module.exports = display;

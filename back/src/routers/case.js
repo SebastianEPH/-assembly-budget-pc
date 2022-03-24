@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const case_ =  require("../controller/componets/case")
+const case_ =  require("../controller/componets/controller_case")
 
 // Processor
 router.get("/proforma/:proforma_id/case", case_.getIf)

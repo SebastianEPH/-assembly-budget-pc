@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const powersupply=  require("../controller/componets/powersupply")
+const powersupply=  require("../controller/componets/controller_powersupply")
 
 // PowerSupply
 router.get("/proforma/:proforma_id/powersupply", powersupply.getIf)

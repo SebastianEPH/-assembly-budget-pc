@@ -1,5 +1,5 @@
 const memoryram = {}
-const databaseHelper =  require("./querysDataBase")
+const databaseHelper =  require("../../helpers/querysDataBase")
 
 const nameDatabase = 'memory_ram'
 const parseDataOriginal = ["name","dol","item_active","sol", "link"]

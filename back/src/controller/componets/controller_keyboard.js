@@ -1,12 +1,12 @@
-const case_= {}
-const databaseHelper = require("./querysDataBase");
+const keyboard= {}
+const databaseHelper = require("../../helpers/querysDataBase");
 
 
-const nameDatabase = 'case'
+const nameDatabase = 'keyboard'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
 const parseDataIDs = ["proforma_id", "brand","store"]
 
-case_.add = async (req, res) =>{
+keyboard.add = async (req, res) =>{
     const data = {
         nameDatabase,
         parseDataOriginal ,
@@ -14,28 +14,28 @@ case_.add = async (req, res) =>{
     }
     return databaseHelper.add(req,res, data )
 }
-case_.getIf = async (req, res) =>{
+keyboard.getIf = async (req, res) =>{
     const data = {
         nameDatabase,
     }
     return databaseHelper.getIf(req,res, data )
 }
-case_.update = async (req, res) =>{
-    const { case_id } = req.params
+keyboard.update = async (req, res) =>{
+    const { keyboard_id } = req.params
     const data = {
         nameDatabase,
-        item_id : case_id,
+        item_id : keyboard_id,
         parseDataOriginal,
         parseDataIDs,
     }
     return databaseHelper.update(req,res, data )
 }
-case_.delete = async (req, res) =>{
-    const {case_id} = req.params
+keyboard.delete = async (req, res) =>{
+    const {keyboard_id} = req.params
     const data = {
         nameDatabase,
-        item_id : case_id,
+        item_id : keyboard_id,
     }
     return databaseHelper.delete(req,res, data )
 }
-module.exports = case_;
+module.exports = keyboard;

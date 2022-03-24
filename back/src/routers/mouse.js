@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const mouse =  require("../controller/componets/mouse")
+const mouse =  require("../controller/componets/controller_mouse")
 
 // Processor
 router.get("/proforma/:proforma_id/mouse", mouse.getIf)
