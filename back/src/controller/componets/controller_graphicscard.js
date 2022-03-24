@@ -4,7 +4,7 @@ const databaseHelper = require("../../helpers/querysDataBase");
 
 const nameDatabase = 'graphicscard'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
-const parseDataIDs = ["proforma_id", "brand","store"]
+const parseDataIDs = ["proforma_id",  "brand","store", "memory"]
 
 graphicscard.add = async (req, res) =>{
     const data = {

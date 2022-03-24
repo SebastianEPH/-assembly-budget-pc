@@ -15,8 +15,10 @@ databaseHelper.add = async (req, res, data)=>{
     try{ // try connection
         const querySQL = `INSERT INTO ${nameDatabase} SET ?`
         const response =  DB.responseAdd(await pool.query(querySQL , [parseBody.data]))
+        console.log(response)
         return res.status(response.status).json({message:response.message})
     }catch (E){
+        console.log(E)
         return res.status(400).json({message:"The submitted data cannot be processed"})
     }
 }

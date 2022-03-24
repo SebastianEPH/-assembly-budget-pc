@@ -41,6 +41,11 @@ app.use('/api/', require('./routers/memory_ram'))
 app.use('/api/', require('./routers/processor'))
 app.use('/api/', require('./routers/motherboard'))
 app.use('/api/', require('./routers/powersupply'))
+app.use('/api/', require('./routers/mouse'))
+app.use('/api/', require('./routers/keyboard'))
+app.use('/api/', require('./routers/graphicscard'))
+app.use('/api/', require('./routers/display'))
+app.use('/api/', require('./routers/case'))
 
 
 //app.use((err, req, res, next)=>{

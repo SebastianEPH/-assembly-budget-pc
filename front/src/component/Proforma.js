@@ -11,12 +11,15 @@ import Motherboard from "./proforma_data/motherboard/Motherboard";
 import ModalMotherboard from "./proforma_data/motherboard/ModalMotherboard";
 import ModalPowersupply from "./proforma_data/powersupply/ModalPowersupply";
 import Powersupply from "./proforma_data/powersupply/Powersupply";
+import ModalGraphicsCard from "./proforma_data/graphicscard/ModalGraphicsCard";
+import Graphicscard from "./proforma_data/graphicscard/Graphicscard";
 
 
 export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        loadGraphicscard ,graphicscard,
         powersupplyWatts,powersupplyCertificate,powersupply,
         loadPowersupply,loadPowersupplyCertificate,loadPowersupplyWatts,
         motherboard,
@@ -36,6 +39,7 @@ export default function Proforma(){
     } = UseProforma(proforma_id)
 
     useEffect(async()=>{
+        await loadGraphicscard()
         await loadPowersupply()
         await loadPowersupplyCertificate()
         await loadPowersupplyWatts()
@@ -54,7 +58,6 @@ return(
     <div className="container-fluid">
         <h1>Proforma Mode Editor</h1>
 
-
         {/*  Verificar el id , si no es una valido, entonces, mandar un mensaje de error  */}
         <Toaster position={"top-center"} />
 
@@ -67,6 +70,16 @@ return(
                 dataStore={store}
                 theme={'primary'}
                 processorType={processorType}
+            />
+            <ModalGraphicsCard
+                data={{
+                    proforma_id,
+                    reloadForDB :loadGraphicscard,
+                    theme:'secondary',
+                    dataStore:store,
+                    dataSize:memoryRAMSize,
+                    dataBrand:brand,
+                }}
             />
             <ModalMemoryRam
                             proforma_id={proforma_id}
@@ -93,11 +106,9 @@ return(
                     reloadForDB :loadPowersupply,
                     dataPowersupplyWatts:powersupplyWatts,
                     dataPowersupplyCertificate:powersupplyCertificate,
-                    powersupply,
                     theme:'warning',
                     dataStore:store,
                     dataBrand:brand,
-                    modal:false
                 }}
             />
         </Row>
@@ -113,6 +124,21 @@ return(
                     processorType={processorType}
                     dataStore={store}
                     reloadForDB ={loadProcessor}
+                />)
+            :"loading"}
+
+        {/* Graphics Card */}
+        {graphicscard.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Graphics Card</h4><hr/><br/></div> :""}
+        {graphicscard?
+            graphicscard.map((data, index)=>
+                <Graphicscard
+                    key={index +"graphicscard"}
+                    data={data}
+                    dataStore={store}
+                    dataBrand={brand}
+                    dataSize={memoryRAMSize}
+                    theme={'secondary'}
+                    reloadForDB ={loadGraphicscard}
                 />)
             :"loading"}
 

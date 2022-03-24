@@ -6,6 +6,9 @@ const connectionAPI =  axios.create({
 })
 
 export const UseProforma = (proforma_id)=>{
+    // graphics card
+    const [graphicscard, setGraphicscard] = useState([]);
+
     // processor
     const [processor, setProcessor] = useState([]);
     const [processorType, setProcessorType] = useState([]);
@@ -27,6 +30,11 @@ export const UseProforma = (proforma_id)=>{
     const [brand, setBrand] = useState([]);
     const [store, setStore] = useState([]);
 
+    const loadGraphicscard = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/graphicscard`)
+            .then(({data})=>setGraphicscard(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
     const loadPowersupply = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/powersupply`)
             .then(({data})=>setPowersuppy(data))
@@ -89,6 +97,7 @@ export const UseProforma = (proforma_id)=>{
             .catch((err)=>console.log("there Was an Error getting the data ",err))
     }
     return {
+        loadGraphicscard ,graphicscard,
         powersupplyWatts,powersupplyCertificate,powersupply,
         loadPowersupply,loadPowersupplyCertificate,loadPowersupplyWatts,
         motherboard,
