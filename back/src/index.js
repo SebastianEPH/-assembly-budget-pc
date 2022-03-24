@@ -35,9 +35,12 @@ app.use(express.urlencoded({
 
 
 // routers
-app.use('/api/', require('./routers/proforma')) //  router index
-app.use('/api/', require('./routers/others')) //  router index
-app.use('/api/', require('./routers/componets')) //  router index
+app.use('/api/', require('./routers/proforma'))
+app.use('/api/', require('./routers/others'))
+app.use('/api/', require('./routers/memory_ram'))
+app.use('/api/', require('./routers/processor'))
+app.use('/api/', require('./routers/motherboard'))
+app.use('/api/', require('./routers/powersupply'))
 
 
 //app.use((err, req, res, next)=>{

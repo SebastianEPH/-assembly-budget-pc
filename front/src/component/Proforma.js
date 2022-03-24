@@ -152,7 +152,7 @@ return(
         {powersupply?
             powersupply.map((data, index)=>
                 <Powersupply
-                    key={index +"processor"}
+                    key={index +"powersupply"}
                     data={data}
                     processorType={processorType}
                     dataStore={store}

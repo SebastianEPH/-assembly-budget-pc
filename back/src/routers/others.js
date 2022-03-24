@@ -8,11 +8,6 @@ const brandProcessor= require('../controller/ctrl_brand_processor')
 router.get('/store', store.get)
 router.get('/brand_processor', brandProcessor.get)
 router.get('/brand', brand.get)
-//router.get('/:id', store.get_Only)
-//router.post ('/', store.add)
-//router.patch ('/proforma/:id', store.add_proforma)
-//router.put('/:id', store.update)
-//router.delete('/:id', store.delete)
 
 
 
