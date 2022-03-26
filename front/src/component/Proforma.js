@@ -16,6 +16,8 @@ import Graphicscard from "./proforma_data/graphicscard/Graphicscard";
 import ModalCabinet from "./proforma_data/gabinet/ModalCabinet";
 import Cabinet from "./proforma_data/gabinet/Cabinet";
 import ModalDisplay from "./proforma_data/display/ModalDisplay";
+import Keyboard from "./proforma_data/keyboard/Keyboard";
+import ModalKeyboard from "./proforma_data/keyboard/ModalKeyboard";
 
 
 export default function Proforma(){
@@ -131,6 +133,15 @@ return(
                     dataBrand:brand,
                 }}
             />
+            <ModalKeyboard
+                data={{
+                    proforma_id,
+                    reloadForDB :loadKeyboard,
+                    theme:'darkgray',
+                    dataStore:store,
+                    dataBrand:brand,
+                }}
+            />
             <ModalDisplay
                 data={{
                     proforma_id,
@@ -218,7 +229,7 @@ return(
                 />)
             :"loading"}
 
-        {/* Cabinet */}
+        {/* Keyboard */}
         {cabinet.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Cabinet</h4><hr/><br/></div> :""}
         {cabinet?
             cabinet.map((data, index)=>
@@ -229,6 +240,19 @@ return(
                     dataBrand={brand}
                     theme={'orange'}
                     reloadForDB ={loadCabinet}
+                />)
+            :"loading"}
+        {/* Keyboard*/}
+        {keyboard.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Keyboard</h4><hr/><br/></div> :""}
+        {keyboard?
+            keyboard.map((data, index)=>
+                <Keyboard
+                    key={index +"keyboard"}
+                    data={data}
+                    dataStore={store}
+                    dataBrand={brand}
+                    theme={'darkgray'}
+                    reloadForDB ={loadKeyboard}
                 />)
             :"loading"}
 
@@ -245,6 +269,9 @@ return(
                     reloadForDB ={loadDisplay}
                 />)
             :"loading"}
+
+
+
 
 
     </div>
