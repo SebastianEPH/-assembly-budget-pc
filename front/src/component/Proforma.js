@@ -15,6 +15,7 @@ import ModalGraphicsCard from "./proforma_data/graphicscard/ModalGraphicsCard";
 import Graphicscard from "./proforma_data/graphicscard/Graphicscard";
 import ModalCabinet from "./proforma_data/gabinet/ModalCabinet";
 import Cabinet from "./proforma_data/gabinet/Cabinet";
+import ModalDisplay from "./proforma_data/display/ModalDisplay";
 
 
 export default function Proforma(){
@@ -130,6 +131,15 @@ return(
                     dataBrand:brand,
                 }}
             />
+            <ModalDisplay
+                data={{
+                    proforma_id,
+                    reloadForDB :loadDisplay,
+                    theme:'deepskyblue',
+                    dataStore:store,
+                    dataBrand:brand,
+                }}
+            />
         </Row>
 
         {/* Processor */}
@@ -219,6 +229,20 @@ return(
                     dataBrand={brand}
                     theme={'orange'}
                     reloadForDB ={loadCabinet}
+                />)
+            :"loading"}
+
+        {/* Display */}
+        {display.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Display</h4><hr/><br/></div> :""}
+        {display?
+            display.map((data, index)=>
+                <Cabinet
+                    key={index +"display"}
+                    data={data}
+                    dataStore={store}
+                    dataBrand={brand}
+                    theme={'deepskyblue'}
+                    reloadForDB ={loadDisplay}
                 />)
             :"loading"}
 

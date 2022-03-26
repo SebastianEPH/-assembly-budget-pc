@@ -4,7 +4,7 @@ import InputSelect from "../../util/InputSelectC";
 import ModalConfirmation from "../../util/ModalConfirmation";
 import "../../util/ModalCSS.css"
 
-const Graphicscard = ({ data,
+const Display = ({ data,
                        modal=false,
                        reloadForDB=[],
                        theme=[],
@@ -12,12 +12,12 @@ const Graphicscard = ({ data,
                        dataStore=[],
                        modalHandleClose = []}) =>{
 
-    const nameDiv = 'graphicscard'
+    const nameDiv = 'display'
     const {databaseAddIf, databaseRemove, databaseUpdate, update, updateHook, clean,form} = useForm(data, nameDiv, modalHandleClose,reloadForDB )
     let  {name, id,  store, brand, link ,item_active, dol, sol, memory} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={`border border-${theme}`} >
+        <div id={nameDiv+'_'+id} className={` border-${theme}`}  >
             <Card  className={modal? 'm-1': 'm-2'}  >
                 <Card.Body>
                     <Card.Text>
@@ -29,7 +29,7 @@ const Graphicscard = ({ data,
                                 </FloatingLabel>
                                 <Row>
                                     <InputSelect name={"brand"} title={"Brand"} update={update} select={brand} col={2} data={dataBrand}/>
-                                    <InputSelect name={"memory"} title={"Memory Size"} update={update} select={memory} col={2} data={dataSize}/>
+                                    {/*<InputSelect name={"memory"} title={"Memory Size"} update={update} select={memory} col={2} data={dataSize}/>*/}
                                      <Col md={3}>
                                         <FloatingLabel  label="Soles">
                                             <Form.Control name="sol"
@@ -105,4 +105,4 @@ const Graphicscard = ({ data,
     )
 }
 
-export default Graphicscard;
+export default Display;

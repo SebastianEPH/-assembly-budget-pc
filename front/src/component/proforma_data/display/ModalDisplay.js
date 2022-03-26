@@ -1,10 +1,10 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import Graphicscard from "./Graphicscard";
+import Display from "./Display";
 
 
-const ModalGraphicsCard = ({ data}) =>{
+const ModalDisplay = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,dataStore,dataBrand,dataSize} = data
     console.log(data)
     const [show, setShow] = useState(false);
@@ -13,8 +13,7 @@ const ModalGraphicsCard = ({ data}) =>{
     return(
         <>
             <ButtonModal
-                name="Add Graphics Card"
-                size="15"
+                name="Add Display"
                 icon_size="60"
                 theme={theme}
                 funct={handleShow}
@@ -30,7 +29,7 @@ const ModalGraphicsCard = ({ data}) =>{
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Graphics Card
+                        Add display
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -44,7 +43,7 @@ const ModalGraphicsCard = ({ data}) =>{
                 </div>
 
                 <Modal.Body>
-                    <Graphicscard
+                    <Display
                         data={{
                             proforma_id,
                             store:'',
@@ -70,4 +69,4 @@ const ModalGraphicsCard = ({ data}) =>{
         </>
     )
 }
-export default ModalGraphicsCard;
+export default ModalDisplay;
