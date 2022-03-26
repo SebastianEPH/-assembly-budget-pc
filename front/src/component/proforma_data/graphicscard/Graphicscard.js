@@ -31,6 +31,7 @@ const Graphicscard = ({ data,
                                 <Row>
                                     <InputSelect name={"brand"} title={"Brand"} update={update} select={brand} col={2} data={dataBrand}/>
                                     <InputSelect name={"memory"} title={"Memory Size"} update={update} select={memory} col={2} data={dataSize}/>
+                                    <InputSelect name={"store"}  title={"Store"} update={update} select={store}  col={2} data={dataStore}/>
                                      <Col md={3}>
                                         <FloatingLabel  label="Soles">
                                             <Form.Control name="sol"
@@ -48,7 +49,7 @@ const Graphicscard = ({ data,
                                             />
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={10}>
+                                    <Col md={12}>
                                         <FloatingLabel  label="Link">
                                             <Form.Control name="link"
                                                           type="link"
@@ -58,7 +59,7 @@ const Graphicscard = ({ data,
                                                           onChange={(e)=>update(e)}/>
                                         </FloatingLabel>
                                     </Col>
-                                    <InputSelect name={"store"}  title={"Store"} update={update} select={store}  col={2} data={dataStore}/>
+
                                 </Row>
                             </Col>
                             <Col md={1}>

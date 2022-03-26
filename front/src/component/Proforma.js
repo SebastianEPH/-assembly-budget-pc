@@ -21,12 +21,16 @@ import ModalKeyboard from "./proforma_data/keyboard/ModalKeyboard";
 import ModalMouse from "./proforma_data/mouse/ModalMouse";
 import ModalDisk from "./proforma_data/disk/ModalDisk";
 import Disk from "./proforma_data/disk/Disk";
+import Display from "./proforma_data/display/Display";
 
 
 export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        displayPanel,
+        displaySize,
+        loadDisplayPanel,loadDisplaySize,
         disk,
         diskType,
         diskSize,
@@ -55,6 +59,8 @@ export default function Proforma(){
     } = UseProforma(proforma_id)
 
     useEffect(async()=>{
+        await loadDisplayPanel()
+        await loadDisplaySize()
         await loadDisk()
         await loadDiskType()
         await loadDiskSize()
@@ -179,6 +185,8 @@ return(
                     theme:'deepskyblue',
                     dataStore:store,
                     dataBrand:brand,
+                    displayPanel,
+                    displaySize,
                 }}
             />
         </Row>
@@ -320,11 +328,13 @@ return(
         {display.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Display</h4><hr/><br/></div> :""}
         {display?
             display.map((data, index)=>
-                <Cabinet
+                <Display
                     key={index +"display"}
                     data={data}
                     dataStore={store}
                     dataBrand={brand}
+                    displayPanel={displayPanel}
+                    displaySize={displaySize}
                     theme={'deepskyblue'}
                     reloadForDB ={loadDisplay}
                 />)

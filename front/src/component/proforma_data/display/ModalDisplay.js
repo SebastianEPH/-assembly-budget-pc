@@ -5,7 +5,7 @@ import Display from "./Display";
 
 
 const ModalDisplay = ({ data}) =>{
-    const {proforma_id, reloadForDB,theme,dataStore,dataBrand,dataSize} = data
+    const {proforma_id, reloadForDB,theme, displayPanel, displaySize, dataStore,dataBrand,dataSize} = data
     console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -61,6 +61,8 @@ const ModalDisplay = ({ data}) =>{
                         dataSize={dataSize}
                         dataStore={dataStore}
                         dataBrand={dataBrand}
+                        displayPanel={displayPanel}
+                        displaySize={displaySize}
                         modalHandleClose={handleClose}
                     />
 

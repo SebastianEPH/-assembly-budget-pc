@@ -10,6 +10,7 @@ databaseHelper.add = async (req, res, data)=>{
 
     // chack if the object data matches
     const parseBody= parse.ObjDB(req.body,parseDataOriginal, parseDataIDs)
+
     if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
     try{ // try connection

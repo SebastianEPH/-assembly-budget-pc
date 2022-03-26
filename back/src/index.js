@@ -18,9 +18,6 @@ app.set('port', process.env.PORT|| 5000 );
 
 app.use(cors())
 
-
-
-
 // middlewares
 app.use(morgan('dev'))
 app.use(express.json()) // acepta json
@@ -44,9 +41,9 @@ app.use('/api/', require('./routers/powersupply'))
 app.use('/api/', require('./routers/mouse'))
 app.use('/api/', require('./routers/keyboard'))
 app.use('/api/', require('./routers/graphicscard'))
-app.use('/api/', require('./routers/display'))
 app.use('/api/', require('./routers/cabinet'))
 app.use('/api/', require('./routers/disk'))
+app.use('/api/', require('./routers/display'))
 
 //app.use((err, req, res, next)=>{
 //    return res.json({

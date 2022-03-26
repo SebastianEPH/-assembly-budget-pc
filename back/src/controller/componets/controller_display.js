@@ -1,10 +1,9 @@
 const display = {}
 const databaseHelper = require("../../helpers/querysDataBase");
 
-
 const nameDatabase = 'display'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
-const parseDataIDs = ["proforma_id", "brand","store"]
+const parseDataIDs = ["proforma_id", "brand","store","panel","size"]
 
 display.add = async (req, res) =>{
     const data = {
@@ -37,5 +36,17 @@ display.delete = async (req, res) =>{
         item_id : display_id,
     }
     return databaseHelper.delete(req,res, data )
+}
+display.getPanel = async (req, res)=>{
+    const data = {
+        nameTable: "display_panel"
+    }
+    return databaseHelper.get(req,res, data )
+}
+display.getSize = async (req, res)=>{
+    const data = {
+        nameTable: "display_size"
+    }
+    return databaseHelper.get(req,res, data )
 }
 module.exports = display;

@@ -22,6 +22,12 @@ export const UseProforma = (proforma_id)=>{
     // display
     const [display, setDisplay] = useState([]);
 
+    // display Panel
+    const [displayPanel, setDisplayPanel] = useState([]);
+
+    // display Size
+    const [displaySize, setDisplaySize] = useState([]);
+
     // keyboard
     const [keyboard, setKeyboard] = useState([]);
 
@@ -58,6 +64,7 @@ export const UseProforma = (proforma_id)=>{
             .then(({data})=>setDisk(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
+
     const loadDiskType = async () =>{
         await connectionAPI.get(`/disk_type`)
             .then(({data})=>setDiskType(data))
@@ -76,6 +83,16 @@ export const UseProforma = (proforma_id)=>{
     const loadDisplay = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/display`)
             .then(({data})=>setDisplay(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadDisplayPanel = async () =>{
+        await connectionAPI.get(`/display_panel`)
+            .then(({data})=>setDisplayPanel(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadDisplaySize = async () =>{
+        await connectionAPI.get(`/display_size`)
+            .then(({data})=>setDisplaySize(data))
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadKeyboard = async () =>{
@@ -156,7 +173,9 @@ export const UseProforma = (proforma_id)=>{
     }
 
     return {
-
+        displayPanel,
+        displaySize,
+        loadDisplayPanel,loadDisplaySize,
         disk, setDisk,
         diskType, setDiskType,
         diskSize, setDiskSize,
