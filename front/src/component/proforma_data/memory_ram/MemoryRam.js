@@ -2,7 +2,7 @@ import InputSelect from "../../util/InputSelectC";
 import {useForm} from "../../hooks/useForm";
 import {Row, Col, Form, FloatingLabel, Card} from "react-bootstrap";
 import ModalConfirmation from "../../util/ModalConfirmation";
-
+import "../../util/ModalCSS.css"
 
 const MemoryRam = ({ data,
                        dataType = [],
@@ -21,10 +21,8 @@ const MemoryRam = ({ data,
 
 
     return(
-        <div id={nameDiv+'_'+id} className={`border border-${theme}`}>
-            <Card  className={modal? '': 'm-2'}  >
-                {/*className={"border border-danger"}*/}
-                {/*<Card.Header>MemoryRAM: {title}</Card.Header>*/}
+        <div id={nameDiv+'_'+id} className={` border-${theme} ` } >
+            <Card  className={modal? 'm-1': 'm-2'}  >
                 <Card.Body>
                     <Card.Text>
                         <Row >

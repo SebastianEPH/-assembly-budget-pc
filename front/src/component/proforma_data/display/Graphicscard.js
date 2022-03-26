@@ -10,7 +10,6 @@ const Graphicscard = ({ data,
                        theme=[],
                        dataBrand=[],
                        dataStore=[],
-                       dataSize=[],
                        modalHandleClose = []}) =>{
 
     const nameDiv = 'graphicscard'
@@ -18,7 +17,7 @@ const Graphicscard = ({ data,
     let  {name, id,  store, brand, link ,item_active, dol, sol, memory} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={` border-${theme}`} >
+        <div id={nameDiv+'_'+id} className={`border border-${theme}`} >
             <Card  className={modal? 'm-1': 'm-2'}  >
                 <Card.Body>
                     <Card.Text>

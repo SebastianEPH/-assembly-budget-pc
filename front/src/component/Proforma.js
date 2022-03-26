@@ -13,12 +13,18 @@ import ModalPowersupply from "./proforma_data/powersupply/ModalPowersupply";
 import Powersupply from "./proforma_data/powersupply/Powersupply";
 import ModalGraphicsCard from "./proforma_data/graphicscard/ModalGraphicsCard";
 import Graphicscard from "./proforma_data/graphicscard/Graphicscard";
+import ModalCabinet from "./proforma_data/gabinet/ModalCabinet";
+import Cabinet from "./proforma_data/gabinet/Cabinet";
 
 
 export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        loadCabinet, cabinet,
+        loadDisplay, display,
+        loadKeyboard, keyboard,
+        loadMouse, mouse,
         loadGraphicscard ,graphicscard,
         powersupplyWatts,powersupplyCertificate,powersupply,
         loadPowersupply,loadPowersupplyCertificate,loadPowersupplyWatts,
@@ -39,6 +45,10 @@ export default function Proforma(){
     } = UseProforma(proforma_id)
 
     useEffect(async()=>{
+        await loadCabinet()
+        await loadDisplay()
+        await loadKeyboard()
+        await loadMouse()
         await loadGraphicscard()
         await loadPowersupply()
         await loadPowersupplyCertificate()
@@ -68,36 +78,36 @@ return(
                 reloadForDB ={loadProcessor}
                 modal={true} // if true, then use added, otherwise use update function
                 dataStore={store}
-                theme={'primary'}
+                theme={'red'}
                 processorType={processorType}
             />
             <ModalGraphicsCard
                 data={{
                     proforma_id,
                     reloadForDB :loadGraphicscard,
-                    theme:'secondary',
+                    theme:'blue',
                     dataStore:store,
                     dataSize:memoryRAMSize,
                     dataBrand:brand,
                 }}
             />
             <ModalMemoryRam
-                            proforma_id={proforma_id}
-                            reloadForDB ={loadMemoryRAM}
-                            modal={true} // if true, then use added, otherwise use update function
-                            dataType={memoryRAMType}
-                            dataStore={store}
-                            theme={"danger"}
-                            dataFreq={memoryRAMFrequency}
-                            dataBrand={brand}
-                            dataSize={memoryRAMSize}
+                proforma_id={proforma_id}
+                reloadForDB ={loadMemoryRAM}
+                modal={true} // if true, then use added, otherwise use update function
+                dataType={memoryRAMType}
+                dataStore={store}
+                theme={"violet"}
+                dataFreq={memoryRAMFrequency}
+                dataBrand={brand}
+                dataSize={memoryRAMSize}
             />
             <ModalMotherboard
                 proforma_id={proforma_id}
                 reloadForDB ={loadMotherboard}
                 modal={true} // if true, then use added, otherwise use update function
                 dataStore={store}
-                theme={'info'}
+                theme={'green'}
                 processorType={processorType}
             />
             <ModalPowersupply
@@ -106,7 +116,16 @@ return(
                     reloadForDB :loadPowersupply,
                     dataPowersupplyWatts:powersupplyWatts,
                     dataPowersupplyCertificate:powersupplyCertificate,
-                    theme:'warning',
+                    theme:'pink',
+                    dataStore:store,
+                    dataBrand:brand,
+                }}
+            />
+            <ModalCabinet
+                data={{
+                    proforma_id,
+                    reloadForDB :loadCabinet,
+                    theme:'orange',
                     dataStore:store,
                     dataBrand:brand,
                 }}
@@ -120,7 +139,7 @@ return(
                 <Processor
                     key={index +"processor"}
                     data={data}
-                    theme={'primary'}
+                    theme={'red'}
                     processorType={processorType}
                     dataStore={store}
                     reloadForDB ={loadProcessor}
@@ -137,7 +156,7 @@ return(
                     dataStore={store}
                     dataBrand={brand}
                     dataSize={memoryRAMSize}
-                    theme={'secondary'}
+                    theme={'blue'}
                     reloadForDB ={loadGraphicscard}
                 />)
             :"loading"}
@@ -151,7 +170,7 @@ return(
                     data={data}
                     processorType={processorType}
                     dataStore={store}
-                    theme={'info'}
+                    theme={'green'}
                     reloadForDB ={loadMotherboard}
                 />)
             :"loading"}
@@ -167,7 +186,7 @@ return(
                     dataSize={memoryRAMSize}
                     dataBrand={brand}
                     dataStore={store}
-                    theme={"danger"}
+                    theme={"violet"}
                     dataFreq={memoryRAMFrequency}
                     reloadForDB ={loadMemoryRAM}
                 />)
@@ -180,13 +199,26 @@ return(
                 <Powersupply
                     key={index +"powersupply"}
                     data={data}
-                    processorType={processorType}
                     dataStore={store}
                     dataBrand={brand}
-                    theme={'warning'}
+                    theme={'pink'}
                     dataPowersupplyWatts={powersupplyWatts}
                     dataPowersupplyCertificate={powersupplyCertificate}
                     reloadForDB ={loadPowersupply}
+                />)
+            :"loading"}
+
+        {/* Cabinet */}
+        {cabinet.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Cabinet</h4><hr/><br/></div> :""}
+        {cabinet?
+            cabinet.map((data, index)=>
+                <Cabinet
+                    key={index +"cabinet"}
+                    data={data}
+                    dataStore={store}
+                    dataBrand={brand}
+                    theme={'orange'}
+                    reloadForDB ={loadCabinet}
                 />)
             :"loading"}
 

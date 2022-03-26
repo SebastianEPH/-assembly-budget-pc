@@ -2,6 +2,7 @@ import {useForm} from "../../hooks/useForm";
 import {Card, Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import InputSelect from "../../util/InputSelectC";
 import ModalConfirmation from "../../util/ModalConfirmation";
+import "../../util/ModalCSS.css"
 
 const Motherboard = ({ data,
                        modal=false,
@@ -16,10 +17,8 @@ const Motherboard = ({ data,
     let  {name, id,  store, type, link ,item_active, dol, sol} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={`border border-${theme}`}>
-            <Card className={modal? '': 'm-2'}  >
-                {/*className={"border border-danger"}*/}
-                {/*<Card.Header>MemoryRAM: {title}</Card.Header>*/}
+        <div id={nameDiv+'_'+id} className={` border-${theme} `} >
+            <Card className={modal? 'm-1': ' m-2'} >
                 <Card.Body>
                     <Card.Text>
                         <Row >

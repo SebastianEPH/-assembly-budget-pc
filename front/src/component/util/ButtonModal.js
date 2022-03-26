@@ -1,9 +1,10 @@
-
+//style={{ width:`${props.size}rem`, height:`${props.size}rem` ,}}
+import "./ModalCSS.css"
 export default function (props){
     return(
         <div className="col-auto justify-content-center p-2 m-2 " onClick={props.funct}>
-            <button className={`btn btn-outline-${props.theme}`} type="button" style={{ width:`${props.size}rem`, height:`${props.size}rem` }}>
-                <h4 className="" >{props.name}</h4>
+            <button className={` modal_  modal-${props.theme}`}  type="button" >
+                <h4>{props.name}</h4>
                 <br/>
                 <svg xmlns="http://www.w3.org/2000/svg" width={props.icon_size} height={props.icon_size} fill="currentColor"
                      className=" bi bi-plus-circle-dotted" viewBox="0 0 16 16">
@@ -13,5 +14,4 @@ export default function (props){
             </button>
         </div>
     )
-
 }

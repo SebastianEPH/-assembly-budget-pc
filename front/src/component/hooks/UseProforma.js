@@ -6,6 +6,20 @@ const connectionAPI =  axios.create({
 })
 
 export const UseProforma = (proforma_id)=>{
+
+    // cabinet
+    const [cabinet, setCabinet] = useState([]);
+
+    // display
+    const [display, setDisplay] = useState([]);
+
+    // keyboard
+    const [keyboard, setKeyboard] = useState([]);
+
+    // mouse
+    const [mouse, setMouse] = useState([]);
+
+
     // graphics card
     const [graphicscard, setGraphicscard] = useState([]);
 
@@ -30,6 +44,26 @@ export const UseProforma = (proforma_id)=>{
     const [brand, setBrand] = useState([]);
     const [store, setStore] = useState([]);
 
+    const loadCabinet = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/cabinet`)
+            .then(({data})=>setCabinet(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadDisplay = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/display`)
+            .then(({data})=>setDisplay(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadKeyboard = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/keyboard`)
+            .then(({data})=>setKeyboard(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadMouse = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/mouse`)
+            .then(({data})=>setMouse(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
     const loadGraphicscard = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/graphicscard`)
             .then(({data})=>setGraphicscard(data))
@@ -96,7 +130,12 @@ export const UseProforma = (proforma_id)=>{
             .then(({data})=>setBrand(data))
             .catch((err)=>console.log("there Was an Error getting the data ",err))
     }
+
     return {
+        loadCabinet, cabinet,
+        loadDisplay, display,
+        loadKeyboard, keyboard,
+        loadMouse, mouse,
         loadGraphicscard ,graphicscard,
         powersupplyWatts,powersupplyCertificate,powersupply,
         loadPowersupply,loadPowersupplyCertificate,loadPowersupplyWatts,

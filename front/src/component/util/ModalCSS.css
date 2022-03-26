@@ -1,0 +1,224 @@
+:root{
+    /*--color-primary: orange;*/
+    /*--color-primary-hover: red;*/
+    --border-radius:22px;
+    --size: 12rem;
+}
+/*border-top-color: black;*/
+/*border-right-color: black;*/
+/*border-bottom-color: black;*/
+/*border-left-color: black;*/
+/*border-top: 10px ;*/
+/*border-right:  10px ;*/
+/*border-bottom:  10px ;*/
+/*border-left:  10px ;*/
+
+.modal_{
+    width: var(--size);
+    /*-webkit-text-stroke: 1px white;*/
+    height: var(--size);
+    background-color: white;
+    border-radius: 15px;
+    border-color:black;
+    color: black;
+}
+.modal_:hover{
+    background-color: black;
+    color: white;
+}
+
+/*Modal blue */
+.modal_.modal-blue{
+    border-color: blue;
+    color: blue;
+}
+.border-blue{
+    border: solid blue ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-blue:hover{
+    color:white;
+    background-color: blue;
+}
+/*Modal red */
+.modal_.modal-red{
+    border-color: red;
+    color: red;
+}
+.border-red{
+    border: solid red ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-red:hover{
+    color:white;
+    background-color: red;
+}
+/*Modal blueviolet*/
+.modal_.modal-violet{
+    border-color: blueviolet;
+    color: blueviolet;
+}
+.border-violet{
+    border: solid blueviolet ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-violet:hover{
+    color:white;
+    background-color: blueviolet;
+}
+/*Modal forestgreen*/
+.modal_.modal-green{
+    border-color: forestgreen;
+    color: forestgreen;
+}
+.border-green{
+    border: solid forestgreen;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-green:hover{
+    color:white;
+    background-color: forestgreen;
+}
+/*Modal deeppink*/
+.modal_.modal-pink{
+    border-color: deeppink;
+    color: deeppink;
+}
+.border-pink{
+    border: solid deeppink;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-pink:hover{
+    color:white;
+    background-color: deeppink;
+}
+/*Modal orange*/
+.modal_.modal-orange{
+    border-color: orange;
+    color: orange;
+}
+.border-orange{
+    border: solid orange ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-orange:hover{
+    color:white;
+    background-color: orange;
+}
+/*Modal darkslategray*/
+.modal_.modal-greendark{
+    border-color: darkslategray;
+    color: darkslategray;
+}
+.border-greendark{
+    border: solid darkslategray ;
+    border-radius: var(--border-radius);
+}
+.border-geendark{
+    border: solid darkslategray ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-greendark:hover{
+    color:white;
+    background-color: darkslategray;
+}
+/*Modal firebrick*/
+.modal_.modal-firebrick{
+    border-color: firebrick;
+    color: firebrick;
+}
+.border-firebrick{
+    border: solid firebrick;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-firebrick:hover{
+    color:white;
+    background-color: firebrick;
+}
+/*Modal hotpink*/
+.modal_.modal-hotpink{
+    border-color: hotpink;
+    color: firebrick;
+}
+.border-hotpink{
+    border: solid hotpink;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-hotpink:hover{
+    color:white;
+    background-color: hotpink;
+}
+/*Modal greenyellow*/
+.modal_.modal-greenyellow{
+    border-color: greenyellow;
+    color: greenyellow;
+    -webkit-text-stroke: 1px lawngreen;
+}
+.border-greenyellow{
+    border: solid greenyellow;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-greenyellow:hover{
+    color:white;
+    -webkit-text-stroke: 1px white;
+    background-color: greenyellow;
+}
+/*Modal deepskyblue*/
+.modal_.modal-deepskyblue{
+    border-color: deepskyblue;
+    color: deepskyblue;
+    /*-webkit-text-stroke: 1px lawngreen;*/
+}
+.border-deepskyblue{
+    border: solid deepskyblue;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-deepskyblue:hover{
+    color:white;
+    /*-webkit-text-stroke: 1px white;*/
+    background-color: deepskyblue;
+}
+/*Modal deepskyblue*/
+.modal_.modal-lightcoral{
+    border-color: lightcoral;
+    color: lightcoral;
+    /*-webkit-text-stroke: 1px lawngreen;*/
+}
+.border-lightcoral{
+    border: solid lightcoral;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-lightcoral:hover{
+    color:white;
+    /*-webkit-text-stroke: 1px white;*/
+    background-color: lightcoral;
+}
+/*Modal olivedrab*/
+.modal_.modal-olivedrab{
+    border-color: olivedrab;
+    color: olivedrab;
+    /*-webkit-text-stroke: 1px lawngreen;*/
+}
+.border-olivedrab{
+    border: solid olivedrab;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-olivedrab:hover{
+    color:white;
+    /*-webkit-text-stroke: 1px white;*/
+    background-color: olivedrab;
+}
+/*Modal darkgray*/
+.modal_.modal-darkgray{
+    border-color: darkgray;
+    color: darkgray;
+}
+.border-darkgray{
+    border: solid darkgray;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-darkgray:hover{
+    color:white;
+    /*-webkit-text-stroke: 1px white;*/
+    background-color: darkgray;
+}

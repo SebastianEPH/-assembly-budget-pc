@@ -13,7 +13,6 @@ const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, da
         <>
             <ButtonModal
                 name={"Add Memory RAM"}
-                size="15"
                 theme={theme}
                 icon_size="60"
                 funct={handleShow}
@@ -58,7 +57,7 @@ const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, da
                                     dol:0,
                                     sol:0
                                }}
-                               theme={theme}
+                        theme={theme}
                         modalHandleClose ={handleClose}
                         reloadForDB={reloadForDB}
                         modal={true} // if true, then use added, otherwise use update function

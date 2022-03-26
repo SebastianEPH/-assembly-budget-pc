@@ -2,6 +2,7 @@ import {useForm} from "../../hooks/useForm";
 import {Card, Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import InputSelect from "../../util/InputSelectC";
 import ModalConfirmation from "../../util/ModalConfirmation";
+import "../../util/ModalCSS.css"
 
 const Processor = ({ data,
                        modal=false,
@@ -11,13 +12,13 @@ const Processor = ({ data,
                        reloadForDB  = [],
                        modalHandleClose = []}) =>{
 
-    const nameDiv = 'processor'
+    const nameDiv = 'processor' // ${theme}
     const {databaseAddIf, databaseRemove, databaseUpdate, update, updateHook, clean,form} = useForm(data, nameDiv, modalHandleClose,reloadForDB )
     let  {name, id,  store, brand, link ,item_active, dol, sol} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={`border border-${theme}`} >
-            <Card  className={modal? '': 'm-2'}  >
+        <div id={nameDiv+'_'+id} className={` border-${theme} `} >
+            <Card className={modal? 'm-1': ' m-2'} >
                 <Card.Body>
                     <Card.Text>
                         <Row >

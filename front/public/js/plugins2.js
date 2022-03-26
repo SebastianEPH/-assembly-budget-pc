@@ -1242,7 +1242,7 @@
 			} else if (current.autoWidth || current.autoHeight) {
 				inner.addClass( 'fancybox-tmp' );
 
-				// Set width or height in case we need to calculate only one dimension
+				// Set width or height in gabinet we need to calculate only one dimension
 				if (!current.autoWidth) {
 					inner.width( origWidth );
 				}

@@ -1,17 +1,20 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import Processor from "./Processor";
+import Graphicscard from "./Graphicscard";
 
-const ModalMemoryRam = ({ proforma_id, theme,  processorType, dataStore, reloadForDB }) =>{
 
+const ModalGraphicsCard = ({ data}) =>{
+    const {proforma_id, reloadForDB,theme,dataStore,dataBrand,dataSize} = data
+    console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return(
         <>
             <ButtonModal
-                name="Add Processor"
+                name="Add Graphics Card"
+                size="15"
                 icon_size="60"
                 theme={theme}
                 funct={handleShow}
@@ -27,7 +30,7 @@ const ModalMemoryRam = ({ proforma_id, theme,  processorType, dataStore, reloadF
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Processor
+                        Add Graphics Card
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -39,11 +42,12 @@ const ModalMemoryRam = ({ proforma_id, theme,  processorType, dataStore, reloadF
                         </svg>
                     </button>
                 </div>
+
                 <Modal.Body>
-                    <Processor
+                    <Graphicscard
                         data={{
-                            store:'',
                             proforma_id,
+                            store:'',
                             brand:'',
                             link:'',
                             select:'',
@@ -51,20 +55,19 @@ const ModalMemoryRam = ({ proforma_id, theme,  processorType, dataStore, reloadF
                             item_active:'',
                             sol:0,
                             dol:0
-                            }}
+                        }}
                         theme={theme}
-                        proforma_id={proforma_id}
-                        modalHandleClose ={handleClose}
-                        reloadForDB ={reloadForDB }
-                        modal={true} // if true, then use added, otherwise use update function
+                        reloadForDB ={reloadForDB}
+                        modal={true}
+                        dataSize={dataSize}
                         dataStore={dataStore}
-                        processorType={processorType}>
-
-                    </Processor>
+                        dataBrand={dataBrand}
+                        modalHandleClose={handleClose}
+                    />
 
                 </Modal.Body>
             </Modal>
         </>
     )
 }
-export default ModalMemoryRam;
+export default ModalGraphicsCard;

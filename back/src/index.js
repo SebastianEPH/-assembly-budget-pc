@@ -45,7 +45,7 @@ app.use('/api/', require('./routers/mouse'))
 app.use('/api/', require('./routers/keyboard'))
 app.use('/api/', require('./routers/graphicscard'))
 app.use('/api/', require('./routers/display'))
-app.use('/api/', require('./routers/case'))
+app.use('/api/', require('./routers/cabinet'))
 
 
 //app.use((err, req, res, next)=>{

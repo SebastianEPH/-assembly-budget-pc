@@ -1,12 +1,12 @@
-const case_= {}
+const cabinet= {}
 const databaseHelper = require("../../helpers/querysDataBase");
 
 
-const nameDatabase = 'case'
+const nameDatabase = 'cabinet'
 const parseDataOriginal = ["name","dol","sol","item_active","link"]
 const parseDataIDs = ["proforma_id", "brand","store"]
 
-case_.add = async (req, res) =>{
+cabinet.add = async (req, res) =>{
     const data = {
         nameDatabase,
         parseDataOriginal ,
@@ -14,28 +14,28 @@ case_.add = async (req, res) =>{
     }
     return databaseHelper.add(req,res, data )
 }
-case_.getIf = async (req, res) =>{
+cabinet.getIf = async (req, res) =>{
     const data = {
         nameDatabase,
     }
     return databaseHelper.getIf(req,res, data )
 }
-case_.update = async (req, res) =>{
-    const { case_id } = req.params
+cabinet.update = async (req, res) =>{
+    const { cabinet_id } = req.params
     const data = {
         nameDatabase,
-        item_id : case_id,
+        item_id : cabinet_id,
         parseDataOriginal,
         parseDataIDs,
     }
     return databaseHelper.update(req,res, data )
 }
-case_.delete = async (req, res) =>{
-    const {case_id} = req.params
+cabinet.delete = async (req, res) =>{
+    const {cabinet_id} = req.params
     const data = {
         nameDatabase,
-        item_id : case_id,
+        item_id : cabinet_id,
     }
     return databaseHelper.delete(req,res, data )
 }
-module.exports = case_;
+module.exports = cabinet;

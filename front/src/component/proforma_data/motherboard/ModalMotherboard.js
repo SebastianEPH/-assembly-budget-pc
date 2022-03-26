@@ -12,7 +12,6 @@ const ModalMotherboard = ({ proforma_id, theme, processorType, dataStore, reload
         <>
             <ButtonModal
                 name="Add Motherboard"
-                size="15"
                 icon_size="60"
                 theme={theme}
                 funct={handleShow}
@@ -40,11 +39,7 @@ const ModalMotherboard = ({ proforma_id, theme, processorType, dataStore, reload
                         </svg>
                     </button>
                 </div>
-
-
                 <Modal.Body>
-
-
                     <Motherboard
                         data={{
                             store:'',
@@ -66,7 +61,6 @@ const ModalMotherboard = ({ proforma_id, theme, processorType, dataStore, reload
                         processorType={processorType}>
 
                     </Motherboard>
-
                 </Modal.Body>
             </Modal>
         </>

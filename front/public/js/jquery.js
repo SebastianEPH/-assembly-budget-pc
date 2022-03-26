@@ -208,7 +208,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 		i++;
 	}
 
-	// Handle case when target is a string or something (possible in deep copy)
+	// Handle gabinet when target is a string or something (possible in deep copy)
 	if ( typeof target !== "object" && !jQuery.isFunction( target ) ) {
 		target = {};
 	}
@@ -1339,7 +1339,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			el.appendChild( input ).setAttribute( "name", "D" );
 
 			// Support: IE8
-			// Enforce case-sensitivity of name attribute
+			// Enforce gabinet-sensitivity of name attribute
 			if ( el.querySelectorAll("[name=d]").length ) {
 				rbuggyQSA.push( "name" + whitespace + "*[*^$|!~]?=" );
 			}
@@ -1924,9 +1924,9 @@ Expr = Sizzle.selectors = {
 		},
 
 		"PSEUDO": function( pseudo, argument ) {
-			// pseudo-class names are case-insensitive
+			// pseudo-class names are gabinet-insensitive
 			// http://www.w3.org/TR/selectors/#pseudo-classes
-			// Prioritize by case sensitivity in case custom pseudos are added with uppercase letters
+			// Prioritize by gabinet sensitivity in gabinet custom pseudos are added with uppercase letters
 			// Remember that setFilters inherits from pseudos
 			var args,
 				fn = Expr.pseudos[ pseudo ] || Expr.setFilters[ pseudo.toLowerCase() ] ||
@@ -2010,7 +2010,7 @@ Expr = Sizzle.selectors = {
 		// is based solely on the element's language value
 		// being equal to the identifier C,
 		// or beginning with the identifier C immediately followed by "-".
-		// The matching of C against the element's language value is performed case-insensitively.
+		// The matching of C against the element's language value is performed gabinet-insensitively.
 		// The identifier C does not have to be a valid language name."
 		// http://www.w3.org/TR/selectors/#lang-pseudo
 		"lang": markFunction( function( lang ) {
@@ -2573,7 +2573,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// equals `i`), unless we didn't visit _any_ elements in the above loop because we have
 			// no element matchers and no seed.
 			// Incrementing an initially-string "0" `i` allows `i` to remain a string only in that
-			// case, which will result in a "00" `matchedCount` that differs from `i` but is also
+			// gabinet, which will result in a "00" `matchedCount` that differs from `i` but is also
 			// numerically zero.
 			if ( bySet && i !== matchedCount ) {
 				j = 0;
@@ -2953,7 +2953,7 @@ var rootjQuery,
 	// A simple way to check for HTML strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
-	// Shortcut simple #id case for speed
+	// Shortcut simple #id gabinet for speed
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/,
 
 	init = jQuery.fn.init = function( selector, context, root ) {
@@ -3668,7 +3668,7 @@ jQuery.extend( {
 								process();
 							} else {
 
-								// Call an optional hook to record the stack, in case of exception
+								// Call an optional hook to record the stack, in gabinet of exception
 								// since it's otherwise lost when execution goes async
 								if ( jQuery.Deferred.getStackHook ) {
 									process.stackTrace = jQuery.Deferred.getStackHook();
@@ -4489,7 +4489,7 @@ var cssExpand = [ "Top", "Right", "Bottom", "Left" ];
 var isHiddenWithinTree = function( elem, el ) {
 
 		// isHiddenWithinTree might be called from jQuery#filter function;
-		// in that case, element will be second argument
+		// in that gabinet, element will be second argument
 		elem = el || elem;
 
 		// Inline style trumps all
@@ -4986,7 +4986,7 @@ jQuery.event = {
 		}
 
 		// Ensure that invalid selectors throw exceptions at attach time
-		// Evaluate against documentElement in case elem is a non-element node (e.g., document)
+		// Evaluate against documentElement in gabinet elem is a non-element node (e.g., document)
 		if ( selector ) {
 			jQuery.find.matchesSelector( documentElement, selector );
 		}
@@ -6348,7 +6348,7 @@ function getWidthOrHeight( elem, name, extra ) {
 			return val;
 		}
 
-		// Check for style in case a browser which returns unreliable values
+		// Check for style in gabinet a browser which returns unreliable values
 		// for getComputedStyle silently falls back to the reliable elem.style
 		valueIsBorderBox = isBorderBox &&
 			( support.boxSizingReliable() || val === elem.style[ name ] );
@@ -8120,7 +8120,7 @@ jQuery.extend( jQuery.event, {
 			new RegExp( "(^|\\.)" + namespaces.join( "\\.(?:.*\\.|)" ) + "(\\.|$)" ) :
 			null;
 
-		// Clean up the event in case it is being reused
+		// Clean up the event in gabinet it is being reused
 		event.result = undefined;
 		if ( !event.target ) {
 			event.target = elem;
@@ -8645,7 +8645,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 	var conv2, current, conv, tmp, prev,
 		converters = {},
 
-		// Work with a copy of dataTypes in case we need to modify it for conversion
+		// Work with a copy of dataTypes in gabinet we need to modify it for conversion
 		dataTypes = s.dataTypes.slice();
 
 	// Create converters map with lowercased keys
@@ -9033,7 +9033,7 @@ jQuery.extend( {
 		// Determine if request has content
 		s.hasContent = !rnoContent.test( s.type );
 
-		// Save the URL in case we're toying with the If-Modified-Since
+		// Save the URL in gabinet we're toying with the If-Modified-Since
 		// and/or If-None-Match header later on
 		// Remove hash to simplify url manipulation
 		cacheURL = s.url.replace( rhash, "" );
@@ -9579,7 +9579,7 @@ jQuery.ajaxSetup( {
 	}
 } );
 
-// Handle cache's special case and crossDomain
+// Handle cache's special gabinet and crossDomain
 jQuery.ajaxPrefilter( "script", function( s ) {
 	if ( s.cache === undefined ) {
 		s.cache = false;
@@ -9890,7 +9890,7 @@ jQuery.offset = {
 			curElem = jQuery( elem ),
 			props = {};
 
-		// Set position first, in-case top/left are set even on static elem
+		// Set position first, in-gabinet top/left are set even on static elem
 		if ( position === "static" ) {
 			elem.style.position = "relative";
 		}
@@ -10024,7 +10024,7 @@ jQuery.fn.extend( {
 	// 1) For the element inside the iframe without offsetParent, this method will return
 	//    documentElement of the parent window
 	// 2) For the hidden or detached element
-	// 3) For body or html element, i.e. in case of the html node - it will return itself
+	// 3) For body or html element, i.e. in gabinet of the html node - it will return itself
 	//
 	// but those exceptions were never presented as a real life use-cases
 	// and might be considered as more preferable results.
@@ -10173,7 +10173,7 @@ jQuery.parseJSON = JSON.parse;
 
 // Note that for maximum portability, libraries that are not jQuery should
 // declare themselves as anonymous modules, and avoid setting a global if an
-// AMD loader is present. jQuery is a special case. For more information, see
+// AMD loader is present. jQuery is a special gabinet. For more information, see
 // https://github.com/jrburke/requirejs/wiki/Updating-existing-libraries#wiki-anon
 
 if ( typeof define === "function" && define.amd ) {
@@ -10187,10 +10187,10 @@ if ( typeof define === "function" && define.amd ) {
 
 var
 
-	// Map over jQuery in case of overwrite
+	// Map over jQuery in gabinet of overwrite
 	_jQuery = window.jQuery,
 
-	// Map over the $ in case of overwrite
+	// Map over the $ in gabinet of overwrite
 	_$ = window.$;
 
 jQuery.noConflict = function( deep ) {
