@@ -46,7 +46,7 @@ app.use('/api/', require('./routers/keyboard'))
 app.use('/api/', require('./routers/graphicscard'))
 app.use('/api/', require('./routers/display'))
 app.use('/api/', require('./routers/cabinet'))
-
+app.use('/api/', require('./routers/disk'))
 
 //app.use((err, req, res, next)=>{
 //    return res.json({

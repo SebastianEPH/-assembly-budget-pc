@@ -1,19 +1,20 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import Keyboard from "./Keyboard";
+import Disk from "./Disk";
 
 
-const ModalKeyboard = ({ data}) =>{
-    const {proforma_id, reloadForDB,theme,dataStore,dataBrand} = data
+const ModalDisk = ({ data}) =>{
+    const {proforma_id, reloadForDB,theme,diskSize, diskType, dataStore,dataBrand} = data
     console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     return(
         <>
             <ButtonModal
-                name="Add Keyboard"
+                name="Add Disk"
                 icon_size="60"
                 theme={theme}
                 funct={handleShow}
@@ -29,7 +30,7 @@ const ModalKeyboard = ({ data}) =>{
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Keyboard
+                        Add Disk
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -43,7 +44,7 @@ const ModalKeyboard = ({ data}) =>{
                 </div>
 
                 <Modal.Body>
-                    <Keyboard
+                    <Disk
                         data={{
                             proforma_id,
                             store:'',
@@ -60,6 +61,8 @@ const ModalKeyboard = ({ data}) =>{
                         modal={true}
                         dataStore={dataStore}
                         dataBrand={dataBrand}
+                        diskSize={diskSize}
+                        diskType={diskType}
                         modalHandleClose={handleClose}
                     />
 
@@ -68,4 +71,4 @@ const ModalKeyboard = ({ data}) =>{
         </>
     )
 }
-export default ModalKeyboard;
+export default ModalDisk;

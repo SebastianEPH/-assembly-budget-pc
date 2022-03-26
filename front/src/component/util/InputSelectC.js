@@ -20,15 +20,15 @@ export default function ({name, title ,select = '', col, update, data, idConditi
                     <option value={''} key="0"> </option>
                     {data.map((p={name}, index)=>{
                         if(!p.condition){
-                            return<option value={p.id || ''} key={index+"l"}>{p.name}</option>
+                            return<option value={p.id || ''} key={index+"l"}>{p.name || p[name] }</option>
                         }else{
                             if(idCondition ===null){
                                 // existe una condición en la base de datos, está vacia el objeto que recibe
                             } else if ( idCondition === undefined){ // is condicion es null como valor,
-                                return<option value={p.id || ''} key={index+"t"}>{p.name }</option>
+                                return<option value={p.id || ''} key={index+"t"}>{p.name || p[name] }</option>
                             }else{
                                 if (idCondition.toString() === p.condition.toString()){
-                                    return<option value={p.id || ''} key={index+"y"}>{p.name}</option>
+                                    return<option value={p.id || ''} key={index+"y"}>{p.name|| p[name] }</option>
                                 }
                             }
                         }

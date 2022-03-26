@@ -7,6 +7,15 @@ const connectionAPI =  axios.create({
 
 export const UseProforma = (proforma_id)=>{
 
+    // disk
+    const [disk, setDisk] = useState([]);
+
+    // disk type
+    const [diskType, setDiskType] = useState([]);
+
+    // disk size
+    const [diskSize, setDiskSize] = useState([]);
+
     // cabinet
     const [cabinet, setCabinet] = useState([]);
 
@@ -44,6 +53,21 @@ export const UseProforma = (proforma_id)=>{
     const [brand, setBrand] = useState([]);
     const [store, setStore] = useState([]);
 
+    const loadDisk = async () =>{
+        await connectionAPI.get(`/proforma/${proforma_id}/disk`)
+            .then(({data})=>setDisk(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadDiskType = async () =>{
+        await connectionAPI.get(`/disk_type`)
+            .then(({data})=>setDiskType(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
+    const loadDiskSize = async () =>{
+        await connectionAPI.get(`/disk_size`)
+            .then(({data})=>setDiskSize(data))
+            .catch((err)=>console.log("there was an Error getting the data ",err))
+    }
     const loadCabinet = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/cabinet`)
             .then(({data})=>setCabinet(data))
@@ -132,6 +156,11 @@ export const UseProforma = (proforma_id)=>{
     }
 
     return {
+
+        disk, setDisk,
+        diskType, setDiskType,
+        diskSize, setDiskSize,
+        loadDisk,loadDiskType,loadDiskSize,
         loadCabinet, cabinet,
         loadDisplay, display,
         loadKeyboard, keyboard,

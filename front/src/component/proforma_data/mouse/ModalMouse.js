@@ -1,10 +1,10 @@
 import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import Keyboard from "./Keyboard";
+import Mouse from "./Mouse";
 
 
-const ModalKeyboard = ({ data}) =>{
+const ModalMouse = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,dataStore,dataBrand} = data
     console.log(data)
     const [show, setShow] = useState(false);
@@ -13,7 +13,7 @@ const ModalKeyboard = ({ data}) =>{
     return(
         <>
             <ButtonModal
-                name="Add Keyboard"
+                name="Add Mouse"
                 icon_size="60"
                 theme={theme}
                 funct={handleShow}
@@ -29,7 +29,7 @@ const ModalKeyboard = ({ data}) =>{
             >
                 <div className="modal-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Keyboard
+                        Add Mouse
                     </Modal.Title>
                     <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -43,7 +43,7 @@ const ModalKeyboard = ({ data}) =>{
                 </div>
 
                 <Modal.Body>
-                    <Keyboard
+                    <Mouse
                         data={{
                             proforma_id,
                             store:'',
@@ -68,4 +68,4 @@ const ModalKeyboard = ({ data}) =>{
         </>
     )
 }
-export default ModalKeyboard;
+export default ModalMouse;

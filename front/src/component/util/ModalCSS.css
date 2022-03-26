@@ -92,6 +92,19 @@
     color:white;
     background-color: deeppink;
 }
+/*Modal green-pastel*/
+.modal_.modal-green-pastel{
+    border-color: #48c9b0;
+    color: #48c9b0;
+}
+.border-green-pastel{
+    border: solid #48c9b0 ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-green-pastel:hover{
+    color:white;
+    background-color: #48c9b0;
+}
 /*Modal orange*/
 .modal_.modal-orange{
     border-color: orange;
@@ -104,6 +117,34 @@
 .modal_:hover.modal-orange:hover{
     color:white;
     background-color: orange;
+}
+/*Modal salmon*/
+.modal_.modal-salmon{
+    border-color: salmon;
+    color: salmon;
+}
+.border-salmon{
+    border: solid salmon ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-salmon:hover{
+    color:white;
+    background-color: salmon;
+}
+/*Modal yellow*/
+.modal_.modal-yellow{
+    border-color: yellow;
+    color: yellow;
+    -webkit-text-fill-color:  orange;
+}
+.border-yellow{
+    border: solid yellow ;
+    border-radius: var(--border-radius);
+}
+.modal_:hover.modal-yellow:hover{
+    color:white;
+    background-color: yellow;
+    -webkit-text-stroke: 1px orange;
 }
 /*Modal darkslategray*/
 .modal_.modal-greendark{

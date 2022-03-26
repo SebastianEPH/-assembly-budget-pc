@@ -18,12 +18,19 @@ import Cabinet from "./proforma_data/gabinet/Cabinet";
 import ModalDisplay from "./proforma_data/display/ModalDisplay";
 import Keyboard from "./proforma_data/keyboard/Keyboard";
 import ModalKeyboard from "./proforma_data/keyboard/ModalKeyboard";
+import ModalMouse from "./proforma_data/mouse/ModalMouse";
+import ModalDisk from "./proforma_data/disk/ModalDisk";
+import Disk from "./proforma_data/disk/Disk";
 
 
 export default function Proforma(){
     const {proforma_id} = useParams();
 
     const {
+        disk,
+        diskType,
+        diskSize,
+        loadDisk,loadDiskType,loadDiskSize,
         loadCabinet, cabinet,
         loadDisplay, display,
         loadKeyboard, keyboard,
@@ -48,6 +55,9 @@ export default function Proforma(){
     } = UseProforma(proforma_id)
 
     useEffect(async()=>{
+        await loadDisk()
+        await loadDiskType()
+        await loadDiskSize()
         await loadCabinet()
         await loadDisplay()
         await loadKeyboard()
@@ -91,6 +101,17 @@ return(
                     theme:'blue',
                     dataStore:store,
                     dataSize:memoryRAMSize,
+                    dataBrand:brand,
+                }}
+            />
+            <ModalDisk
+                data={{
+                    proforma_id,
+                    reloadForDB :loadDisk,
+                    theme:'green-pastel',
+                    dataStore:store,
+                    diskSize,
+                    diskType,
                     dataBrand:brand,
                 }}
             />
@@ -142,6 +163,15 @@ return(
                     dataBrand:brand,
                 }}
             />
+            <ModalMouse
+                data={{
+                    proforma_id,
+                    reloadForDB :loadMouse,
+                    theme:'yellow',
+                    dataStore:store,
+                    dataBrand:brand,
+                }}
+            />
             <ModalDisplay
                 data={{
                     proforma_id,
@@ -181,6 +211,23 @@ return(
                     reloadForDB ={loadGraphicscard}
                 />)
             :"loading"}
+
+        {/* Disk */}
+        {disk.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Disk</h4><hr/><br/></div> :""}
+        {disk?
+            disk.map((data, index)=>
+                <Disk
+                    key={index +"disk"}
+                    data={data}
+                    dataStore={store}
+                    dataBrand={brand}
+                    diskSize={diskSize}
+                    diskType={diskType}
+                    theme={'green-pastel'}
+                    reloadForDB ={loadDisk}
+                />)
+            :"loading"}
+
 
         {/* Motherboard*/}
         {motherboard.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Motherboard</h4><hr/><br/></div> :""}
@@ -229,7 +276,7 @@ return(
                 />)
             :"loading"}
 
-        {/* Keyboard */}
+        {/* Cabinet */}
         {cabinet.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Cabinet</h4><hr/><br/></div> :""}
         {cabinet?
             cabinet.map((data, index)=>
@@ -242,7 +289,7 @@ return(
                     reloadForDB ={loadCabinet}
                 />)
             :"loading"}
-        {/* Keyboard*/}
+        {/* Kerboard */}
         {keyboard.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Keyboard</h4><hr/><br/></div> :""}
         {keyboard?
             keyboard.map((data, index)=>
@@ -253,6 +300,19 @@ return(
                     dataBrand={brand}
                     theme={'darkgray'}
                     reloadForDB ={loadKeyboard}
+                />)
+            :"loading"}
+        {/* Mouse */}
+        {mouse.toString() !== ""? <div className="col-auto text-center"><hr/><h4>Mouse</h4><hr/><br/></div> :""}
+        {mouse?
+            mouse.map((data, index)=>
+                <Keyboard
+                    key={index +"mouse"}
+                    data={data}
+                    dataStore={store}
+                    dataBrand={brand}
+                    theme={'yellow'}
+                    reloadForDB ={loadMouse}
                 />)
             :"loading"}
 
