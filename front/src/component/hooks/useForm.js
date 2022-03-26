@@ -53,7 +53,8 @@ export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadF
         await connectionAPI.delete(`/proforma/${form.proforma_id}/${typeName}/${form.id}`)
             .then((m)=>{
                 toast.success(m.data.message)
-                const div = document.getElementById(typeName+'_'+form.id);
+                const div = document.getElementById(typeName+'_'+form.id)
+                div.style.setProperty("display","none")
                 if(div !== null){
                     while (div.hasChildNodes()){
                         div.removeChild(div.lastChild);

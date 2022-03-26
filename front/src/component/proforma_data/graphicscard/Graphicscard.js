@@ -18,13 +18,13 @@ const Graphicscard = ({ data,
     let  {name, id,  store, brand, link ,item_active, dol, sol, memory} = form
 
     return(
-        <div id={nameDiv+'_'+id} className={` border-${theme}`} >
-            <Card  className={modal? 'm-1': 'm-2'}  >
+        <div id={nameDiv+'_'+id} className={` border-${theme}`}  >
+            <Card  className={modal? 'm-1': ' m-2'}  >
                 <Card.Body>
                     <Card.Text>
                         <Row >
-                            <Col md={11}>
-                                <FloatingLabel  label="Name">
+                            <Col  md={11}>
+                                <FloatingLabel   label="Name">
                                     <Form.Control name="name"  type="text" placeholder="insert Name"  value={name}
                                                   onChange={(e)=>update(e)}/>
                                 </FloatingLabel>
