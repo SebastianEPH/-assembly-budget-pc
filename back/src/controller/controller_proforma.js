@@ -8,6 +8,8 @@ const getMemoryRam = async (id) =>{
     return await pool.query(
         ' SELECT ' +
         ' memory_ram.name, ' +
+        ' memory_ram.sol, ' +
+        ' memory_ram.dol, ' +
         ' memory_ram_size.name as "size", ' +
         ' memory_ram_type.name as "type", ' +
         ' memory_ram_frequency.name as "frequency", ' +
@@ -17,24 +19,28 @@ const getMemoryRam = async (id) =>{
         ' LEFT JOIN memory_ram_type ON memory_ram.type = memory_ram_type.id  ' +
         ' LEFT JOIN memory_ram_frequency ON memory_ram.freq = memory_ram_frequency.id  ' +
         ' LEFT JOIN brand ON memory_ram.brand = brand.id  ' +
-        ' WHERE proforma_id = ?  ',[id]) // LEFT
+        ' WHERE proforma_id = ? AND memory_ram.item_active = 1 ',[id]) // LEFT
 }
 const getMotherboard = async (id) =>{
     return await pool.query(
         ' SELECT ' +
         ' motherboard.name, ' +
+        ' motherboard.sol, ' +
+        ' motherboard.dol, ' +
         ' processor_type.name as "type", ' +
         ' brand.name as "brand" ' +
         ' FROM motherboard ' +
         ' LEFT JOIN processor_type ON motherboard.type = processor_type.id  ' +
         ' LEFT JOIN brand ON motherboard.brand = brand.id  ' +
-        ' WHERE proforma_id = ?  ',[id]) // LEFT
+        ' WHERE proforma_id = ? AND motherboard.item_active = 1 ',[id]) // LEFT
 }
 
 const getPowerSupply = async (id) =>{
     const table = "powersupply"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      ${table}_certificate.name as "certificate"  ,
      ${table}_watts.name as "watts" ,
      brand.name as "brand" 
@@ -42,23 +48,27 @@ const getPowerSupply = async (id) =>{
      LEFT JOIN ${table}_certificate ON  ${table}.certificate =  ${table}_certificate.id
      LEFT JOIN ${table}_watts ON ${table}.watts = ${table}_watts.id
      LEFT JOIN brand ON ${table}.brand = brand.id
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 
 }
 const getProcessor = async (id) =>{
     const table = "processor"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      ${table}_type.name as "brand" 
      FROM ${table}
      LEFT JOIN ${table}_type ON  ${table}.brand =  ${table}_type.id
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 
 }
 const getDisplay = async (id) =>{
     const table = "display"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      ${table}_panel.panel as "panel" , 
      ${table}_size.size as "size" , 
      brand.name as "brand"  
@@ -66,12 +76,14 @@ const getDisplay = async (id) =>{
      LEFT JOIN ${table}_panel ON  ${table}.panel =  ${table}_panel.id 
      LEFT JOIN ${table}_size ON  ${table}.size =  ${table}_size.id 
      LEFT JOIN brand ON ${table}.brand = brand.id 
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
 const getDisk = async (id) =>{
     const table = "disk"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      ${table}_type.type as "type" , 
      ${table}_size.size as "size" , 
      brand.name as "brand"  
@@ -79,45 +91,53 @@ const getDisk = async (id) =>{
      LEFT JOIN ${table}_type ON  ${table}.type =  ${table}_type.id 
      LEFT JOIN ${table}_size ON  ${table}.size =  ${table}_size.id 
      LEFT JOIN brand ON ${table}.brand = brand.id 
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
 const getCabinet = async (id) =>{
     const table = "cabinet"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      brand.name as "brand"  
      FROM ${table} 
      LEFT JOIN brand ON ${table}.brand = brand.id 
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
 const getMouse= async (id) =>{
     const table = "mouse"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      brand.name as "brand"  
      FROM ${table} 
      LEFT JOIN brand ON ${table}.brand = brand.id 
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
 const getKeyboard= async (id) =>{
     const table = "keyboard"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      brand.name as "brand"  
      FROM ${table} 
      LEFT JOIN brand ON ${table}.brand = brand.id 
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
 const getGraphicscard = async (id) =>{
     const table = "graphicscard"
     return await pool.query( `SELECT 
      ${table}.name ,
+     ${table}.sol,
+     ${table}.dol,
      brand.name as "brand"  ,
      memory_ram_size.name as "size"
      FROM ${table} 
      LEFT JOIN brand ON ${table}.brand = brand.id 
      LEFT JOIN memory_ram_size ON ${table}.memory = memory_ram_size.id 
-     WHERE proforma_id = ?`,[id])
+     WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
 
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
@@ -127,6 +147,7 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
     for (let i = 0; i < proforma .length; i++) {
         const obj = {}
         obj.name = proforma[i].name
+        obj.id = proforma[i].id
         obj.display = await getDisplay(proforma[i].id)
         obj.processor = await getProcessor(proforma[i].id)
         obj.graphicscard = await getGraphicscard(proforma[i].id)
@@ -142,8 +163,9 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
     }
 
 
-    await console.log("finish", finish)
 
+
+    await console.log("finish", finish)
 
      return await res.json(finish)
 
