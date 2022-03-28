@@ -7,9 +7,8 @@ import {
 import "./App.css"
 
 import ListProforma from "./component/ListProforma";
-import SearchProject from "./component/SearchProject";
-import NewProject from "./component/NewProject";
 import Proforma from "./component/Proforma";
+import View from "./component/View";
 import Navbar from "./component/navegation/Navbar";
 import {DollarProvider} from "./component/hooks/DollarContext"
 import {MessageProvider} from "./component/hooks/MessageContext";
@@ -21,14 +20,15 @@ function App() {
                 <BrowserRouter>
                     <Navbar/>
                     <Routes>
-                        <Route path="/proforma/:proforma_id" element={<Proforma/>}/>
+                        <Route path="/proforma/:proforma_id"  exact element={<Proforma/>}/>
+                        <Route path="/proforma/:proforma_id/view/"  exact element={<View/>}/>
                         <Route path="/" exact element={
-                            <div className="container-fluid">
-                                <NewProject/>
+                            <div className="container">
                                 <br/>
-                                <SearchProject/>
-                                <br/>
+                                {/*<SearchProject/>*/}
+                                {/*<br/>*/}
                                 <ListProforma/>
+                                <br/>
                             </div>
                         }/>
                         <Route path="/about" element={

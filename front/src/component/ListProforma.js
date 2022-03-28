@@ -1,7 +1,9 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import connectionAPI from "../config/axios";
-
+import "../App.css"
+import {Col, Container, Row} from "react-bootstrap";
+import gfgLogo from "../assets/img/hardware/disipador.png";
 export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
 
@@ -13,26 +15,6 @@ export default function ListProforma (){
 
     },[])
 
-    // const getProjects =async () =>{
-    //
-    //     const response = await fetch(url, {
-    //         method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    //         //mode: 'no-cors', // no-cors, *cors, same-origin
-    //         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    //         credentials: 'same-origin', // include, *same-origin, omit
-    //         headers: {
-    //             "Accept":'application/json',
-    //             'Content-Type': 'application/json',
-    //             // 'Content-Type': 'application/x-www-form-urlencoded',
-    //             "Access-Control-Allow-Credentials" : true
-    //             //"Access-Control-Allow-Origin": "*",
-    //         },
-    //         //redirect: 'follow', // manual, *follow, error
-    //         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //         //body: JSON.stringify(data) // body data type must match "Content-Type" header
-    //     });
-    //
-    // }
     const  consultarApi = async ()=>    {
         console.log('consultado API principal ')
         const queryProjects = await connectionAPI.get('/proforma')
@@ -41,44 +23,76 @@ export default function ListProforma (){
         console.log(json)
         setProjects(json)
     }
-
-    //{projects.map(pro=>
-    //    <htmlProject name="PC gaby " details="esta pc nunca se concreto " date="mayo" active="0"/>
-    //)}
-    // <htmlProject name="PC gaby " details="esta pc nunca se concreto " date="mayo" active="0"/>
-    //{projects.map(pro=>(
-    //{projects.map(function ( p, index){
-    //    return (<htmlProject name="PC gaby " details="esta pc nunca se concreto " date="mayo" active="0"/>)
-    //})}
-    // ricki morty
-    //<ListProforma index={p.id}  name={p.name} details={p.status} location={p.location.name} date={p.created} active="0" img={p.image}/>
-
+    const fg=[
+        {
+            name:"SSD",
+            img:gfgLogo,
+        },
+        {
+            name:"gdf",
+            img:"https://cdn.icon-icons.com/icons2/1367/PNG/512/32officeicons-31_89708.png",
+        },
+        {
+            name:"SgdfgSD",
+            img:"https://cdn.icon-icons.com/icons2/1367/PNG/512/32officeicons-31_89708.png",
+        },
+        {
+            name:"SSD",
+            img:gfgLogo,
+        },
+        {
+            name:"dfgdf",
+            img:"https://cdn.icon-icons.com/icons2/1367/PNG/512/32officeicons-31_89708.png",
+        },
+        {
+            name:"SSfffD",
+            img:gfgLogo,
+        },
+        {
+            name:"S45D",
+            img:"https://cdn.icon-icons.com/icons2/1367/PNG/512/32officeicons-31_89708.png",
+        }
+    ]
     return(
-        <div className="container">
-            <div className="row justify-content-center">
-                {projects.map(function ( {id, name, details, date, img}, index){
+        <>
+            <h1 className={"text-center"}>Proforma</h1>
+            <hr/>
+            <div className="row container justify-content-center">
+                {projects.map(function ( {id, name, details, date_update, price, sol}, index){
                     return (
-                        <div className="card m-2" style={{width: '18rem'}} key={id+index}>
-                            <img src={img} className="card-img-top" alt=""/>
-                            <div className="card-body">
-                                <h5 className="card-title">{name}</h5>
-                                <p className="card-text">{details}</p>
-                                <Link to={`/proforma/`+id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
-                                    Edit
-                                </Link>
-
-                                <Link to={`/proforma/`+id} className="btn btn-primary"> {/* `/proforma/${p._id}` */}
-                                    View
-                                </Link>
-                            </div>
-                            <div className="card-header-pills">
-                                <h6 className="card-subtitle mb-2 text-muted text-end">{date} </h6>
-                            </div>
-                        </div>
+                        <Link key={index+"_conteiner"} className={"proforma "} to={`/proforma/${id}`} >
+                            <Container className={"m-2"}>
+                                <div className={"collection row justify-content-center"}>
+                                    <Col md={2}> </Col>
+                                    <Col md={8}>
+                                        <h4>{name}</h4>
+                                    </Col>
+                                    <Col md={2}>
+                                        <Row className={"text-start"}>
+                                            <Col md={5}> </Col>
+                                            <Col md={6} className={"text-center price"}>{'S/. '+sol||"/S."}</Col>
+                                            <Col md={1}> </Col>
+                                        </Row>
+                                    </Col>
+                                    {fg.map( ( data, index)=>{
+                                        return (
+                                            <div key={index+"_item"} className={"col m-2"}>
+                                                <Row className={'justify-content-center'}>
+                                                    <img id={"img-item"}   src={data.img}   alt={"img"}/>
+                                                    <span id={"col "}>{data.name}</span>
+                                                </Row>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </Container>
+                        </Link>
                     )
                 })}
+               <p></p>
+                <button type="submit" className="collection-button fw-bold">Create new Proforma</button>
             </div>
-        </div>
-);
-}
+        </>
 
+    );
+}

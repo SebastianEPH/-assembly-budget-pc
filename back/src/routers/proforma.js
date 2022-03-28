@@ -4,7 +4,7 @@ const proforma = require('../controller/controller_proforma')
 
 
 
-router.get('/proforma', proforma.get)
+router.get('/proforma', proforma.getAll)
 router.get('/proforma/:id', proforma.get_only)
 //router.post ('/', proforma.add)
 //router.patch ('/proforma/:id', proforma.add_proforma)

@@ -3,3 +3,9 @@ body{
     color:white;
 
 }
+.card-proforma{
+    background-color:black;
+    border-color: red;
+    color: white;
+    width: 18rem;
+}

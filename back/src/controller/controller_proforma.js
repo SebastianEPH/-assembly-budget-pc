@@ -1,27 +1,154 @@
-const project = {}
+const proforma = {}
 const pool = require('../database')
 
 //const m_project= require ('../models/model_project')
 //const m_proforma= require ('../models/model_proforma_data')
 
-project.get = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
+const getMemoryRam = async (id) =>{
+    return await pool.query(
+        ' SELECT ' +
+        ' memory_ram.name, ' +
+        ' memory_ram_size.name as "size", ' +
+        ' memory_ram_type.name as "type", ' +
+        ' memory_ram_frequency.name as "frequency", ' +
+        ' brand.name as "brand" ' +
+        ' FROM memory_ram ' +
+        ' LEFT JOIN memory_ram_size ON memory_ram.size = memory_ram_size.id  ' +
+        ' LEFT JOIN memory_ram_type ON memory_ram.type = memory_ram_type.id  ' +
+        ' LEFT JOIN memory_ram_frequency ON memory_ram.freq = memory_ram_frequency.id  ' +
+        ' LEFT JOIN brand ON memory_ram.brand = brand.id  ' +
+        ' WHERE proforma_id = ?  ',[id]) // LEFT
+}
+const getMotherboard = async (id) =>{
+    return await pool.query(
+        ' SELECT ' +
+        ' motherboard.name, ' +
+        ' processor_type.name as "type", ' +
+        ' brand.name as "brand" ' +
+        ' FROM motherboard ' +
+        ' LEFT JOIN processor_type ON motherboard.type = processor_type.id  ' +
+        ' LEFT JOIN brand ON motherboard.brand = brand.id  ' +
+        ' WHERE proforma_id = ?  ',[id]) // LEFT
+}
 
-    const proforma = await pool.query('SELECT * from proforma')
+const getPowerSupply = async (id) =>{
+    const table = "powersupply"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     ${table}_certificate.name as "certificate"  ,
+     ${table}_watts.name as "watts" ,
+     brand.name as "brand" 
+     FROM ${table}
+     LEFT JOIN ${table}_certificate ON  ${table}.certificate =  ${table}_certificate.id
+     LEFT JOIN ${table}_watts ON ${table}.watts = ${table}_watts.id
+     LEFT JOIN brand ON ${table}.brand = brand.id
+     WHERE proforma_id = ?`,[id])
 
-    console.log(proforma)
-    res.json(proforma)
+}
+const getProcessor = async (id) =>{
+    const table = "processor"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     ${table}_type.name as "brand" 
+     FROM ${table}
+     LEFT JOIN ${table}_type ON  ${table}.brand =  ${table}_type.id
+     WHERE proforma_id = ?`,[id])
+
+}
+
+proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
+
+
+    const proforma = await pool.query('SELECT id,name from proforma ORDER BY id ASC')
+
+    let finish = []
+
+    for (let i = 0; i < proforma .length; i++) {
+        const obj = {}
+        obj.name = proforma[i].name
+        obj.processor = await getProcessor(proforma[i].id)
+        obj.memory_ram = await getMemoryRam(proforma[i].id)
+        obj.motherboard = await getMotherboard(proforma[i].id)
+        obj.powersuppy = await getPowerSupply(proforma[i].id)
+
+        finish.push(obj)
+    }
+
+    // for(let data in proforma){
+    //     await getMemoryRam(data.id)
+    //         .then(response=>{
+    //              finish.push(response)
+    //             console.log("response",response)
+    //         })
+    // }
+    //  proforma.map( async (data)=>{
+    //      await getMemoryRam(data.id)
+    //          .then(response=>{
+    //              finish.push(response)
+    //              console.log("response",response)
+    //          })
+    //  } )
+
+    await console.log("finish", finish)
+
+
+     return await res.json(finish)
+     // await finish.push("hola")
+    // await console.log("finish ",finish)
+
+    // await pool.query('SELECT *, person.id as "person_id"' +
+    //     ' FROM person ' +
+    //     ' LEFT JOIN person_countries ON person.country = person_countries.id '+
+    //     ' LEFT JOIN profile_img ON person.profile_img = profile_img.id ' +
+    //     ' LEFT JOIN person_gender ON person.gender = person_gender.id ' +
+    //     ' LEFT JOIN person_relationship ON person.relationship = person_relationship.id ' +
+    //     ' WHERE person.id = ? AND person.user = ? ', [ data.id_person, data.id_user])
+
+
+    // const persons =  await  pool.query('SELECT ' +
+    //     'person.name_short, ' +
+    //     'person.id, ' +
+    //     'person.date_birth, ' +
+    //     'person_gender.gender, ' +
+    //     'person_relationship.relationship,' +
+    //     'person.date_update, ' +
+    //     'profile_img.path ,' +
+    //     'person.profile_img_active, ' +
+    //     'person.id as "person_id", ' +
+    //     '(SELECT count(*) FROM person_account WHERE person = person_id) as "accounts" ' +// count account
+    //     'FROM person  ' +
+    //     'INNER JOIN profile_img ON person.profile_img = profile_img.id ' +
+    //     'LEFT JOIN person_gender ON person.gender = person_gender.id ' +
+    //     'LEFT JOIN person_relationship ON person.relationship = person_relationship.id ' +
+    //     'WHERE person.user = ?', [req.user.id])
+    //
+    //
+
+    // res.json({esto:"esto es "})
+
 
     // res.json proforma.rows .
 
+
+    // let coun = proforma.length
+    //  while (coun > 0){
+    //     coun = coun-1;
+    //      await getMemoryRam(proforma[coun].id)
+    //             .then(response=>{
+    //                  finish.push(response)
+    //                 console.log("response",response)
+    //             })
+    // }
+
+
+
 }
-project.get_only = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
+proforma.get_only = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
     const {id} = req.params
 
     console.log(req.params)
     console.log('entro:propforma get  ')
      // está detectando store como un i
-
-
     // verificar el id, por que hay problemas si no mandas un id que no se aun numero .
 
     const proforma = await pool.query('SELECT * from proforma where id = ? ', [id])
@@ -59,12 +186,14 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
     //console.log(Object.values(proforma))
     res.json(proforma)
 
-    // if result  pool.query === 0 return   res.status(404).json({message: "no se encontro la proforma, no existe  "})
-    //
-
-    // added try catch, return res.jason(err: error.message)
 
 }
+// pro
+
+
+
+
+module.exports =  proforma;
 
 //project.getOnly = async (req, res)=>{
 //
@@ -165,4 +294,3 @@ project.get_only = async (req, res)=>{ // esto es de la vista principal, no es d
 
 
 
-module.exports =  project;
