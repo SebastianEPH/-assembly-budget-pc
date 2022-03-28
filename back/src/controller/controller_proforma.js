@@ -90,7 +90,24 @@ const getCabinet = async (id) =>{
      LEFT JOIN brand ON ${table}.brand = brand.id 
      WHERE proforma_id = ?`,[id])
 }
-
+const getMouse= async (id) =>{
+    const table = "mouse"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     brand.name as "brand"  
+     FROM ${table} 
+     LEFT JOIN brand ON ${table}.brand = brand.id 
+     WHERE proforma_id = ?`,[id])
+}
+const getKeyboard= async (id) =>{
+    const table = "keyboard"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     brand.name as "brand"  
+     FROM ${table} 
+     LEFT JOIN brand ON ${table}.brand = brand.id 
+     WHERE proforma_id = ?`,[id])
+}
 
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
@@ -108,6 +125,8 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
         obj.memory_ram = await getMemoryRam(proforma[i].id)
         obj.motherboard = await getMotherboard(proforma[i].id)
         obj.powersuppy = await getPowerSupply(proforma[i].id)
+        obj.mouse= await getMouse(proforma[i].id)
+        obj.keyboard= await getKeyboard(proforma[i].id)
         obj.cabinet = await getCabinet(proforma[i].id)
 
         finish.push(obj)
