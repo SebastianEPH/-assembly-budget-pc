@@ -55,6 +55,34 @@ const getProcessor = async (id) =>{
      WHERE proforma_id = ?`,[id])
 
 }
+const getDisplay = async (id) =>{
+    const table = "display"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     ${table}_panel.panel as "panel" , 
+     ${table}_size.size as "size" , 
+     brand.name as "brand"  
+     FROM ${table} 
+     LEFT JOIN ${table}_panel ON  ${table}.panel =  ${table}_panel.id 
+     LEFT JOIN ${table}_size ON  ${table}.size =  ${table}_size.id 
+     LEFT JOIN brand ON ${table}.brand = brand.id 
+     WHERE proforma_id = ?`,[id])
+
+}
+const getDisk = async (id) =>{
+    const table = "disk"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     ${table}_type.type as "type" , 
+     ${table}_size.size as "size" , 
+     brand.name as "brand"  
+     FROM ${table} 
+     LEFT JOIN ${table}_type ON  ${table}.type =  ${table}_type.id 
+     LEFT JOIN ${table}_size ON  ${table}.size =  ${table}_size.id 
+     LEFT JOIN brand ON ${table}.brand = brand.id 
+     WHERE proforma_id = ?`,[id])
+
+}
 
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
@@ -66,7 +94,9 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
     for (let i = 0; i < proforma .length; i++) {
         const obj = {}
         obj.name = proforma[i].name
+        obj.display = await getDisplay(proforma[i].id)
         obj.processor = await getProcessor(proforma[i].id)
+        obj.disk = await getDisk(proforma[i].id)
         obj.memory_ram = await getMemoryRam(proforma[i].id)
         obj.motherboard = await getMotherboard(proforma[i].id)
         obj.powersuppy = await getPowerSupply(proforma[i].id)
