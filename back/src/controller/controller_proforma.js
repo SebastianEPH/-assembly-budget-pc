@@ -108,19 +108,28 @@ const getKeyboard= async (id) =>{
      LEFT JOIN brand ON ${table}.brand = brand.id 
      WHERE proforma_id = ?`,[id])
 }
+const getGraphicscard = async (id) =>{
+    const table = "graphicscard"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     brand.name as "brand"  ,
+     memory_ram_size.name as "size"
+     FROM ${table} 
+     LEFT JOIN brand ON ${table}.brand = brand.id 
+     LEFT JOIN memory_ram_size ON ${table}.memory = memory_ram_size.id 
+     WHERE proforma_id = ?`,[id])
+}
 
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
-
     const proforma = await pool.query('SELECT id,name from proforma ORDER BY id ASC')
-
     let finish = []
-
     for (let i = 0; i < proforma .length; i++) {
         const obj = {}
         obj.name = proforma[i].name
         obj.display = await getDisplay(proforma[i].id)
         obj.processor = await getProcessor(proforma[i].id)
+        obj.graphicscard = await getGraphicscard(proforma[i].id)
         obj.disk = await getDisk(proforma[i].id)
         obj.memory_ram = await getMemoryRam(proforma[i].id)
         obj.motherboard = await getMotherboard(proforma[i].id)
@@ -132,73 +141,11 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
         finish.push(obj)
     }
 
-    // for(let data in proforma){
-    //     await getMemoryRam(data.id)
-    //         .then(response=>{
-    //              finish.push(response)
-    //             console.log("response",response)
-    //         })
-    // }
-    //  proforma.map( async (data)=>{
-    //      await getMemoryRam(data.id)
-    //          .then(response=>{
-    //              finish.push(response)
-    //              console.log("response",response)
-    //          })
-    //  } )
 
     await console.log("finish", finish)
 
 
      return await res.json(finish)
-     // await finish.push("hola")
-    // await console.log("finish ",finish)
-
-    // await pool.query('SELECT *, person.id as "person_id"' +
-    //     ' FROM person ' +
-    //     ' LEFT JOIN person_countries ON person.country = person_countries.id '+
-    //     ' LEFT JOIN profile_img ON person.profile_img = profile_img.id ' +
-    //     ' LEFT JOIN person_gender ON person.gender = person_gender.id ' +
-    //     ' LEFT JOIN person_relationship ON person.relationship = person_relationship.id ' +
-    //     ' WHERE person.id = ? AND person.user = ? ', [ data.id_person, data.id_user])
-
-
-    // const persons =  await  pool.query('SELECT ' +
-    //     'person.name_short, ' +
-    //     'person.id, ' +
-    //     'person.date_birth, ' +
-    //     'person_gender.gender, ' +
-    //     'person_relationship.relationship,' +
-    //     'person.date_update, ' +
-    //     'profile_img.path ,' +
-    //     'person.profile_img_active, ' +
-    //     'person.id as "person_id", ' +
-    //     '(SELECT count(*) FROM person_account WHERE person = person_id) as "accounts" ' +// count account
-    //     'FROM person  ' +
-    //     'INNER JOIN profile_img ON person.profile_img = profile_img.id ' +
-    //     'LEFT JOIN person_gender ON person.gender = person_gender.id ' +
-    //     'LEFT JOIN person_relationship ON person.relationship = person_relationship.id ' +
-    //     'WHERE person.user = ?', [req.user.id])
-    //
-    //
-
-    // res.json({esto:"esto es "})
-
-
-    // res.json proforma.rows .
-
-
-    // let coun = proforma.length
-    //  while (coun > 0){
-    //     coun = coun-1;
-    //      await getMemoryRam(proforma[coun].id)
-    //             .then(response=>{
-    //                  finish.push(response)
-    //                 console.log("response",response)
-    //             })
-    // }
-
-
 
 }
 proforma.get_only = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
