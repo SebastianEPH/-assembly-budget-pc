@@ -67,7 +67,6 @@ const getDisplay = async (id) =>{
      LEFT JOIN ${table}_size ON  ${table}.size =  ${table}_size.id 
      LEFT JOIN brand ON ${table}.brand = brand.id 
      WHERE proforma_id = ?`,[id])
-
 }
 const getDisk = async (id) =>{
     const table = "disk"
@@ -81,8 +80,17 @@ const getDisk = async (id) =>{
      LEFT JOIN ${table}_size ON  ${table}.size =  ${table}_size.id 
      LEFT JOIN brand ON ${table}.brand = brand.id 
      WHERE proforma_id = ?`,[id])
-
 }
+const getCabinet = async (id) =>{
+    const table = "cabinet"
+    return await pool.query( `SELECT 
+     ${table}.name ,
+     brand.name as "brand"  
+     FROM ${table} 
+     LEFT JOIN brand ON ${table}.brand = brand.id 
+     WHERE proforma_id = ?`,[id])
+}
+
 
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
@@ -100,6 +108,7 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
         obj.memory_ram = await getMemoryRam(proforma[i].id)
         obj.motherboard = await getMotherboard(proforma[i].id)
         obj.powersuppy = await getPowerSupply(proforma[i].id)
+        obj.cabinet = await getCabinet(proforma[i].id)
 
         finish.push(obj)
     }
