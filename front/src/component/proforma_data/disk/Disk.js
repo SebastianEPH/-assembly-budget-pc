@@ -17,7 +17,6 @@ const Disk = ({ data,
     const nameDiv = 'disk'
     const {databaseAddIf, databaseRemove, databaseUpdate, update, updateHook, clean,form} = useForm(data, nameDiv, modalHandleClose,reloadForDB )
     let  {name, id,  store, brand, link ,item_active, size, type, dol, sol} = form
-
     return(
         <div id={nameDiv+'_'+id} className={` border-${theme}`}>
             <Card  className={modal? 'm-1': 'm-2'}  >

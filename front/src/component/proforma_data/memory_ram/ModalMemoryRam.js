@@ -47,7 +47,7 @@ const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, da
                                     proforma_id,
                                     name:'',
                                     select:'',
-                                    item_active:0,
+                                    item_active:1,
                                     type:'',
                                     link:'',
                                     size:'',

@@ -90,11 +90,7 @@ export default function ListProforma (){
                         return suma
                     }
                     const price_sol = suma("sol")
-                    // const price_dol = suma("dol")
-
-                    console.log("suma Soles : ",price_sol )
-                    // console.log("suma dolares : ",price_dol )
-                    console.log("==-=-=-=-=-=-=-==================================================")
+                    const price_dol = suma("dol")
 
                     return (
                         <Link key={index+"_conteiner"} className={"proforma "} to={`/proforma/${id}`} >

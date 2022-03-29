@@ -48,7 +48,7 @@ const ModalMotherboard = ({ proforma_id, theme, processorType, dataStore, reload
                             link:'',
                             select:'',
                             name:'',
-                            item_active:'',
+                            item_active:1,
                             sol:0,
                             dol:0
                             }}
