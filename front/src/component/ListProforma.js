@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import connectionAPI from "../config/axios";
 import "../App.css"
+import "../component/View.css"
 import {Col, Container, Row} from "react-bootstrap";
 import img_disipador from "../assets/img/hardware/disipador.png";
 import img_memory_ram from "../assets/img/hardware/memory-ram-3.png";
@@ -16,6 +17,7 @@ import img_disk_ssd from "../assets/img/hardware/disk-ssd.png"
 import img_disk_mvne from "../assets/img/hardware/disk-mvne.png"
 import img_powersupply from "../assets/img/hardware/power-suply.png"
 import img_cabinet from "../assets/img/hardware/cabinet.png"
+import ModalNewProforma from "./ModalNewProforma";
 
 export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
@@ -43,23 +45,13 @@ export default function ListProforma (){
          await consultarApi()
     },[])
 
-    // useEffect(()=>{
-    //     hola()
-    // },[])
-
-
     const summ =(arr) => {
         let suma = 0
         arr.map(data => {
             if(data){
                 if (!isNaN(data) || data!== "") {
-                    // console.log("El item ", data, " si es un numero")
                     suma += parseInt(data)
-
                 }
-                // else {
-                //     console.log("El item ", data, " no es un numero")
-                // }
             }
         })
         console.log(suma)
@@ -168,7 +160,6 @@ export default function ListProforma (){
                                                     <img id={"img-item"} src={data.type === "SSD"? img_disk_ssd:data.type==="NVME"?img_disk_mvne:img_disk_hdd} alt={"img"}/>
                                                      <span><b>{data.brand}</b></span>
                                                     <span><b>{data.size}</b></span>
-
                                                 </Row>
                                             </div>
                                         )
@@ -192,7 +183,6 @@ export default function ListProforma (){
                                                     <img id={"img-item"} src={img_powersupply} alt={"img"}/>
                                                     <span id={"col "}  className={data.watts ?"visible":"invisible"} >  {data.watts || "||"} </span>
                                                     <span><b>{data.certificate || "  "}</b></span>
-
                                                 </Row>
                                             </div>
                                         )
@@ -205,7 +195,6 @@ export default function ListProforma (){
                                                     <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
                                                     <img id={"img-item"} src={img_mouse} alt={"img"}/>
                                                      <span><b>{data.brand}</b></span>
-
                                                 </Row>
                                             </div>
                                         )
@@ -217,7 +206,6 @@ export default function ListProforma (){
                                                     <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
                                                     <img id={"img-item"} src={img_keyboard} alt={"img"}/>
                                                     <span><b>{data.brand}</b></span>
-
                                                 </Row>
                                             </div>
                                         )
@@ -229,19 +217,23 @@ export default function ListProforma (){
                                                     <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
                                                     <img id={"img-item"} src={img_cabinet} alt={"img"}/>
                                                     <span><b>{data.brand}</b></span>
-
                                                 </Row>
                                             </div>
                                         )
                                     })}
-
                                 </div>
                             </Container>
                         </Link>
                     )
                 })}
-               <p></p>
-                <button type="submit" className="collection-button fw-bold">Create new Proforma</button>
+                <br/>
+                <br/>
+                <ModalNewProforma data={{
+                    title:"Create New Proforma",
+                    reloadForDB:  consultarApi,
+                    }}/>
+
+                {/*<button type="submit" className="collection-button fw-bold">Create new Proforma</button>*/}
             </div>
         </>
 

@@ -8,7 +8,6 @@ import "./App.css"
 
 import ListProforma from "./component/ListProforma";
 import Proforma from "./component/Proforma";
-import View from "./component/View";
 import Navbar from "./component/navegation/Navbar";
 import {DollarProvider} from "./component/hooks/DollarContext"
 import {MessageProvider} from "./component/hooks/MessageContext";
@@ -21,7 +20,6 @@ function App() {
                     <Navbar/>
                     <Routes>
                         <Route path="/proforma/:proforma_id"  exact element={<Proforma/>}/>
-                        <Route path="/proforma/:proforma_id/view/"  exact element={<View/>}/>
                         <Route path="/" exact element={
                             <div className="container">
                                 <br/>

@@ -1,5 +1,7 @@
 const proforma = {}
 const pool = require('../database')
+const databaseHelper = require("../helpers/querysDataBase");
+const {parse, DB} = require("../helpers/helpers");
 
 //const m_project= require ('../models/model_project')
 //const m_proforma= require ('../models/model_proforma_data')
@@ -212,13 +214,24 @@ proforma.get_only = async (req, res)=>{ // esto es de la vista principal, no es 
     //console.table(proforma)
     //console.log(Object.values(proforma))
     res.json(proforma)
-
-
 }
-// pro
+proforma.add = async (req, res)=>{
 
-
-
+    const parseBody= req.body.name
+    if(parseBody){
+        try{ // try connection
+            const querySQL = `INSERT INTO proforma SET ?`
+            const response =  DB.responseAdd(await pool.query(querySQL , [{name:req.body.name}]))
+            console.log(response)
+            return res.status(response.status).json({message:response.message})
+        }catch (E){
+            console.log(E)
+            return res.status(400).json({message:"The submitted data cannot be processed"})
+        }
+    }else{
+        return res.status(400).json({message:"name is empty"})
+    }
+}
 
 module.exports =  proforma;
 

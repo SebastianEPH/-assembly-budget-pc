@@ -11,7 +11,7 @@ export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadF
 
     const update = ({target}) => {
         setForm({...form, [target.name]: target.value})
-        console.log(form)
+        // console.log(form)
     }
 
     const updateHook= ({target}, name) =>{
