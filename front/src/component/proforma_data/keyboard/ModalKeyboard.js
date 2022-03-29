@@ -2,7 +2,7 @@ import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 import Keyboard from "./Keyboard";
-
+import "../../util/ModalCSS.css"
 
 const ModalKeyboard = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,dataStore,dataBrand} = data
@@ -27,11 +27,11 @@ const ModalKeyboard = ({ data}) =>{
                 size={"xl"}
                 keyboard={false}
             >
-                <div className="modal-header">
+                <div className="modal-header mooo">
                     <Modal.Title id="contained-modal-title-vcenter">
                         Add Keyboard
                     </Modal.Title>
-                    <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" onClick={handleClose} className="btn-close btn-close_" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                              className="bi bi-x-lg" >
                             <path fillRule="event"
@@ -42,7 +42,7 @@ const ModalKeyboard = ({ data}) =>{
                     </button>
                 </div>
 
-                <Modal.Body>
+                <Modal.Body className={"mooo"}>
                     <Keyboard
                         data={{
                             proforma_id,

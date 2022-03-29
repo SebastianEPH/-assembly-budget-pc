@@ -65,6 +65,18 @@ input{
 }
 
 
+.mooo{
+    background-color:black;
+    border-color: white;
+}
+.btn-close_{
+    color: white;
+    background-color: red;
+
+}
+.btn-close_:hover{
+    color: yellow;
+}
 
 .modal_{
     width: var(--size);

@@ -2,7 +2,7 @@ import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 import Graphicscard from "./Graphicscard";
-
+import "../../util/ModalCSS.css"
 
 const ModalGraphicsCard = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,dataStore,dataBrand,dataSize} = data
@@ -28,11 +28,11 @@ const ModalGraphicsCard = ({ data}) =>{
                 size={"xl"}
                 keyboard={false}
             >
-                <div className="modal-header">
+                <div className="modal-header mooo">
                     <Modal.Title id="contained-modal-title-vcenter">
                         Add Graphics Card
                     </Modal.Title>
-                    <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" onClick={handleClose} className="btn-close btn-close_" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                              className="bi bi-x-lg" >
                             <path fillRule="event"
@@ -43,7 +43,7 @@ const ModalGraphicsCard = ({ data}) =>{
                     </button>
                 </div>
 
-                <Modal.Body>
+                <Modal.Body className={"mooo"}>
                     <Graphicscard
                         data={{
                             proforma_id,

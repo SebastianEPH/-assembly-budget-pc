@@ -2,6 +2,7 @@ import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 import MemoryRam from "./MemoryRam";
+import "../../util/ModalCSS.css"
 
 const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, dataStore, dataFreq,reloadForDB }) =>{
 
@@ -26,11 +27,11 @@ const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, da
                 size={"xl"}
                 keyboard={false}
             >
-                <div className="modal-header">
+                <div className="modal-header mooo">
                     <Modal.Title id="contained-modal-title-vcenter">
                         Add Memory RAM
                     </Modal.Title>
-                    <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" onClick={handleClose} className="btn-close btn-close_" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                              className="bi bi-x-lg" >
                             <path fillRule="event"
@@ -42,7 +43,7 @@ const ModalMemoryRam = ({ proforma_id, theme, dataType, dataSize , dataBrand, da
                 </div>
 
 
-                <Modal.Body>
+                <Modal.Body className={"mooo"}>
                     <MemoryRam data={{
                                     proforma_id,
                                     name:'',

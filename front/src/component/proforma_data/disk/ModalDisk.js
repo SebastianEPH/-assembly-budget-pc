@@ -2,7 +2,7 @@ import ButtonModal from "../../util/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 import Disk from "./Disk";
-
+import "../../util/ModalCSS.css"
 
 const ModalDisk = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,diskSize, diskType, dataStore,dataBrand} = data
@@ -28,11 +28,11 @@ const ModalDisk = ({ data}) =>{
                 size={"xl"}
                 keyboard={false}
             >
-                <div className="modal-header">
+                <div className="modal-header mooo">
                     <Modal.Title id="contained-modal-title-vcenter">
                         Add Disk
                     </Modal.Title>
-                    <button type="button" onClick={handleClose} className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" onClick={handleClose} className="btn-close btn-close_" data-bs-dismiss="modal" aria-label="Close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                              className="bi bi-x-lg" >
                             <path fillRule="event"
@@ -43,7 +43,7 @@ const ModalDisk = ({ data}) =>{
                     </button>
                 </div>
 
-                <Modal.Body>
+                <Modal.Body className={"mooo"}>
                     <Disk
                         data={{
                             proforma_id,
