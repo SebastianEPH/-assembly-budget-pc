@@ -14,6 +14,8 @@ import img_display from "../assets/img/hardware/display-2.png"
 import img_disk_hdd from "../assets/img/hardware/disk-hdd-2.png"
 import img_disk_ssd from "../assets/img/hardware/disk-ssd.png"
 import img_disk_mvne from "../assets/img/hardware/disk-mvne.png"
+import img_powersupply from "../assets/img/hardware/power-suply.png"
+import img_cabinet from "../assets/img/hardware/cabinet.png"
 
 export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
@@ -70,7 +72,7 @@ export default function ListProforma (){
             <hr/>
             <div className="row container justify-content-center">
                 {projects.map(function ( {id, name, details, date_update, price, sol,
-                                             memory_ram, processor, motherboard,graphicscard, display, mouse, keyboard, disk}, index){
+                                             memory_ram, processor, motherboard,graphicscard, display, mouse, keyboard, disk, cabinet ,powersupply }, index){
                     console.log(name)
                     const suma= (type= "sol")=>{
                         let suma = 0
@@ -80,7 +82,9 @@ export default function ListProforma (){
                         suma += summ( graphicscard.map(data=>data[type]))
                         suma += summ( display.map(data=>data[type]))
                         suma += summ( mouse.map(data=>data[type]))
+                        suma += summ( cabinet.map(data=>data[type]))
                         suma += summ( keyboard.map(data=>data[type]))
+                        suma += summ( powersupply.map(data=>data[type]))
                         suma += summ( disk.map(data=>data[type]))
 
                         return suma
@@ -184,6 +188,19 @@ export default function ListProforma (){
                                             </div>
                                         )
                                     })}
+                                    {powersupply.map( ( data, index)=>{
+                                        return (
+                                            <div key={index+"_item"} className={"col m-2"}>
+                                                <Row className={'justify-content-center'}>
+                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                    <img id={"img-item"} src={img_powersupply} alt={"img"}/>
+                                                    <span id={"col "}  className={data.watts ?"visible":"invisible"} >  {data.watts || "||"} </span>
+                                                    <span><b>{data.certificate || "  "}</b></span>
+
+                                                </Row>
+                                            </div>
+                                        )
+                                    })}
 
                                     {mouse.map( ( data, index)=>{
                                         return (
@@ -203,6 +220,18 @@ export default function ListProforma (){
                                                 <Row className={'justify-content-center'}>
                                                     <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
                                                     <img id={"img-item"} src={img_keyboard} alt={"img"}/>
+                                                    <span><b>{data.brand}</b></span>
+
+                                                </Row>
+                                            </div>
+                                        )
+                                    })}
+                                    {cabinet.map( ( data, index)=>{
+                                        return (
+                                            <div key={index+"_item"} className={"col m-2"}>
+                                                <Row className={'justify-content-center'}>
+                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                    <img id={"img-item"} src={img_cabinet} alt={"img"}/>
                                                     <span><b>{data.brand}</b></span>
 
                                                 </Row>

@@ -154,7 +154,7 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
         obj.disk = await getDisk(proforma[i].id)
         obj.memory_ram = await getMemoryRam(proforma[i].id)
         obj.motherboard = await getMotherboard(proforma[i].id)
-        obj.powersuppy = await getPowerSupply(proforma[i].id)
+        obj.powersupply = await getPowerSupply(proforma[i].id)
         obj.mouse= await getMouse(proforma[i].id)
         obj.keyboard= await getKeyboard(proforma[i].id)
         obj.cabinet = await getCabinet(proforma[i].id)
