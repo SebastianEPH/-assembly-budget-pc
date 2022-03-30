@@ -3,9 +3,10 @@ import {useState} from "react";
 import "../component/util/ModalCSS.css"
 import connectionAPI from "../config/axios";
 import toast from "react-hot-toast";
+// import {useNavigate} from "react-router-dom";
 
 const ModalNewProforma = ({ data}) =>{
-    const {title, reloadForDB} = data
+    const {title, reloadForDB, idUser = ''} = data
     console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -21,6 +22,9 @@ const ModalNewProforma = ({ data}) =>{
             .then((m)=>{
                 toast.success(m.data.message)
                 // clean(false) // clean  inputs
+                //
+                // const navigate = useNavigate();
+                // navigate(`/${idUser}`);
             })
             .catch((m)=>{
                 toast.error(m.response.data.message)

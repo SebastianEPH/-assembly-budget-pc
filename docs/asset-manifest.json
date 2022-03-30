@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/assembly-budget_node/static/css/main.2a263a2c.css",
-    "main.js": "/assembly-budget_node/static/js/main.be0f99f5.js",
+    "main.js": "/assembly-budget_node/static/js/main.8f0c968b.js",
     "static/media/disipador.png": "/assembly-budget_node/static/media/disipador.2b4aa100d64f2368e481.png",
     "static/media/power-suply.png": "/assembly-budget_node/static/media/power-suply.8d40dc3f248e29110585.png",
     "static/media/disk-hdd-2.png": "/assembly-budget_node/static/media/disk-hdd-2.34e81a8e4b56e1cb67dd.png",
@@ -17,10 +17,10 @@
     "static/media/graphics-card-3.png": "/assembly-budget_node/static/media/graphics-card-3.dfaa68273a59293e09af.png",
     "index.html": "/assembly-budget_node/index.html",
     "main.2a263a2c.css.map": "/assembly-budget_node/static/css/main.2a263a2c.css.map",
-    "main.be0f99f5.js.map": "/assembly-budget_node/static/js/main.be0f99f5.js.map"
+    "main.8f0c968b.js.map": "/assembly-budget_node/static/js/main.8f0c968b.js.map"
   },
   "entrypoints": [
     "static/css/main.2a263a2c.css",
-    "static/js/main.be0f99f5.js"
+    "static/js/main.8f0c968b.js"
   ]
 }

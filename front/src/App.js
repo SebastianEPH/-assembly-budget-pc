@@ -35,22 +35,18 @@ function App() {
                                     <br/>
                                     <br/>
                                     <h1 className={"text-center"}>About</h1>
-                                    <br/><br/>   <br/>
                                     <br/><br/>
                                     <br/>
-                                    {/*<p>*/}
-                                    <div className="card" style={{"max-width":" 400px;"}}>
+                                    <div className="card" style={{"max-width":" 15rem;"}}>
                                         <div className="row g-0">
-                                            <div className="col-md-2 ">
-                                                {/*<img src="..." className="img-fluid rounded-start" alt="...">*/}
-                                                <img className={" "} src="https://avatars.githubusercontent.com/u/29019923?v=4"  width="200" height="200"  alt=""/>
-                                            </div>
-                                            <div className="col-md-10">
+
+                                            <div className="col">
                                                 <div className="card-body">
-                                                    <h3 className="card-title text-white ">SebastiánEPH
-                                                        <a href= "https://github.com/SebastianEPH/"><img src="https://img.shields.io/github/followers/SebastianEPH?style=social"/> </a>
+                                                    <h3 className="card-title text-center text-white ">SebastiánEPH
+                                                        <br/>
+                                                        <a className={"text-center"} href= "https://github.com/SebastianEPH/"><img src="https://img.shields.io/github/followers/SebastianEPH?style=social"/> </a>
                                                     </h3>
-                                                    <p >
+                                                    <p className={"text-center"}>
                                                         {/*<a> <img src="icons/gamemaker.png"  width="40" height="40"/> </a>*/}
                                                         <a> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" width="40" height="40" alt={""}/> </a>
                                                         <a> <img src="https://cdn0.iconfinder.com/data/icons/web-social-and-folder-icons/512/Unity_3D.png" width="40" height="40"/> </a>
@@ -80,7 +76,7 @@ function App() {
                                                         <a> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" width="40" height="40"/> </a>
 
                                                         <a> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40" height="40"/> </a>
-                                                        <a> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/django/django-original.svg" width="40" height="40"/> </a>
+                                                        {/*<a> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/django/django-original.svg" width="40" height="40"/> </a>*/}
                                                         <a> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" width="40" height="40"/> </a>
                                                         <a> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/visualstudio/visualstudio-plain.svg" width="40" height="40"/> </a>
                                                         <a> <img src="https://www.armadilloamarillo.com/wp-content/uploads/logo_android_studio_512dp.png" width="40" height="40"/> </a>
@@ -99,11 +95,7 @@ function App() {
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div className={"text-center"}>
-
                                         <p align="center">
                                             <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=SebastianEPH&langs_count=10&theme=chartreuse-dark&layout=compact"/>
                                         </p>
@@ -111,22 +103,9 @@ function App() {
                                         <p align="center">
                                             <img src="https://github-readme-stats.vercel.app/api?username=SebastianEPH&show_icons=true&theme=chartreuse-dark"/>
                                         </p>
-
-
-                                        {/*<p align="center">*/}
-                                        {/*</a><br>*/}
-
-                                        {/*</p>*/}
                                     </div>
-
-
-
-
-
                                 </div>
                             }/>
-
-
                             <Route path="*" element={<h1>Error 404, el URL no existe </h1>}/>
                         </Routes>
                     {/*</BrowserRouter>*/}

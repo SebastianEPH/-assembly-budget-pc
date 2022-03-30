@@ -1,8 +1,8 @@
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useEffect} from "react";
 import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
 import ModalProcessor from "./proforma_data/processor/ModalProcessor";
-import {Accordion, Row} from "react-bootstrap";
+import {Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import Processor from "./proforma_data/processor/Processor";
 import toast, { Toaster } from 'react-hot-toast';
@@ -84,13 +84,13 @@ export default function Proforma(){
         await loadStore()
     },[])
 
-
-
+    const navigate = useNavigate();
     const deleteProforma= async ()=>{
         await connectionAPI.delete(`/proforma/${proforma_id}`)
             .then((m)=>{
                 toast.success(m.data.message)
-                window.location.href = "/";
+
+                navigate('/');
             })
             .catch((m)=>{
                 toast.error(m.response.data.message)
@@ -352,17 +352,21 @@ return(
                     reloadForDB ={loadDisplay}
                 />)
             :"loading"}
-
         <br/>
         <br/>
         <br/>
         <Row>
-            <ModalDeleteProforma
-                data={{
-                title:"Remove this proforma",
-                text:"this action cannot be reversed",
-                ok: deleteProforma
-            }}/>
+            {/*<HashRouter>*/}
+            {/*<Routes>*/}
+                <ModalDeleteProforma
+                    data={{
+                        title:"Remove this proforma",
+                        text:"this action cannot be reversed",
+                        ok: deleteProforma
+                    }}/>
+            {/*</Routes>*/}
+            {/*</HashRouter>*/}
+
         </Row>
         <br/>
         <br/>
