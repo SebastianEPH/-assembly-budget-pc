@@ -6,7 +6,6 @@ import "../../util/ModalCSS.css"
 
 const ModalCabinet = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,dataStore,dataBrand} = data
-    console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

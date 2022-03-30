@@ -26,6 +26,7 @@ const ModalNewProforma = ({ data}) =>{
                 toast.error(m.response.data.message)
             })
         handleClose()
+        setForm({name:""})
         reloadForDB()
     }
 
@@ -37,7 +38,7 @@ const ModalNewProforma = ({ data}) =>{
 
     return(
         <>
-            <button type="submit" onClick={handleShow} className="collection-button fw-bold">Create new Proforma</button>
+            <button type="submit" onClick={handleShow} className="collection-button bottom fw-bold">Create new Proforma</button>
 
             <Modal
                 show={show}

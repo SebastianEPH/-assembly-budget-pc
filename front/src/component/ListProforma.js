@@ -30,7 +30,6 @@ export default function ListProforma (){
         console.log(json)
         setProjects(json)
     }
-
     const parseText = (text) =>{
         const lengthText = 15
         if ( text && text.length >= lengthText ){
@@ -39,8 +38,6 @@ export default function ListProforma (){
             return text
         }
     }
-
-
     useEffect(async ()=>{
          await consultarApi()
     },[])
@@ -160,6 +157,7 @@ export default function ListProforma (){
                                                     <img id={"img-item"} src={data.type === "SSD"? img_disk_ssd:data.type==="NVME"?img_disk_mvne:img_disk_hdd} alt={"img"}/>
                                                      <span><b>{data.brand}</b></span>
                                                     <span><b>{data.size}</b></span>
+
                                                 </Row>
                                             </div>
                                         )
@@ -183,6 +181,7 @@ export default function ListProforma (){
                                                     <img id={"img-item"} src={img_powersupply} alt={"img"}/>
                                                     <span id={"col "}  className={data.watts ?"visible":"invisible"} >  {data.watts || "||"} </span>
                                                     <span><b>{data.certificate || "  "}</b></span>
+
                                                 </Row>
                                             </div>
                                         )
@@ -217,23 +216,24 @@ export default function ListProforma (){
                                                     <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
                                                     <img id={"img-item"} src={img_cabinet} alt={"img"}/>
                                                     <span><b>{data.brand}</b></span>
+
                                                 </Row>
                                             </div>
                                         )
                                     })}
+
                                 </div>
                             </Container>
                         </Link>
                     )
                 })}
-                <br/>
-                <br/>
-                <ModalNewProforma data={{
+               <p></p>
+                <ModalNewProforma
+                    data={{
                     title:"Create New Proforma",
-                    reloadForDB:  consultarApi,
-                    }}/>
-
-                {/*<button type="submit" className="collection-button fw-bold">Create new Proforma</button>*/}
+                    reloadForDB:consultarApi
+                }}
+                />
             </div>
         </>
 

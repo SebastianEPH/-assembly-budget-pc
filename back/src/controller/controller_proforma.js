@@ -1,6 +1,5 @@
 const proforma = {}
 const pool = require('../database')
-const databaseHelper = require("../helpers/querysDataBase");
 const {parse, DB} = require("../helpers/helpers");
 
 //const m_project= require ('../models/model_project')
@@ -141,7 +140,27 @@ const getGraphicscard = async (id) =>{
      LEFT JOIN memory_ram_size ON ${table}.memory = memory_ram_size.id 
      WHERE proforma_id = ? AND ${table}.item_active = 1`,[id])
 }
+proforma.removeOnly = async (req, res)=>{
+    res.json({message:"se elimino correctamente"})
 
+    const {id} = req.params
+    //parse IDs from params
+    console.log('DELETE BACK esto es el proforma id',req.params)
+    //parse IDs from params
+    const parseIds = parse.IdForDB([id])
+    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
+    console.log("a ver kldsjkldkljdsf k dk k d")
+    try{ // try connection
+        const response =  await pool.query('DELETE FROM proforma WHERE id = ?;',[id])
+        console.log("response ",response)
+        return res.status(response.status).json({message:response.message})
+    }catch (E){
+        return res.status(400).json({message:"The submitted data cannot be processed"})
+    }
+
+
+
+}
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
     const proforma = await pool.query('SELECT id,name from proforma ORDER BY id ASC')
@@ -192,15 +211,6 @@ proforma.get_only = async (req, res)=>{ // esto es de la vista principal, no es 
     const memory_ram_size = await pool.query('SELECT * from memory_ram_size ')
     const memory_ram_frequency = await pool.query('SELECT * from memory_ram_frequency ')
 
-    // const pro = await pool.query('SELECT * from proforma RIGHT JOIN processor ON proforma.id = processor.id')
-
-    //let hol = [processor[0],processor[1]]
-
-    //let new_processor = JSON.parse(JSON.stringify(processor))
-    //let new_proforma = JSON.parse(JSON.stringify(proforma))
-    //new_proforma.processor = new_processor
-    //console.log(new_proforma) // esta es la menera correcta
-    //console.log(processor)
     console.table(processor)
     console.table(motherboard)
     console.table(memory_ram)
@@ -234,103 +244,5 @@ proforma.add = async (req, res)=>{
 }
 
 module.exports =  proforma;
-
-//project.getOnly = async (req, res)=>{
-//
-//    const only = await m_project.findById(req.params.id)
-//
-//    res.json(only);
-//
-//}
-//project.add= async (req, res)=>{
-//
-//    console.log(req.body) // imprime lo que el ususario envio al body
-//    // req.body;
-//
-//    let project = new m_project({
-//        name : req.body.name,
-//        details: req.body.details,
-//        date: req.body.date,
-//        img: req.body.img,
-//        proforma: [
-//            {
-//                processor:[
-//                    {
-//                        name: 'nombre',
-//                        brand: "",
-//                        link: 'esto es un link',
-//                        store: 'impacto',
-//                        price_sol: 'ghfh',
-//                        price_dol: 'jhkghkjg'
-//                    }
-//                ]
-//
-//            }
-//        ]
-//
-//    })
-//
-//    console.log('creuqea q1')
-//    console.log(project)
-//    console.log('creuqea q2')
-//
-//    await project.save()
-//
-//    res.json({
-//        status: 'saved ok '
-//    })
-//}
-//
-//project.add_proforma =  async (req, res) =>{
-//    console.log(req.body) // imprime lo que el ususario envio al body
-//    // req.body;
-//
-//    let proforma = new m_proforma({
-//
-//        processor:[
-//            {
-//                name: 'nombre',
-//                brand: "",
-//                link: 'esto es un link',
-//                store: 'impacto',
-//                price_sol: 'ghfh',
-//                price_dol: 'jhkghkjg'
-//            }
-//        ]
-//    })
-//
-//    console.log('proforma 1')
-//    console.log(proforma)
-//    console.log('proforma 2')
-//
-//    //await project.save()
-//    await m_project.findByIdAndUpdate(req.params.id, proforma)
-//
-//    res.json({
-//        status: 'saved ok '
-//    })
-//}
-//
-//project.update = async (req, res)=>{
-//    const {name, details, date, img} =  req.body
-//    const newTask = {name, details, date, img}
-//
-//    await m_project.findByIdAndUpdate(req.params.id, newTask)
-//    console.log(req.params.id)
-//
-//    res.json({
-//        status: 'Update ok'
-//    })
-//
-//}
-//project.delete = async(req, res)=>{
-//
-//    await m_project.findByIdAndDelete(req.params.id)
-//    res.json({
-//        status: 'delete ok '
-//    })
-//
-//}
-
 
 

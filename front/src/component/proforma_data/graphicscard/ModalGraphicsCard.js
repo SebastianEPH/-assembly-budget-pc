@@ -6,7 +6,6 @@ import "../../util/ModalCSS.css"
 
 const ModalGraphicsCard = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,dataStore,dataBrand,dataSize} = data
-    console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

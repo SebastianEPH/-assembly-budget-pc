@@ -1,11 +1,11 @@
-import {useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useEffect} from "react";
 import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
 import ModalProcessor from "./proforma_data/processor/ModalProcessor";
-import { Row} from "react-bootstrap";
+import {Accordion, Row} from "react-bootstrap";
 import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
 import Processor from "./proforma_data/processor/Processor";
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import {UseProforma} from "./hooks/UseProforma";
 import Motherboard from "./proforma_data/motherboard/Motherboard";
 import ModalMotherboard from "./proforma_data/motherboard/ModalMotherboard";
@@ -22,11 +22,12 @@ import ModalMouse from "./proforma_data/mouse/ModalMouse";
 import ModalDisk from "./proforma_data/disk/ModalDisk";
 import Disk from "./proforma_data/disk/Disk";
 import Display from "./proforma_data/display/Display";
+import ModalDeleteProforma from "./ModalDeleteProforma";
+import connectionAPI from "../config/axios";
 
 
 export default function Proforma(){
     const {proforma_id} = useParams();
-
     const {
         displayPanel,
         displaySize,
@@ -83,6 +84,18 @@ export default function Proforma(){
         await loadStore()
     },[])
 
+
+
+    const deleteProforma= async ()=>{
+        await connectionAPI.delete(`/proforma/${proforma_id}`)
+            .then((m)=>{
+                toast.success(m.data.message)
+                window.location.href = "/";
+            })
+            .catch((m)=>{
+                toast.error(m.response.data.message)
+            })
+    }
 return(
     <div className="container-fluid">
         <h1>Proforma Mode Editor</h1>
@@ -340,9 +353,18 @@ return(
                 />)
             :"loading"}
 
-
-
-
-
+        <br/>
+        <br/>
+        <br/>
+        <Row>
+            <ModalDeleteProforma
+                data={{
+                title:"Remove this proforma",
+                text:"this action cannot be reversed",
+                ok: deleteProforma
+            }}/>
+        </Row>
+        <br/>
+        <br/>
     </div>
 )}

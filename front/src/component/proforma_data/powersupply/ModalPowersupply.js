@@ -6,7 +6,7 @@ import "../../util/ModalCSS.css"
 
 const ModalPowersupply = ({ data}) =>{
     const {proforma_id, reloadForDB,dataStore,dataBrand, theme, dataPowersupplyWatts, dataPowersupplyCertificate} = data
-    console.log(data)
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

@@ -6,7 +6,6 @@ import "../../util/ModalCSS.css"
 
 const ModalDisk = ({ data}) =>{
     const {proforma_id, reloadForDB,theme,diskSize, diskType, dataStore,dataBrand} = data
-    console.log(data)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
