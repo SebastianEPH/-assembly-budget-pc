@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2a263a2c.css",
+    "main.js": "/static/js/main.153891ec.js",
+    "static/media/disipador.png": "/static/media/disipador.2b4aa100d64f2368e481.png",
+    "static/media/power-suply.png": "/static/media/power-suply.8d40dc3f248e29110585.png",
+    "static/media/disk-hdd-2.png": "/static/media/disk-hdd-2.34e81a8e4b56e1cb67dd.png",
+    "static/media/disk-ssd.png": "/static/media/disk-ssd.60a0750cff3ecd12bae3.png",
+    "static/media/disk-mvne.png": "/static/media/disk-mvne.ac80ee3cad90c8b4fcb9.png",
+    "static/media/icon.png": "/static/media/icon.5b52e796fb4f9dd1a755.png",
+    "static/media/mouse.png": "/static/media/mouse.be40c19706cf710a9cd7.png",
+    "static/media/display-2.png": "/static/media/display-2.e36634f1d6989f623bbc.png",
+    "static/media/keyboard.png": "/static/media/keyboard.1693820b02bf3856a9c9.png",
+    "static/media/cabinet.png": "/static/media/cabinet.8a90090518d8dde8f4ae.png",
+    "static/media/memory-ram-3.png": "/static/media/memory-ram-3.3112a96e071c522de5e8.png",
+    "static/media/motherboard.png": "/static/media/motherboard.6f08139c7b37e0466780.png",
+    "static/media/graphics-card-3.png": "/static/media/graphics-card-3.dfaa68273a59293e09af.png",
+    "index.html": "/index.html",
+    "main.2a263a2c.css.map": "/static/css/main.2a263a2c.css.map",
+    "main.153891ec.js.map": "/static/js/main.153891ec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a263a2c.css",
+    "static/js/main.153891ec.js"
+  ]
+}
