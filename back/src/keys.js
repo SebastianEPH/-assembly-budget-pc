@@ -1,6 +1,4 @@
-// leer de las variables de entorno
-//const {config} = require('dotenv')
-//config()
+// Database Local
 module.exports ={
     database: {
         host: "localhost",
