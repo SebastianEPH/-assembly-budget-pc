@@ -226,7 +226,6 @@ proforma.get_only = async (req, res)=>{ // esto es de la vista principal, no es 
     res.json(proforma)
 }
 proforma.add = async (req, res)=>{
-
     const parseBody= req.body.name
     if(parseBody){
         try{ // try connection

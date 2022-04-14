@@ -2,7 +2,7 @@
 import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
 import toast from 'react-hot-toast';
-import connectionAPI from "../../config/axios";
+import connectionAPI from "../../connection/axios";
 
 export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadForDB  ) =>{
     const {dollar} = useContext(DollarContext );

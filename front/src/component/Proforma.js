@@ -23,7 +23,7 @@ import ModalDisk from "./proforma_data/disk/ModalDisk";
 import Disk from "./proforma_data/disk/Disk";
 import Display from "./proforma_data/display/Display";
 import ModalDeleteProforma from "./ModalDeleteProforma";
-import connectionAPI from "../config/axios";
+import connectionAPI from "../connection/axios";
 
 
 export default function Proforma(){

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import connectionAPI from "../config/axios";
+import connectionAPI from "../connection/axios";
 import "../App.css"
 import "../component/View.css"
 import {Col, Container, Row} from "react-bootstrap";
@@ -17,18 +17,20 @@ import img_disk_ssd from "../assets/img/hardware/disk-ssd.png"
 import img_disk_mvne from "../assets/img/hardware/disk-mvne.png"
 import img_powersupply from "../assets/img/hardware/power-suply.png"
 import img_cabinet from "../assets/img/hardware/cabinet.png"
-import ModalNewProforma from "./ModalNewProforma";
+import {Loading} from "./util/Loading";
+import {CreateProforma} from "./CreateProforma";
+import {Toaster} from "react-hot-toast";
 
 export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
-
+    const [status, setStatus] = useState(false); // true if query to database
     const  consultarApi = async ()=>    {
-        console.log('consultado API principal ')
         const queryProjects = await connectionAPI.get('/proforma')
         console.log(queryProjects )
         const json = queryProjects.data
         console.log(json)
         setProjects(json)
+        setStatus(true)
     }
     const parseText = (text) =>{
         const lengthText = 15
@@ -54,15 +56,17 @@ export default function ListProforma (){
         console.log(suma)
         return suma
     }
-
+    console.log("lista de projectos ", projects)
     return(
         <>
             <h1 className={"text-center"}>Proforma</h1>
             <hr/>
+            <Toaster position={"top-center"} />
             <div className="row container justify-content-center">
-                {projects.map(function ( {id, name, details, date_update, price, sol,
-                                             memory_ram, processor, motherboard,graphicscard, display, mouse, keyboard, disk, cabinet ,powersupply }, index){
-                    console.log(name)
+                {projects.length>= 1?
+                    projects.map(( {id, name, details, date_update, price, sol,
+                                            memory_ram, processor, motherboard,graphicscard,
+                                            display, mouse, keyboard, disk, cabinet ,powersupply }, index)=>{
                     const suma= (type= "sol")=>{
                         let suma = 0
                         suma += summ( processor.map(data=>data[type]))
@@ -81,159 +85,160 @@ export default function ListProforma (){
                     const price_sol = suma("sol")
                     const price_dol = suma("dol")
 
-                    return (
-                        <Link key={index+"_conteiner"} className={"proforma "} to={`/proforma/${id}`} >
-                            <Container className={"m-2"}>
-                                <div className={"collection row justify-content-center"}>
-                                    <Col md={2}> </Col>
-                                    <Col md={8}>
-                                        <h4>{name}</h4>
-                                    </Col>
-                                    <Col md={2}>
-                                        <Row className={"text-start"}>
-                                            <Col md={4}> </Col>
-                                            <Col md={7} className={"text-center price"}>{price_sol ? "/S. "+price_sol : ""}</Col>
-                                            <Col md={1}> </Col>
-                                        </Row>
-                                    </Col>
-                                    {display.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_display} alt={"img"}/>
-                                                    <span><b>{data.brand || "  "}</b></span>
-                                                    {data.size && data.panel? <span><b>{data.size} | {data.panel}</b></span>: false}
-                                                    {data.size && !data.panel? <span><b>{data.size}</b></span>: false}
-                                                    {!data.size && data.panel? <span><b>{data.panel}</b></span>: false}
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
+                        return (
+                            <Link key={index+"_conteiner"} className={"proforma "} to={`/proforma/${id}`} >
+                                <Container className={"m-2"}>
+                                    <div className={"collection row justify-content-center"}>
+                                        <Col md={2}> </Col>
+                                        <Col md={8}>
+                                            <h4>{name}</h4>
+                                        </Col>
+                                        <Col md={2}>
+                                            <Row className={"text-start"}>
+                                                <Col md={4}> </Col>
+                                                <Col md={7} className={"text-center price"}>{price_sol ? "/S. "+price_sol : ""}</Col>
+                                                <Col md={1}> </Col>
+                                            </Row>
+                                        </Col>
+                                        {display.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_display} alt={"img"}/>
+                                                        <span><b>{data.brand || "  "}</b></span>
+                                                        {data.size && data.panel? <span><b>{data.size} | {data.panel}</b></span>: false}
+                                                        {data.size && !data.panel? <span><b>{data.size}</b></span>: false}
+                                                        {!data.size && data.panel? <span><b>{data.panel}</b></span>: false}
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
 
-                                    {processor.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_processor} alt={"img"}/>
-                                                    <span><b>{parseText(data.brand)}</b></span>
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {memory_ram.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_memory_ram} alt={"img"}/>
-                                                    <span><b>{data.type || "  "}</b></span>
-                                                    {data.size && data.frequency? <span><b>{data.size} | {data.frequency}</b></span>: false}
-                                                    {data.size && !data.frequency? <span><b>{data.size}</b></span>: false}
-                                                    {!data.size && data.frequency? <span><b>{data.frequency}</b></span>: false}
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {graphicscard.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_graphicscard} alt={"img"}/>
-                                                    {data.size && data.brand? <span><b>{data.brand} | {data.size}</b></span>: false}
-                                                    {data.size && !data.brand? <span><b>{data.size}</b></span>: false}
-                                                    {!data.size && data.brand? <span><b>{data.brand}</b></span>: false}
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {disk.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={data.type === "SSD"? img_disk_ssd:data.type==="NVME"?img_disk_mvne:img_disk_hdd} alt={"img"}/>
-                                                     <span><b>{data.brand}</b></span>
-                                                    <span><b>{data.size}</b></span>
+                                        {processor.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_processor} alt={"img"}/>
+                                                        <span><b>{parseText(data.brand)}</b></span>
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {memory_ram.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_memory_ram} alt={"img"}/>
+                                                        <span><b>{data.type || "  "}</b></span>
+                                                        {data.size && data.frequency? <span><b>{data.size} | {data.frequency}</b></span>: false}
+                                                        {data.size && !data.frequency? <span><b>{data.size}</b></span>: false}
+                                                        {!data.size && data.frequency? <span><b>{data.frequency}</b></span>: false}
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {graphicscard.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_graphicscard} alt={"img"}/>
+                                                        {data.size && data.brand? <span><b>{data.brand} | {data.size}</b></span>: false}
+                                                        {data.size && !data.brand? <span><b>{data.size}</b></span>: false}
+                                                        {!data.size && data.brand? <span><b>{data.brand}</b></span>: false}
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {disk.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={data.type === "SSD"? img_disk_ssd:data.type==="NVME"?img_disk_mvne:img_disk_hdd} alt={"img"}/>
+                                                        <span><b>{data.brand}</b></span>
+                                                        <span><b>{data.size}</b></span>
 
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {motherboard.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_motherboard} alt={"img"}/>
-                                                    <span><b>{data.type}</b></span>
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {powersupply.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_powersupply} alt={"img"}/>
-                                                    <span id={"col "}  className={data.watts ?"visible":"invisible"} >  {data.watts || "||"} </span>
-                                                    <span><b>{data.certificate || "  "}</b></span>
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {motherboard.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_motherboard} alt={"img"}/>
+                                                        <span><b>{data.type}</b></span>
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {powersupply.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_powersupply} alt={"img"}/>
+                                                        <span id={"col "}  className={data.watts ?"visible":"invisible"} >  {data.watts || "||"} </span>
+                                                        <span><b>{data.certificate || "  "}</b></span>
 
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
 
-                                    {mouse.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_mouse} alt={"img"}/>
-                                                     <span><b>{data.brand}</b></span>
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {keyboard.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_keyboard} alt={"img"}/>
-                                                    <span><b>{data.brand}</b></span>
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    {cabinet.map( ( data, index)=>{
-                                        return (
-                                            <div key={index+"_item"} className={"col m-2"}>
-                                                <Row className={'justify-content-center'}>
-                                                    <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
-                                                    <img id={"img-item"} src={img_cabinet} alt={"img"}/>
-                                                    <span><b>{data.brand}</b></span>
+                                        {mouse.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_mouse} alt={"img"}/>
+                                                        <span><b>{data.brand}</b></span>
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {keyboard.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_keyboard} alt={"img"}/>
+                                                        <span><b>{data.brand}</b></span>
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
+                                        {cabinet.map( ( data, index)=>{
+                                            return (
+                                                <div key={index+"_item"} className={"col m-2"}>
+                                                    <Row className={'justify-content-center'}>
+                                                        <span id={"col "}  className={data.name?"visible":"invisible"} >{parseText(data.name) || "||"}</span>
+                                                        <img id={"img-item"} src={img_cabinet} alt={"img"}/>
+                                                        <span><b>{data.brand}</b></span>
 
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
+                                                    </Row>
+                                                </div>
+                                            )
+                                        })}
 
-                                </div>
-                            </Container>
-                        </Link>
-                    )
-                })}
-               <p></p>
-                <ModalNewProforma
-                    data={{
-                    title:"Create New Proforma",
-                    reloadForDB:consultarApi
-                }}
-                />
+                                    </div>
+                                </Container>
+                            </Link>
+                        )
+                        })
+                    :
+                    status?
+                        <p>Not found projects, create one... !! </p>
+                        :
+                        <Loading data={{title:"espere porfavor.,, "}}/>
+                }
+
+                <CreateProforma data={{reloadForDB:consultarApi}}/>
             </div>
         </>
 
