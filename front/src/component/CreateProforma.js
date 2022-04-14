@@ -30,13 +30,13 @@ export const CreateProforma =({data}) =>{
             <form className={"p-3 mt-3"}>
                 <Col xl={12}>
                     <FloatingLabel label="Name">
-                        <Form.Control name="name"  type="text" placeholder="insert Name" maxLength={50} value={name||''}
+                        <Form.Control name="name"  type="text" placeholder="insert Name" maxLength={30} value={name||''}
                                       onChange={(e)=>onChange(e)}/>
                     </FloatingLabel>
                 </Col>
                 <Col xl={12} className={"p-3"}>
                     <Row>
-                        <Button type={"submit"} className={"btn-danger"} onClick={(e)=>create(e)}>
+                        <Button type={"submit"} className={"btn-success"} onClick={(e)=>create(e)}>
                             Create proforma
                         </Button>
                     </Row>

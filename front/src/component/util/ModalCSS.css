@@ -332,8 +332,32 @@
 /*    background-color: darkgray;*/
 /*}*/
 
-
+a:link, a:visited,  a:hover, a:active {
+    color: #cccccc;
+    text-decoration: none;
+}
 .item-project{
-    background-color: red ;
+    text-align: center;
+    background-color: #656363;
+    border-radius: 50px;
+    color: white;
+}
+.item-project:hover{
+    background-color: #888888;
+}
+.price-item-container{
+    background-color: #000000;
+    border-radius: 50px;
+    text-align: right;
+    min-height: 25px;
+}
+.price-item{
+    text-align: center;
+    font-size: 15px;
 }
 
+.img-item-project{
+    min-width: 100px;
+    max-width: 100px;
+    /*height: 5rem;*/
+}

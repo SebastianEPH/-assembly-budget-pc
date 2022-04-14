@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import "./App.css"
 
-import ListProforma from "./component/ListProforma";
+import ListProforma from "./component/ListProforma/ListProforma";
 import Proforma from "./component/Proforma";
 import Navbar from "./component/navegation/Navbar";
 import {DollarProvider} from "./component/hooks/DollarContext"
