@@ -11,6 +11,7 @@ import connectionAPI from "../connection/axios";
 import {Powersupply} from "./proforma_data/Powersupply";
 import {Graphicscard} from "./proforma_data/Graphicscard";
 import {Disk} from "./proforma_data/Disk";
+import {Display} from "./proforma_data/Display";
 
 
 export default function Proforma(){
@@ -194,6 +195,31 @@ return(
                     },
                     Item: Disk
                 }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Display" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand: brand,
+                        displayPanel,
+                        displaySize,
+                        reloadForDB:loadDisplay,
+                    },
+                    Item: Display
+                }}/>
+
 
         {/*    <ModalMemoryRam*/}
         {/*        proforma_id={proforma_id}*/}
@@ -252,17 +278,7 @@ return(
         {/*            dataBrand:brand,*/}
         {/*        }}*/}
         {/*    />*/}
-        {/*    <ModalDisplay*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadDisplay,*/}
-        {/*            theme:'deepskyblue',*/}
-        {/*            dataStore:store,*/}
-        {/*            dataBrand:brand,*/}
-        {/*            displayPanel,*/}
-        {/*            displaySize,*/}
-        {/*        }}*/}
-        {/*    />*/}
+
         </Row>
 
         {processor&& processor.map((data, index)=>
@@ -319,38 +335,21 @@ return(
                 }}
             />)
         }
+        {display && display.map((data, index)=>
+            <Display
+                key={"item_display"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataBrand: brand,
+                    displayPanel,
+                    displaySize,
+                    reloadForDB:loadDisplay,
+                }}
+            />)
+        }
 
-
-
-
-        {/*/!* Graphics Card *!/*/}
-        {/*{graphicscard?*/}
-        {/*    graphicscard.map((data, index)=>*/}
-        {/*        <Graphicscard*/}
-        {/*            key={index +"graphicscard"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            dataSize={memoryRAMSize}*/}
-        {/*            theme={'blue'}*/}
-        {/*            reloadForDB ={loadGraphicscard}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
-
-        {/*/!* Disk *!/*/}
-        {/*{disk?*/}
-        {/*    disk.map((data, index)=>*/}
-        {/*        <Disk*/}
-        {/*            key={index +"disk"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            diskSize={diskSize}*/}
-        {/*            diskType={diskType}*/}
-        {/*            theme={'green-pastel'}*/}
-        {/*            reloadForDB ={loadDisk}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
 
 
         {/*/!* Motherboard*!/*/}
