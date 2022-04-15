@@ -106,249 +106,249 @@ return(
         <Toaster position={"top-center"} />
 
         <Row className="justify-content-center">
-                    <ModalAddItem
-                        data={{
-                            name:"Add Processor" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                select:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                reloadForDB:loadProcessor,
-                                processorType
-                            },
-                            Item: Processor
-                        }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Processor" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        reloadForDB:loadProcessor,
+                        processorType
+                    },
+                    Item: Processor
+                }}/>
 
-                    <ModalAddItem
-                        data={{
-                            name:"Add Power Supply" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                watts:'',
-                                certificate:'',
-                                select:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataBrand: brand,
-                                dataPowersupplyWatts:powersupplyWatts,
-                                dataPowersupplyCertificate:powersupplyCertificate,
-                                reloadForDB:loadPowersupply,
-                            },
-                            Item: Powersupply
-                        }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Power Supply" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        watts:'',
+                        certificate:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand: brand,
+                        dataPowersupplyWatts:powersupplyWatts,
+                        dataPowersupplyCertificate:powersupplyCertificate,
+                        reloadForDB:loadPowersupply,
+                    },
+                    Item: Powersupply
+                }}/>
 
-                    <ModalAddItem
-                        data={{
-                            name:"Add Graphics Card" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                select:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataSize: memoryRAMSize,
-                                dataBrand: brand,
-                                reloadForDB:loadGraphicscard,
-                            },
-                            Item: Graphicscard
-                        }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Graphics Card" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataSize: memoryRAMSize,
+                        dataBrand: brand,
+                        reloadForDB:loadGraphicscard,
+                    },
+                    Item: Graphicscard
+                }}/>
 
-                    <ModalAddItem
-                        data={{
-                            name:"Add Disk" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                select:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataSize: memoryRAMSize,
-                                dataBrand: brand,
-                                diskType,
-                                diskSize,
-                                reloadForDB:loadDisk,
-                            },
-                            Item: Disk
-                        }}/>
-                    <ModalAddItem
-                        data={{
-                            name:"Add Display" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataBrand: brand,
-                                displayPanel,
-                                displaySize,
-                                reloadForDB:loadDisplay,
-                            },
-                            Item: Display
-                        }}/>
-                    <ModalAddItem
-                        data={{
-                            name:"Add MemoryRam" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataType:memoryRAMType,
-                                dataFreq:memoryRAMFrequency,
-                                dataBrand:brand,
-                                dataSize:memoryRAMSize,
-                                reloadForDB:loadMemoryRAM,
-                            },
-                            Item: MemoryRam
-                        }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Disk" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataSize: memoryRAMSize,
+                        dataBrand: brand,
+                        diskType,
+                        diskSize,
+                        reloadForDB:loadDisk,
+                    },
+                    Item: Disk
+                }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Display" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand: brand,
+                        displayPanel,
+                        displaySize,
+                        reloadForDB:loadDisplay,
+                    },
+                    Item: Display
+                }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add MemoryRam" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataType:memoryRAMType,
+                        dataFreq:memoryRAMFrequency,
+                        dataBrand:brand,
+                        dataSize:memoryRAMSize,
+                        reloadForDB:loadMemoryRAM,
+                    },
+                    Item: MemoryRam
+                }}/>
 
-                    <ModalAddItem
-                        data={{
-                            name:"Add Motherboard" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataBrand:brand,
-                                processorType,
-                                reloadForDB:loadMotherboard,
-                            },
-                            Item: Motherboard
-                        }}/>
-                    <ModalAddItem
-                        data={{
-                            name:"Add Mouse" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataBrand:brand,
-                                reloadForDB:loadMouse,
-                            },
-                            Item: Mouse
-                        }}/>
-                    <ModalAddItem
-                        data={{
-                            name:"Add Keyboard" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataBrand:brand,
-                                reloadForDB:loadKeyboard,
-                            },
-                            Item: Keyboard
-                        }}/>
-                    <ModalAddItem
-                        data={{
-                            name:"Add Cabinet" ,
-                            information:{
-                                store:'',
-                                proforma_id,
-                                brand:'',
-                                link:'',
-                                name:'',
-                                item_active:1,
-                                sol:0,
-                                dol:0
-                            },
-                            others:{
-                                proforma_id,
-                                modal:true,
-                                dataStore:store,
-                                dataBrand:brand,
-                                reloadForDB:loadCabinet,
-                            },
-                            Item: Cabinet
-                        }}/>
-                </Row>
+            <ModalAddItem
+                data={{
+                    name:"Add Motherboard" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        processorType,
+                        reloadForDB:loadMotherboard,
+                    },
+                    Item: Motherboard
+                }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Mouse" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        reloadForDB:loadMouse,
+                    },
+                    Item: Mouse
+                }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Keyboard" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        reloadForDB:loadKeyboard,
+                    },
+                    Item: Keyboard
+                }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Cabinet" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        reloadForDB:loadCabinet,
+                    },
+                    Item: Cabinet
+                }}/>
+        </Row>
         <br/>
         <div>
             {processor.length>= 1?  processor.map((data, index)=>
@@ -403,7 +403,7 @@ return(
                         dataStore:store,
                         dataBrand: brand,
                         diskType,
-                        dataSize: memoryRAMSize,
+                        diskSize,
                         reloadForDB:loadDisk,
                     }}
                 />)
