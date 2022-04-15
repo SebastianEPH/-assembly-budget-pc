@@ -13,6 +13,7 @@ import {Graphicscard} from "./proforma_data/Graphicscard";
 import {Disk} from "./proforma_data/Disk";
 import {Display} from "./proforma_data/Display";
 import {MemoryRam} from "./proforma_data/MemoryRam";
+import {Motherboard} from "./proforma_data/Motherboard";
 
 
 export default function Proforma(){
@@ -246,14 +247,31 @@ return(
                     Item: MemoryRam
                 }}/>
 
-        {/*    <ModalMotherboard*/}
-        {/*        proforma_id={proforma_id}*/}
-        {/*        reloadForDB ={loadMotherboard}*/}
-        {/*        modal={true} // if true, then use added, otherwise use update function*/}
-        {/*        dataStore={store}*/}
-        {/*        theme={'green'}*/}
-        {/*        processorType={processorType}*/}
-        {/*    />*/}
+            <ModalAddItem
+                data={{
+                    name:"Add Motherboard" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        processorType,
+                        reloadForDB:loadMotherboard,
+                    },
+                    Item: Motherboard
+                }}/>
+
+
         {/*    <ModalPowersupply*/}
         {/*        data={{*/}
         {/*            proforma_id,*/}
@@ -380,52 +398,19 @@ return(
             />)
         }
 
-
-
-
-        {/*/!* Motherboard*!/*/}
-        {/*{motherboard?*/}
-        {/*    motherboard.map((data, index)=>*/}
-        {/*        <Motherboard*/}
-        {/*            key={index +"motherboard"}*/}
-        {/*            data={data}*/}
-        {/*            processorType={processorType}*/}
-        {/*            dataStore={store}*/}
-        {/*            theme={'green'}*/}
-        {/*            reloadForDB ={loadMotherboard}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
-
-        {/*/!* Memory RAM *!/*/}
-        {/*{memoryRAM?*/}
-        {/*    memoryRAM.map((data, index)=>*/}
-        {/*        <MemoryRam*/}
-        {/*            key={index +"memory"}*/}
-        {/*            data={data}*/}
-        {/*            dataType={memoryRAMType}*/}
-        {/*            dataSize={memoryRAMSize}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            dataStore={store}*/}
-        {/*            theme={"violet"}*/}
-        {/*            dataFreq={memoryRAMFrequency}*/}
-        {/*            reloadForDB ={loadMemoryRAM}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
-
-        {/*/!* Power Supply *!/*/}
-        {/*{powersupply?*/}
-        {/*    powersupply.map((data, index)=>*/}
-        {/*        <Powersupply*/}
-        {/*            key={index +"powersupply"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            theme={'pink'}*/}
-        {/*            dataPowersupplyWatts={powersupplyWatts}*/}
-        {/*            dataPowersupplyCertificate={powersupplyCertificate}*/}
-        {/*            reloadForDB ={loadPowersupply}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
+        {motherboard && motherboard.map((data, index)=>
+            <Motherboard
+                key={"item_motherboard"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataBrand:brand,
+                    processorType,
+                    reloadForDB:loadMotherboard,
+                }}
+            />)
+        }
 
         {/*/!* Cabinet *!/*/}
         {/*{cabinet?*/}

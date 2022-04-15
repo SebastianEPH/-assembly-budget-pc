@@ -4,7 +4,7 @@ const databaseHelper = require("../../helpers/querysDataBase");
 
 const nameDatabase = 'motherboard'
 const parseDataOriginal = ["dol","sol","name","link","item_active"]
-const parseDataIDs = ["store","type", "proforma_id"]
+const parseDataIDs = ["store","type","brand", "proforma_id"]
 
 motherboard.add = async (req, res) =>{
     const data = {
