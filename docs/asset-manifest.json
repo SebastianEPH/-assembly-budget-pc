@@ -1,9 +1,7 @@
 {
   "files": {
-    "main.css": "/assembly-budget_node/static/css/main.2a263a2c.css",
-    "main.js": "/assembly-budget_node/static/js/main.eef06214.js",
-    "static/media/disipador.png": "/assembly-budget_node/static/media/disipador.2b4aa100d64f2368e481.png",
-    "static/media/power-suply.png": "/assembly-budget_node/static/media/power-suply.8d40dc3f248e29110585.png",
+    "main.css": "/assembly-budget_node/static/css/main.6c0d2953.css",
+    "main.js": "/assembly-budget_node/static/js/main.97a0929b.js",
     "static/media/disk-hdd-2.png": "/assembly-budget_node/static/media/disk-hdd-2.34e81a8e4b56e1cb67dd.png",
     "static/media/disk-ssd.png": "/assembly-budget_node/static/media/disk-ssd.60a0750cff3ecd12bae3.png",
     "static/media/disk-mvne.png": "/assembly-budget_node/static/media/disk-mvne.ac80ee3cad90c8b4fcb9.png",
@@ -16,11 +14,11 @@
     "static/media/motherboard.png": "/assembly-budget_node/static/media/motherboard.6f08139c7b37e0466780.png",
     "static/media/graphics-card-3.png": "/assembly-budget_node/static/media/graphics-card-3.dfaa68273a59293e09af.png",
     "index.html": "/assembly-budget_node/index.html",
-    "main.2a263a2c.css.map": "/assembly-budget_node/static/css/main.2a263a2c.css.map",
-    "main.eef06214.js.map": "/assembly-budget_node/static/js/main.eef06214.js.map"
+    "main.6c0d2953.css.map": "/assembly-budget_node/static/css/main.6c0d2953.css.map",
+    "main.97a0929b.js.map": "/assembly-budget_node/static/js/main.97a0929b.js.map"
   },
   "entrypoints": [
-    "static/css/main.2a263a2c.css",
-    "static/js/main.eef06214.js"
+    "static/css/main.6c0d2953.css",
+    "static/js/main.97a0929b.js"
   ]
 }
