@@ -14,6 +14,7 @@ import {Disk} from "./proforma_data/Disk";
 import {Display} from "./proforma_data/Display";
 import {MemoryRam} from "./proforma_data/MemoryRam";
 import {Motherboard} from "./proforma_data/Motherboard";
+import {Mouse} from "./proforma_data/Mouse";
 
 
 export default function Proforma(){
@@ -270,6 +271,28 @@ return(
                     },
                     Item: Motherboard
                 }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Mouse" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        reloadForDB:loadMouse,
+                    },
+                    Item: Mouse
+                }}/>
 
 
         {/*    <ModalPowersupply*/}
@@ -301,16 +324,6 @@ return(
         {/*            dataBrand:brand,*/}
         {/*        }}*/}
         {/*    />*/}
-        {/*    <ModalMouse*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadMouse,*/}
-        {/*            theme:'yellow',*/}
-        {/*            dataStore:store,*/}
-        {/*            dataBrand:brand,*/}
-        {/*        }}*/}
-        {/*    />*/}
-
         </Row>
 
         {processor&& processor.map((data, index)=>
@@ -367,6 +380,7 @@ return(
                 }}
             />)
         }
+        <br/>
         {display && display.map((data, index)=>
             <Display
                 key={"item_display"+index+"_"+data.id}
@@ -381,7 +395,7 @@ return(
                 }}
             />)
         }
-
+        <br/>
         {memoryRAM && memoryRAM.map((data, index)=>
             <MemoryRam
                 key={"item_memory_ram"+index+"_"+data.id}
@@ -397,7 +411,7 @@ return(
                 }}
             />)
         }
-
+        <br/>
         {motherboard && motherboard.map((data, index)=>
             <Motherboard
                 key={"item_motherboard"+index+"_"+data.id}
@@ -411,6 +425,20 @@ return(
                 }}
             />)
         }
+        <br/>
+        {mouse && mouse.map((data, index)=>
+            <Mouse
+                key={"item_mouse"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataBrand:brand,
+                    reloadForDB:loadMouse,
+                }}
+            />)
+        }
+        <br/>
 
         {/*/!* Cabinet *!/*/}
         {/*{cabinet?*/}
@@ -437,32 +465,8 @@ return(
         {/*        />)*/}
         {/*    :"loading"}*/}
         {/*/!* Mouse *!/*/}
-        {/*{mouse?*/}
-        {/*    mouse.map((data, index)=>*/}
-        {/*        <Keyboard*/}
-        {/*            key={index +"mouse"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            theme={'yellow'}*/}
-        {/*            reloadForDB ={loadMouse}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
 
-        {/*/!* Display *!/*/}
-        {/*{display?*/}
-        {/*    display.map((data, index)=>*/}
-        {/*        <Display*/}
-        {/*            key={index +"display"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            displayPanel={displayPanel}*/}
-        {/*            displaySize={displaySize}*/}
-        {/*            theme={'deepskyblue'}*/}
-        {/*            reloadForDB ={loadDisplay}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
+
         <br/>
         <br/>
         <br/>
