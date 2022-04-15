@@ -12,7 +12,7 @@ export const Processor = ({data, others, modalHandleClose}) =>{
 
     const nameDiv = 'processor'
     const {databaseAddIf, databaseRemove, databaseUpdate, onChange, updateHook, clean,form} = useForm(data, nameDiv, modalHandleClose,reloadForDB )
-    let  {name, id,  store, brand, link ,item_active, dol, sol} = form
+    let  {name, id, index, store, brand, link ,item_active, dol, sol} = form
 
     return(
         <div className="accordion" id={nameDiv+'_'+id}>
@@ -20,7 +20,7 @@ export const Processor = ({data, others, modalHandleClose}) =>{
                 {!modal &&
                     <h2 className="accordion-header">
                         <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#panelsStayOpen-collapseOne_${nameDiv}_${id}`} aria-expanded="false" >
-                            <b className={"me-3"}>Processor: </b> {name} <TextActive data={{state:item_active, center:false}}/>
+                            <b className={"me-3"}>Processor {index !== 0 && `${(index+1)}`}: </b> {name} <TextActive data={{state:item_active, center:false}}/>
                         </button>
                     </h2>
                 }

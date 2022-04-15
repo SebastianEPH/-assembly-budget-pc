@@ -9,6 +9,7 @@ import {UseProforma} from "./hooks/UseProforma";
 import ModalDeleteProforma from "./ModalDeleteProforma";
 import connectionAPI from "../connection/axios";
 import {Powersupply} from "./proforma_data/Powersupply";
+import {Graphicscard} from "./proforma_data/graphicscard/Graphicscard";
 
 
 export default function Proforma(){
@@ -141,39 +142,31 @@ return(
                     Item: Powersupply
                 }}/>
 
+            <ModalAddItem
+                data={{
+                    name:"Add Graphics Card" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataSize: memoryRAMSize,
+                        dataBrand: brand,
+                        reloadForDB:loadGraphicscard,
+                    },
+                    Item: Graphicscard
+                }}/>
 
-
-            {/*<Processor*/}
-            {/*    data={{*/}
-            {/*        store:'',*/}
-            {/*        proforma_id,*/}
-            {/*        brand:'',*/}
-            {/*        link:'',*/}
-            {/*        select:'',*/}
-            {/*        name:'',*/}
-            {/*        item_active:1,*/}
-            {/*        sol:0,*/}
-            {/*        dol:0*/}
-            {/*    }}*/}
-            {/*    // theme={theme}*/}
-            {/*    proforma_id={proforma_id}*/}
-            {/*    // modalHandleClose ={handleClose}*/}
-            {/*    // reloadForDB ={reloadForDB }*/}
-            {/*    modal={true} // if true, then use added, otherwise use update function*/}
-            {/*    // dataStore={dataStore}*/}
-            {/*    processorType={processorType}>*/}
-            {/*</Processor>*/}
-
-        {/*    <ModalGraphicsCard*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadGraphicscard,*/}
-        {/*            theme:'blue',*/}
-        {/*            dataStore:store,*/}
-        {/*            dataSize:memoryRAMSize,*/}
-        {/*            dataBrand:brand,*/}
-        {/*        }}*/}
-        {/*    />*/}
         {/*    <ModalDisk*/}
         {/*        data={{*/}
         {/*            proforma_id,*/}
@@ -280,6 +273,23 @@ return(
                 }}
             />)
         }
+        <br/>
+        {graphicscard && graphicscard.map((data, index)=>
+            <Graphicscard
+                key={"item_graphicscard"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataSize: memoryRAMSize,
+                    dataBrand: brand,
+                    reloadForDB:loadGraphicscard,
+                }}
+            />)
+        }
+
+
+
 
 
         {/*/!* Graphics Card *!/*/}
