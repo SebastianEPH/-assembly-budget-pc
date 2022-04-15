@@ -15,7 +15,8 @@ import {Display} from "./proforma_data/Display";
 import {MemoryRam} from "./proforma_data/MemoryRam";
 import {Motherboard} from "./proforma_data/Motherboard";
 import {Mouse} from "./proforma_data/Mouse";
-
+import {Cabinet} from "./proforma_data/Cabinet";
+import {Keyboard} from "./proforma_data/Keyboard";
 
 export default function Proforma(){
     const {proforma_id} = useParams();
@@ -293,37 +294,50 @@ return(
                     },
                     Item: Mouse
                 }}/>
-
-
-        {/*    <ModalPowersupply*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadPowersupply,*/}
-        {/*            dataPowersupplyWatts:powersupplyWatts,*/}
-        {/*            dataPowersupplyCertificate:powersupplyCertificate,*/}
-        {/*            theme:'pink',*/}
-        {/*            dataStore:store,*/}
-        {/*            dataBrand:brand,*/}
-        {/*        }}*/}
-        {/*    />*/}
-        {/*    <ModalCabinet*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadCabinet,*/}
-        {/*            theme:'orange',*/}
-        {/*            dataStore:store,*/}
-        {/*            dataBrand:brand,*/}
-        {/*        }}*/}
-        {/*    />*/}
-        {/*    <ModalKeyboard*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadKeyboard,*/}
-        {/*            theme:'darkgray',*/}
-        {/*            dataStore:store,*/}
-        {/*            dataBrand:brand,*/}
-        {/*        }}*/}
-        {/*    />*/}
+            <ModalAddItem
+                data={{
+                    name:"Add Keyboard" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        reloadForDB:loadKeyboard,
+                    },
+                    Item: Keyboard
+                }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add Cabinet" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand:brand,
+                        reloadForDB:loadCabinet,
+                    },
+                    Item: Cabinet
+                }}/>
         </Row>
 
         {processor&& processor.map((data, index)=>
@@ -439,35 +453,36 @@ return(
             />)
         }
         <br/>
-
-        {/*/!* Cabinet *!/*/}
-        {/*{cabinet?*/}
-        {/*    cabinet.map((data, index)=>*/}
-        {/*        <Cabinet*/}
-        {/*            key={index +"cabinet"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            theme={'orange'}*/}
-        {/*            reloadForDB ={loadCabinet}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
-        {/*/!* Kerboard *!/*/}
-        {/*{keyboard?*/}
-        {/*    keyboard.map((data, index)=>*/}
-        {/*        <Keyboard*/}
-        {/*            key={index +"keyboard"}*/}
-        {/*            data={data}*/}
-        {/*            dataStore={store}*/}
-        {/*            dataBrand={brand}*/}
-        {/*            theme={'darkgray'}*/}
-        {/*            reloadForDB ={loadKeyboard}*/}
-        {/*        />)*/}
-        {/*    :"loading"}*/}
-        {/*/!* Mouse *!/*/}
-
-
+        {keyboard && keyboard.map((data, index)=>
+            <Keyboard
+                key={"item_keyboard"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataBrand:brand,
+                    reloadForDB:loadKeyboard,
+                }}
+            />)
+        }
         <br/>
+        {cabinet && cabinet.map((data, index)=>
+            <Cabinet
+                key={"item_cabinet"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataBrand:brand,
+                    reloadForDB:loadCabinet,
+                }}
+            />)
+        }
+        <br/>
+
+
+
+
         <br/>
         <br/>
             <Row>
