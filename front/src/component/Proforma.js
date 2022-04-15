@@ -12,6 +12,7 @@ import {Powersupply} from "./proforma_data/Powersupply";
 import {Graphicscard} from "./proforma_data/Graphicscard";
 import {Disk} from "./proforma_data/Disk";
 import {Display} from "./proforma_data/Display";
+import {MemoryRam} from "./proforma_data/MemoryRam";
 
 
 export default function Proforma(){
@@ -219,19 +220,32 @@ return(
                     },
                     Item: Display
                 }}/>
+            <ModalAddItem
+                data={{
+                    name:"Add MemoryRam" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataType:memoryRAMType,
+                        dataFreq:memoryRAMFrequency,
+                        dataBrand:brand,
+                        dataSize:memoryRAMSize,
+                        reloadForDB:loadMemoryRAM,
+                    },
+                    Item: MemoryRam
+                }}/>
 
-
-        {/*    <ModalMemoryRam*/}
-        {/*        proforma_id={proforma_id}*/}
-        {/*        reloadForDB ={loadMemoryRAM}*/}
-        {/*        modal={true} // if true, then use added, otherwise use update function*/}
-        {/*        dataType={memoryRAMType}*/}
-        {/*        dataStore={store}*/}
-        {/*        theme={"violet"}*/}
-        {/*        dataFreq={memoryRAMFrequency}*/}
-        {/*        dataBrand={brand}*/}
-        {/*        dataSize={memoryRAMSize}*/}
-        {/*    />*/}
         {/*    <ModalMotherboard*/}
         {/*        proforma_id={proforma_id}*/}
         {/*        reloadForDB ={loadMotherboard}*/}
@@ -349,6 +363,23 @@ return(
                 }}
             />)
         }
+
+        {memoryRAM && memoryRAM.map((data, index)=>
+            <MemoryRam
+                key={"item_memory_ram"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataType:memoryRAMType,
+                    dataFreq:memoryRAMFrequency,
+                    dataBrand:brand,
+                    dataSize:memoryRAMSize,
+                    reloadForDB:loadMemoryRAM,
+                }}
+            />)
+        }
+
 
 
 

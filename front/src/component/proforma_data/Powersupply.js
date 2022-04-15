@@ -28,7 +28,7 @@ export const Powersupply = ({data, others, modalHandleClose}) =>{
                     <Row className="accordion-body">
                         <Col md={11}>
                             <Row className={"pe-2 ps-2 pt-2"}>
-                                <InputsCustom data={{col:9,name:"name", placeHolder:"inserta name", value:name, onChange, updateHook:""}}/>
+                                <InputsCustom data={{col:9,name:"name", placeHolder:"insert name", value:name, onChange, updateHook:""}}/>
                                 <InputSelect col={3} name={"brand"} title={"brand"} update={onChange} select={brand}  data={dataBrand}/>
                                 <InputSelect col={3} name={"watts"} title={"Watts"} update={onChange} select={watts}  data={dataPowersupplyWatts}/>
                                 <InputSelect col={3} name={"certificate"} title={"Certificate"} update={onChange} select={certificate}  data={dataPowersupplyCertificate}/>

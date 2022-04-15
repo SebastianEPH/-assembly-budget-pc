@@ -28,7 +28,7 @@ export const Disk = ({data, others, modalHandleClose}) =>{
                     <Row className="accordion-body">
                         <Col md={11}>
                             <Row className={"pe-2 ps-2 pt-2"}>
-                                <InputsCustom data={{col:9,name:"name", placeHolder:"inserta name", value:name, onChange, updateHook:""}}/>
+                                <InputsCustom data={{col:9,name:"name", placeHolder:"insert name", value:name, onChange, updateHook:""}}/>
                                 <InputSelect col={3} name={"brand"} title={"brand"} update={onChange} select={brand}  data={dataBrand}/>
                                 <InputSelect col={3} name={"memory"} title={"Memory Size"} update={onChange} select={memory}  data={dataSize}/>
                                 <InputSelect col={3} name={"type"} title={"Memory Type"} update={onChange} select={type}  data={diskType}/>
