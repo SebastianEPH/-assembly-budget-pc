@@ -1,29 +1,14 @@
 import { useParams, useNavigate} from "react-router-dom";
 import { useEffect} from "react";
-import ModalMemoryRam from "./proforma_data/memory_ram/ModalMemoryRam";
-import ModalProcessor, {ModalAddItem} from "./util/Modal/ModalAddItem";
+
+import {ModalAddItem} from "./util/Modal/ModalAddItem";
 import {Container, Row} from "react-bootstrap";
-import MemoryRam from "./proforma_data/memory_ram/MemoryRam";
-import Processor from "./proforma_data/Processor";
+import {Processor} from "./proforma_data/Processor";
 import toast, { Toaster } from 'react-hot-toast';
 import {UseProforma} from "./hooks/UseProforma";
-import Motherboard from "./proforma_data/motherboard/Motherboard";
-import ModalMotherboard from "./proforma_data/motherboard/ModalMotherboard";
-import ModalPowersupply from "./proforma_data/powersupply/ModalPowersupply";
-import Powersupply from "./proforma_data/powersupply/Powersupply";
-import ModalGraphicsCard from "./proforma_data/graphicscard/ModalGraphicsCard";
-import Graphicscard from "./proforma_data/graphicscard/Graphicscard";
-import ModalCabinet from "./proforma_data/gabinet/ModalCabinet";
-import Cabinet from "./proforma_data/gabinet/Cabinet";
-import ModalDisplay from "./proforma_data/display/ModalDisplay";
-import Keyboard from "./proforma_data/keyboard/Keyboard";
-import ModalKeyboard from "./proforma_data/keyboard/ModalKeyboard";
-import ModalMouse from "./proforma_data/mouse/ModalMouse";
-import ModalDisk from "./proforma_data/disk/ModalDisk";
-import Disk from "./proforma_data/disk/Disk";
-import Display from "./proforma_data/display/Display";
 import ModalDeleteProforma from "./ModalDeleteProforma";
 import connectionAPI from "../connection/axios";
+import {Powersupply} from "./proforma_data/Powersupply";
 
 
 export default function Proforma(){
@@ -103,6 +88,7 @@ return(
         <Toaster position={"top-center"} />
 
         <Row className="justify-content-center">
+
             <ModalAddItem
                 data={{
                     name:"Add Processor" ,
@@ -125,8 +111,36 @@ return(
                         processorType
                     },
                     Item: Processor
-            }}>
-            </ModalAddItem>
+            }}/>
+
+            <ModalAddItem
+                data={{
+                    name:"Add Power Supply" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        watts:'',
+                        certificate:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataBrand: brand,
+                        dataPowersupplyWatts:powersupplyWatts,
+                        dataPowersupplyCertificate:powersupplyCertificate,
+                        reloadForDB:loadPowersupply,
+                    },
+                    Item: Powersupply
+                }}/>
+
 
 
             {/*<Processor*/}
@@ -241,17 +255,32 @@ return(
         {/*    />*/}
         </Row>
 
-        {processor&&
-            processor.map((data, index)=>
-                <Processor
-                    key={"item_processor"+index+"_"+data.id}
-                    data={{...data, index}}
-                    others={{
-                        processorType,
-                        dataStore:store,
-                        reloadForDB:loadProcessor
-                    }}
-                />)}
+        {processor&& processor.map((data, index)=>
+            <Processor
+                key={"item_processor"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    processorType,
+                    dataStore:store,
+                    reloadForDB:loadProcessor
+                }}
+            />)
+        }
+        <br/>
+        {powersupply&& powersupply.map((data, index)=>
+            <Powersupply
+                key={"item_powersupply"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    dataStore:store,
+                    dataBrand: brand,
+                    dataPowersupplyWatts:powersupplyWatts,
+                    dataPowersupplyCertificate:powersupplyCertificate,
+                    reloadForDB:loadProcessor
+                }}
+            />)
+        }
+
 
         {/*/!* Graphics Card *!/*/}
         {/*{graphicscard?*/}

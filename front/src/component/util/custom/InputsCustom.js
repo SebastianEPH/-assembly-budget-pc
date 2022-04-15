@@ -3,7 +3,7 @@ import {Col, FloatingLabel, Form} from "react-bootstrap";
 export const InputsCustom = ({data}) =>{
     const {name, placeHolder, type,  value, updateHook, onChange, col} = data
     return(
-        <Col sm={col}>
+        <Col sm={col} className={"ps-0 pe-0"}>
             <FloatingLabel label={placeHolder}>
                 <Form.Control name={name}
                               type={type|| "text"}

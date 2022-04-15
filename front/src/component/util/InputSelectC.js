@@ -13,9 +13,9 @@ import { Col} from "react-bootstrap";
 export default function ({name, title ,select = '', col, update, data, idCondition = null}){
     // console.log("id de la condicion ",idCondition)
     return(
-        <Col sm={col} >
+        <Col sm={col} className={" ps-0 pe-0"}>
             <div className="form-floating ">
-                <select name={name} value={select} onChange={(e)=>update(e)} className="form-select"
+                <select name={name} value={select} onChange={(e)=>update(e)} className="form-select "
                         id="floatingSelect" aria-label="Floating label select example">
                     <option value={''} key="0"> </option>
                     {data.map((p={name}, index)=>{
