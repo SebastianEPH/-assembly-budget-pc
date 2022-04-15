@@ -1,6 +1,6 @@
 {
-  "name": "assembly-budget_node",
-  "version": "0.1.0",
+  "name": "assembly-budget",
+  "version": "2.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -20,7 +20,7 @@
     "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.2"
   },
-  "homepage": "https://sebastianeph.github.io/assembly-budget_node",
+  "homepage": "https://sebastianeph.github.io/assembly-budget",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

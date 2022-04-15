@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/assembly-budget_node/static/css/main.6c0d2953.css",
-    "main.js": "/assembly-budget_node/static/js/main.220fde05.js",
-    "static/media/disk-hdd-2.png": "/assembly-budget_node/static/media/disk-hdd-2.34e81a8e4b56e1cb67dd.png",
-    "static/media/disk-ssd.png": "/assembly-budget_node/static/media/disk-ssd.60a0750cff3ecd12bae3.png",
-    "static/media/disk-mvne.png": "/assembly-budget_node/static/media/disk-mvne.ac80ee3cad90c8b4fcb9.png",
-    "static/media/icon.png": "/assembly-budget_node/static/media/icon.5b52e796fb4f9dd1a755.png",
-    "static/media/mouse.png": "/assembly-budget_node/static/media/mouse.be40c19706cf710a9cd7.png",
-    "static/media/display-2.png": "/assembly-budget_node/static/media/display-2.e36634f1d6989f623bbc.png",
-    "static/media/keyboard.png": "/assembly-budget_node/static/media/keyboard.1693820b02bf3856a9c9.png",
-    "static/media/cabinet.png": "/assembly-budget_node/static/media/cabinet.8a90090518d8dde8f4ae.png",
-    "static/media/memory-ram-3.png": "/assembly-budget_node/static/media/memory-ram-3.3112a96e071c522de5e8.png",
-    "static/media/motherboard.png": "/assembly-budget_node/static/media/motherboard.6f08139c7b37e0466780.png",
-    "static/media/graphics-card-3.png": "/assembly-budget_node/static/media/graphics-card-3.dfaa68273a59293e09af.png",
-    "index.html": "/assembly-budget_node/index.html",
-    "main.6c0d2953.css.map": "/assembly-budget_node/static/css/main.6c0d2953.css.map",
-    "main.220fde05.js.map": "/assembly-budget_node/static/js/main.220fde05.js.map"
+    "main.css": "/assembly-budget/static/css/main.6c0d2953.css",
+    "main.js": "/assembly-budget/static/js/main.27451fa3.js",
+    "static/media/disk-hdd-2.png": "/assembly-budget/static/media/disk-hdd-2.34e81a8e4b56e1cb67dd.png",
+    "static/media/disk-ssd.png": "/assembly-budget/static/media/disk-ssd.60a0750cff3ecd12bae3.png",
+    "static/media/disk-mvne.png": "/assembly-budget/static/media/disk-mvne.ac80ee3cad90c8b4fcb9.png",
+    "static/media/icon.png": "/assembly-budget/static/media/icon.5b52e796fb4f9dd1a755.png",
+    "static/media/mouse.png": "/assembly-budget/static/media/mouse.be40c19706cf710a9cd7.png",
+    "static/media/display-2.png": "/assembly-budget/static/media/display-2.e36634f1d6989f623bbc.png",
+    "static/media/keyboard.png": "/assembly-budget/static/media/keyboard.1693820b02bf3856a9c9.png",
+    "static/media/cabinet.png": "/assembly-budget/static/media/cabinet.8a90090518d8dde8f4ae.png",
+    "static/media/memory-ram-3.png": "/assembly-budget/static/media/memory-ram-3.3112a96e071c522de5e8.png",
+    "static/media/motherboard.png": "/assembly-budget/static/media/motherboard.6f08139c7b37e0466780.png",
+    "static/media/graphics-card-3.png": "/assembly-budget/static/media/graphics-card-3.dfaa68273a59293e09af.png",
+    "index.html": "/assembly-budget/index.html",
+    "main.6c0d2953.css.map": "/assembly-budget/static/css/main.6c0d2953.css.map",
+    "main.27451fa3.js.map": "/assembly-budget/static/js/main.27451fa3.js.map"
   },
   "entrypoints": [
     "static/css/main.6c0d2953.css",
-    "static/js/main.220fde05.js"
+    "static/js/main.27451fa3.js"
   ]
 }
