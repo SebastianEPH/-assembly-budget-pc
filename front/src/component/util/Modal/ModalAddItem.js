@@ -12,7 +12,7 @@ export const ModalAddItem = ({data}) =>{
     return(
         <>
             <div className="col-auto justify-content-center p-2 m-2 " onClick={handleShow}>
-                <button className={``}  type="button" >
+                <button type="button" >
                     <h4>{data.name}</h4>
                     <br/>
                     <PlusCircleDotted size={60} />

@@ -9,7 +9,8 @@ import {UseProforma} from "./hooks/UseProforma";
 import ModalDeleteProforma from "./ModalDeleteProforma";
 import connectionAPI from "../connection/axios";
 import {Powersupply} from "./proforma_data/Powersupply";
-import {Graphicscard} from "./proforma_data/graphicscard/Graphicscard";
+import {Graphicscard} from "./proforma_data/Graphicscard";
+import {Disk} from "./proforma_data/Disk";
 
 
 export default function Proforma(){
@@ -167,17 +168,33 @@ return(
                     Item: Graphicscard
                 }}/>
 
-        {/*    <ModalDisk*/}
-        {/*        data={{*/}
-        {/*            proforma_id,*/}
-        {/*            reloadForDB :loadDisk,*/}
-        {/*            theme:'green-pastel',*/}
-        {/*            dataStore:store,*/}
-        {/*            diskSize,*/}
-        {/*            diskType,*/}
-        {/*            dataBrand:brand,*/}
-        {/*        }}*/}
-        {/*    />*/}
+            <ModalAddItem
+                data={{
+                    name:"Add Disk" ,
+                    information:{
+                        store:'',
+                        proforma_id,
+                        brand:'',
+                        link:'',
+                        select:'',
+                        name:'',
+                        item_active:1,
+                        sol:0,
+                        dol:0
+                    },
+                    others:{
+                        proforma_id,
+                        modal:true,
+                        dataStore:store,
+                        dataSize: memoryRAMSize,
+                        dataBrand: brand,
+                        diskType,
+                        diskSize,
+                        reloadForDB:loadDisk,
+                    },
+                    Item: Disk
+                }}/>
+
         {/*    <ModalMemoryRam*/}
         {/*        proforma_id={proforma_id}*/}
         {/*        reloadForDB ={loadMemoryRAM}*/}
@@ -287,7 +304,21 @@ return(
                 }}
             />)
         }
-
+        <br/>
+        {disk && disk.map((data, index)=>
+            <Disk
+                key={"item_disk"+index+"_"+data.id}
+                data={{...data, index}}
+                others={{
+                    proforma_id,
+                    dataStore:store,
+                    dataBrand: brand,
+                    diskType,
+                    dataSize: memoryRAMSize,
+                    reloadForDB:loadDisk,
+                }}
+            />)
+        }
 
 
 
