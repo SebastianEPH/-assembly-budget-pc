@@ -1,7 +1,7 @@
 import InputSelect from "../../util/InputSelectC";
 import {useForm} from "../../hooks/useForm";
 import {Row, Col, Form, FloatingLabel, Card} from "react-bootstrap";
-import ModalConfirmation from "../../util/ModalConfirmation";
+import ModalConfirmation from "../../util/Modal/ModalConfirmation";
 import "../../util/ModalCSS.css"
 
 const MemoryRam = ({ data,

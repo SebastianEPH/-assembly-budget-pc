@@ -1,7 +1,7 @@
 import {useForm} from "../../hooks/useForm";
 import {Card, Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import InputSelect from "../../util/InputSelectC";
-import ModalConfirmation from "../../util/ModalConfirmation";
+import ModalConfirmation from "../../util/Modal/ModalConfirmation";
 import "../../util/ModalCSS.css"
 
 const Mouse = ({ data,

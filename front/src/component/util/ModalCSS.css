@@ -361,3 +361,17 @@ a:link, a:visited,  a:hover, a:active {
     max-width: 100px;
     /*height: 5rem;*/
 }
+.accordion-button.collapsed {
+    background-color: #eae9e9;
+}
+.text-active{
+
+    font-weight: bold;
+    color: red;
+    font-size: 10px;
+}
+.text-disable{
+    font-weight: bold;
+    color:blue;
+    font-size: 10px;
+}

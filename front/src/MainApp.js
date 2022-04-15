@@ -16,25 +16,18 @@ import {MessageProvider} from "./component/hooks/MessageContext";
 
 function MainApp() {
     return (
-        <MessageProvider>
-            <DollarProvider>
-                <HashRouter>
-                    <Navbar/>
-                    <Routes>
-                        <Route path="/proforma/:proforma_id"  exact element={<Proforma/>}/>
-                        <Route path="/" exact element={
-                            <div className="container">
-                                <br/>
-                                <ListProforma/>
-                                <br/>
-                            </div>
-                        }/>
-
-                        <Route path="*" element={<h1>Error 404, el URL no existe </h1>}/>
-                    </Routes>
-                </HashRouter>
-            </DollarProvider>
-        </MessageProvider>
+        <HashRouter>
+            <MessageProvider>
+                <DollarProvider>
+                <Navbar/>
+                <Routes>
+                    <Route path="/proforma/:proforma_id"  exact element={<Proforma/>}/>
+                    <Route path="/" exact element={<ListProforma/>}/>
+                    <Route path="*" element={<h1>Error 404, el URL no existe </h1>}/>
+                </Routes>
+                </DollarProvider>
+            </MessageProvider>
+        </HashRouter>
 
     );
 }

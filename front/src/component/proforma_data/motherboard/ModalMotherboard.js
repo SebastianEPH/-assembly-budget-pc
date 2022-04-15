@@ -1,4 +1,4 @@
-import ButtonModal from "../../util/ButtonModal";
+import ButtonModal from "../../util/Modal/ButtonModal";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
 import Motherboard from "./Motherboard";

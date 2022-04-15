@@ -50,7 +50,7 @@ export default function ListProforma (){
         return suma
     }
     return(
-        <>
+        <Container>
             <h1 className={"text-center"}>List Proforma</h1>
             <hr/>
             <Toaster position={"top-center"} />
@@ -113,7 +113,7 @@ export default function ListProforma (){
 
                 <CreateProforma data={{reloadForDB:consultarApi}}/>
             </div>
-        </>
+        </Container>
 
     );
 }

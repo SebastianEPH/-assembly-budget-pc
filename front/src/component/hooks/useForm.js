@@ -9,7 +9,7 @@ export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadF
     const [form, setForm]  = useState(initialState);
 
 
-    const update = ({target}) => {
+    const onChange = ({target}) => {
         setForm({...form, [target.name]: target.value})
         // console.log(form)
     }
@@ -86,7 +86,7 @@ export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadF
         form,
         databaseAddIf,databaseUpdate,databaseRemove,
         updateHook,
-        update,
+        onChange,
         clean,
     };
 }
