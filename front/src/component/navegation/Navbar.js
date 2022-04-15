@@ -17,9 +17,9 @@ export default function NewProject (){
                         main
                     </NavLink>
 
-                    <NavLink to="/about" className={({isActive})=> isActive? "btn btn-success":"btn btn-dark"} > {/* activeClassName="active" es del propio navlink*/}
-                        about
-                    </NavLink>
+                    {/*<NavLink to="/about" className={({isActive})=> isActive? "btn btn-success":"btn btn-dark"}>*/}
+                    {/*    about*/}
+                    {/*</NavLink>*/}
 
                 </form>
             </div>

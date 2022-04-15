@@ -6,27 +6,23 @@ import {
     Routes,
     Route, HashRouter,
 } from "react-router-dom";
-import "./App.css"
 
 import ListProforma from "./component/ListProforma/ListProforma";
-import Proforma from "./component/Proforma";
+import Proforma from "./component/proforma_items/Proforma";
 import Navbar from "./component/navegation/Navbar";
 import {DollarProvider} from "./component/hooks/DollarContext"
-import {MessageProvider} from "./component/hooks/MessageContext";
 
 function MainApp() {
     return (
         <HashRouter>
-            <MessageProvider>
-                <DollarProvider>
-                <Navbar/>
+            <DollarProvider>
+            <Navbar/>
                 <Routes>
                     <Route path="/proforma/:proforma_id"  exact element={<Proforma/>}/>
                     <Route path="/" exact element={<ListProforma/>}/>
                     <Route path="*" element={<h1>Error 404, el URL no existe </h1>}/>
                 </Routes>
-                </DollarProvider>
-            </MessageProvider>
+            </DollarProvider>
         </HashRouter>
 
     );

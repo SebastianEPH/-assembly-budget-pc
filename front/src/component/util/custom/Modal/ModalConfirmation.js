@@ -1,6 +1,5 @@
 import {Button, Modal, ModalFooter} from "react-bootstrap";
 import {useState} from "react";
-import "../ModalCSS.css"
 
 const ModalComponent = ({title, text, ok}) =>{
 

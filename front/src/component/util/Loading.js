@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Loading =({
                      data={
                          title:"Loading data..."

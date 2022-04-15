@@ -1,7 +1,5 @@
 export const TextActive = ({data={state: 0}}) =>{
     const {state, center} = data
-
-
     return(
         <>
             {center?

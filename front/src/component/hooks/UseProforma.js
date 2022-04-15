@@ -4,6 +4,7 @@ export const UseProforma = (proforma_id)=>{
 
     // disk
     const [disk, setDisk] = useState([]);
+    const [statusDisk, setStatusDisk] = useState(false); // true if query to database
 
     // disk type
     const [diskType, setDiskType] = useState([]);
@@ -13,10 +14,10 @@ export const UseProforma = (proforma_id)=>{
 
     // cabinet
     const [cabinet, setCabinet] = useState([]);
-
+    const [statusCabinet, setStatusCabinet] = useState(false); // true if query to database
     // display
     const [display, setDisplay] = useState([]);
-
+    const [statusDisplay, setStatusDisplay] = useState(false); // true if query to database
     // display Panel
     const [displayPanel, setDisplayPanel] = useState([]);
 
@@ -25,28 +26,33 @@ export const UseProforma = (proforma_id)=>{
 
     // keyboard
     const [keyboard, setKeyboard] = useState([]);
-
+    const [statuskeyboard, setStatusKeyboard] = useState(false); // true if query to database
     // mouse
     const [mouse, setMouse] = useState([]);
-
+    const [statusMouse, setStatusMouse] = useState(false); // true if query to database
 
     // graphics card
     const [graphicscard, setGraphicscard] = useState([]);
+    const [statusGraphicscard, setStatusGraphicscard] = useState(false); // true if query to database
 
     // processor
     const [processor, setProcessor] = useState([]);
+    const [statusProcessor, setStatusProcessor] = useState(false); // true if query to database
     const [processorType, setProcessorType] = useState([]);
 
     // powersupply
     const [powersupply, setPowersuppy] = useState([]);
+    const [statusPowersupply, setStatusPoersupply] = useState(false); // true if query to database
     const [powersupplyCertificate, setPowersuppyCertificate] = useState([]);
     const [powersupplyWatts, setPowersuppyWatts] = useState([]);
 
     // motherboard
     const [motherboard, setMotherboard] = useState([]);
+    const [statusMotherboard, setStatusMotherboard] = useState(false); // true if query to database
 
     // memory ram
     const [memoryRAM, setMemoryRAM] = useState([]);
+    const [statusMemoryRAM, setStatusMemoryRAM] = useState(false); // true if query to database
     const [memoryRAMType, setMemoryRAMType] = useState([]);
     const [memoryRAMFrequency, setMemoryRAMFrequency] = useState([]);
     const [memoryRAMSize, setMemoryRAMSize] = useState([]);
@@ -56,7 +62,10 @@ export const UseProforma = (proforma_id)=>{
 
     const loadDisk = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/disk`)
-            .then(({data})=>setDisk(data))
+            .then(({data})=>{
+                setDisk(data)
+                setStatusDisk(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
 
@@ -72,12 +81,18 @@ export const UseProforma = (proforma_id)=>{
     }
     const loadCabinet = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/cabinet`)
-            .then(({data})=>setCabinet(data))
+            .then(({data})=>{
+                setCabinet(data)
+                setStatusCabinet(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadDisplay = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/display`)
-            .then(({data})=>setDisplay(data))
+            .then(({data})=>{
+                setDisplay(data)
+                setStatusDisplay(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadDisplayPanel = async () =>{
@@ -92,22 +107,34 @@ export const UseProforma = (proforma_id)=>{
     }
     const loadKeyboard = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/keyboard`)
-            .then(({data})=>setKeyboard(data))
+            .then(({data})=>{
+                setKeyboard(data)
+                setStatusKeyboard(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMouse = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/mouse`)
-            .then(({data})=>setMouse(data))
+            .then(({data})=>{
+                setMouse(data)
+                setStatusMouse(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadGraphicscard = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/graphicscard`)
-            .then(({data})=>setGraphicscard(data))
+            .then(({data})=>{
+                setGraphicscard(data)
+                setStatusGraphicscard(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadPowersupply = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/powersupply`)
-            .then(({data})=>setPowersuppy(data))
+            .then(({data})=>{
+                setPowersuppy(data)
+                setStatusPoersupply(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadPowersupplyCertificate = async () =>{
@@ -122,12 +149,18 @@ export const UseProforma = (proforma_id)=>{
     }
     const loadMotherboard = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/motherboard`)
-            .then(({data})=>setMotherboard(data))
+            .then(({data})=>{
+                setMotherboard(data)
+                setStatusMotherboard(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadProcessor = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/processor`)
-            .then(({data})=>setProcessor(data))
+            .then(({data})=>{
+                setProcessor(data)
+                setStatusProcessor(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadProcessor_type= async () =>{
@@ -137,7 +170,10 @@ export const UseProforma = (proforma_id)=>{
     }
     const loadMemoryRAM = async () =>{
         await connectionAPI.get(`/proforma/${proforma_id}/memoryram`)
-            .then(({data})=>setMemoryRAM(data))
+            .then(({data})=>{
+                setMemoryRAM(data)
+                setStatusMemoryRAM(true)
+            })
             .catch((err)=>console.log("there was an Error getting the data ",err))
     }
     const loadMemoryRAMType = async () =>{
@@ -168,6 +204,16 @@ export const UseProforma = (proforma_id)=>{
     }
 
     return {
+        statusMotherboard,
+        statusPowersupply,
+        statusProcessor,
+        statusGraphicscard,
+        statusMouse,
+        statusMemoryRAM,
+        statuskeyboard,
+        statusDisplay,
+        statusDisk,
+        statusCabinet,
         displayPanel,
         displaySize,
         loadDisplayPanel,loadDisplaySize,

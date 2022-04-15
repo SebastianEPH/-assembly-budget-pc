@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import connectionAPI from "../../connection/axios";
-import "../../App.css"
 import "../View.css"
 import {Col, Container, Row} from "react-bootstrap";
 import img_processor from "../../assets/img/hardware/processor.png";
@@ -9,7 +8,7 @@ import img_mouse from "../../assets/img/hardware/mouse.png";
 import img_keyboard from "../../assets/img/hardware/keyboard.png"
 import img_cabinet from "../../assets/img/hardware/cabinet.png"
 import {Loading} from "../util/Loading";
-import {CreateProforma} from "../CreateProforma";
+import {CreateProforma} from "./CreateProforma";
 import {ItemMemoryRAM} from "./items/ItemMemoryRAM";
 import {ItemGraphicsCard} from "./items/ItemGraphicsCard";
 import {ItemDisk} from "./items/ItemDisk";
@@ -17,6 +16,8 @@ import {ItemGeneric} from "./items/ItemGeneric";
 import {ItemDisplay} from "./items/ItemDisplay";
 import img_motherboard from "../../assets/img/hardware/motherboard.png";
 import {Toaster} from "react-hot-toast";
+import Helpers from "../helpers/helpers";
+
 
 export default function ListProforma (){
     const [projects, setProjects] = useState([]); // array vacio
@@ -56,7 +57,7 @@ export default function ListProforma (){
             <Toaster position={"top-center"} />
             <div className="row container justify-content-center">
                 {projects.length>= 1?
-                    projects.map(( {id, name, details, date_update, price, sol,
+                    projects.map(( {id, name, details, date_created,  price, sol,
                                             memory_ram, processor, motherboard, graphicscard,
                                             display, mouse, keyboard, disk, cabinet ,powersupply }, index)=>{
                     const suma= (type= "sol")=>{
@@ -75,6 +76,8 @@ export default function ListProforma (){
                     }
                     const price_sol = suma("sol")
                     const price_dol = suma("dol")
+                    console.log("fecha update parse ", Helpers.timeago(date_created))
+                    console.log("fecha update sin parse ", date_created)
 
                     return (
                         <Link key={index+"_container"} className={"item-project m-1"} to={`/proforma/${id}`} >
@@ -87,8 +90,10 @@ export default function ListProforma (){
                                         <Col sm={8}>
                                             <h4>{name}</h4>
                                         </Col>
-                                        <Col sm={2} className={date_update?"price-item-container":""}>
-                                            <h4 className={"price-item"}>{"hace 5 días"}</h4>
+                                        <Col sm={2} className={date_created?"time-item-container":""}>
+                                            {date_created&&
+                                                <h4 className={"price-item"}>{Helpers.timeago(date_created)}</h4>
+                                            }
                                         </Col>
                                     </Row>
                                     <ItemGeneric        data={{obj:processor, parseText, name:"processor", img:img_processor}}/>
@@ -108,7 +113,7 @@ export default function ListProforma (){
                         status
                         ? <p>Not found projects, create one... !! </p>
                         :
-                        <Loading data={{title:"espere porfavor.,, "}}/>
+                        <Loading data={{title:"Wait please.."}}/>
                 }
 
                 <CreateProforma data={{reloadForDB:consultarApi}}/>

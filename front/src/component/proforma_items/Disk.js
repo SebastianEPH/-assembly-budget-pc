@@ -1,7 +1,6 @@
 import {useForm} from "../hooks/useForm";
 import {Col, Row} from "react-bootstrap";
 import InputSelect from "../util/InputSelectC";
-import "../util/ModalCSS.css"
 import {TextActive} from "../util/TextActive";
 import {InputsCustom} from "../util/custom/InputsCustom";
 import {ButtonsControlls} from "../util/custom/ButtonsControlls";

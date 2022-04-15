@@ -1,6 +1,6 @@
 import {Button, FloatingLabel, Form, Col, Row} from "react-bootstrap";
-import {useFormBasic} from "./hooks/useFormBasic";
-import connectionAPI from "../connection/axios";
+import {useFormBasic} from "../hooks/useFormBasic";
+import connectionAPI from "../../connection/axios";
 import toast from "react-hot-toast";
 
 export const CreateProforma =({data}) =>{

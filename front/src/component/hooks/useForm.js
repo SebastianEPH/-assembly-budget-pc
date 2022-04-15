@@ -1,4 +1,3 @@
-//@ts-check
 import {useContext, useState} from "react";
 import DollarContext from "./DollarContext";
 import toast from 'react-hot-toast';
@@ -8,10 +7,8 @@ export const useForm= (initialState = {}, typeName='', modalHandleClose, reloadF
     const {dollar} = useContext(DollarContext );
     const [form, setForm]  = useState(initialState);
 
-
     const onChange = ({target}) => {
         setForm({...form, [target.name]: target.value})
-        // console.log(form)
     }
 
     const updateHook= ({target}, name) =>{

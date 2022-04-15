@@ -2,8 +2,6 @@ const proforma = {}
 const pool = require('../database')
 const {parse, DB} = require("../helpers/helpers");
 
-//const m_project= require ('../models/model_project')
-//const m_proforma= require ('../models/model_proforma_data')
 
 const getMemoryRam = async (id) =>{
     return await pool.query(
@@ -158,17 +156,17 @@ proforma.removeOnly = async (req, res)=>{
         return res.status(400).json({message:"The submitted data cannot be processed"})
     }
 
-
-
 }
 proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de proyectos idividuales
 
-    const proforma = await pool.query('SELECT id,name from proforma ORDER BY id ASC')
+    const proforma = await pool.query('SELECT id,name, date_created, date_update from proforma ORDER BY id ASC')
     let finish = []
     for (let i = 0; i < proforma .length; i++) {
         const obj = {}
         obj.name = proforma[i].name
         obj.id = proforma[i].id
+        obj.date_created = proforma[i].date_created
+        obj.date_update = proforma[i].date_update
         obj.display = await getDisplay(proforma[i].id)
         obj.processor = await getProcessor(proforma[i].id)
         obj.graphicscard = await getGraphicscard(proforma[i].id)
@@ -182,9 +180,6 @@ proforma.getAll = async (req, res)=>{ // esto es de la vista principal, no es de
 
         finish.push(obj)
     }
-
-
-
 
     await console.log("finish", finish)
 
@@ -220,9 +215,7 @@ proforma.get_only = async (req, res)=>{ // esto es de la vista principal, no es 
     proforma[0].memory_ram_size = memory_ram_size
     proforma[0].memory_ram_type = memory_ram_type
     proforma[0].memory_ram_frequency = memory_ram_frequency
-    //console.log(JSON.stringify(proforma))
-    //console.table(proforma)
-    //console.log(Object.values(proforma))
+
     res.json(proforma)
 }
 proforma.add = async (req, res)=>{

@@ -1,6 +1,5 @@
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
-import "../ModalCSS.css"
 import {XLg, PlusCircleDotted} from "react-bootstrap-icons";
 
 export const ModalAddItem = ({data}) =>{
@@ -11,10 +10,9 @@ export const ModalAddItem = ({data}) =>{
     const {Item} = data
     return(
         <>
-            <div className="col-auto justify-content-center p-2 m-2 " onClick={handleShow}>
-                <button type="button" >
-                    <h4>{data.name}</h4>
-                    <br/>
+            <div className="col-auto justify-content-center p-2 m-1 " onClick={handleShow}>
+                <button type="button " className={"modal-item"} >
+                    <h6>{data.name}</h6>
                     <PlusCircleDotted size={60} />
                 </button>
             </div>
@@ -27,7 +25,7 @@ export const ModalAddItem = ({data}) =>{
                 size={"xl"}
                 keyboard={false}
             >
-                <div className="modal-header">
+                <div className="modal-header ">
                     <Modal.Title id="contained-modal-title-vcenter">
                         {data.name}
                     </Modal.Title>

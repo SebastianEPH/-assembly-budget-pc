@@ -1,12 +1,12 @@
 import {Check2Circle, Eraser} from "react-bootstrap-icons";
-import ModalConfirmation from "../Modal/ModalConfirmation";
+import ModalConfirmation from "./Modal/ModalConfirmation";
 import {Col, Row} from "react-bootstrap";
 import {TextActive} from "../TextActive";
 
 export const ButtonsControlls = ({data}) =>{
     const {col, modal, databaseAddIf, databaseUpdate, databaseRemove, clean, item_active,onChange } = data
     return(
-        <Col  md={col} className={"p-4"}>
+        <Col  md={col} className={"p-3"}>
             <Row>
                 <button className="btn btn-outline-success p-0  " onClick={modal?databaseAddIf:databaseUpdate}>
                     <Check2Circle size={20}/>

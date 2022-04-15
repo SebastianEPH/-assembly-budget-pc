@@ -1,44 +1,88 @@
-/*:root{*/
-/*    --color: dark;*/
-/*}*/
+a:link, a:visited,  a:hover, a:active {
+    color: #cccccc;
+    text-decoration: none;
+}
+.item-project{
+    text-align: center;
+    background-color: #656363;
+    border-radius: 50px;
+    color: white;
+}
+.item-project:hover{
+    background-color: #888888;
+}
+.price-item-container{
+    background-color: #000000;
+    border-radius: 50px;
+    text-align: left;
+    min-height: 25px;
+}
+.time-item-container{
+    background-color: #000000;
+    border-radius: 50px;
+    text-align: right;
+    min-height: 25px;
+}
+.price-item{
+    text-align: center;
+    font-size: 15px;
+}
 
-/*.collection{*/
-/*    background-color:  #c4c4c4;*/
-/*    text-align: center;*/
-/*    border-radius: 35px;*/
-/*    color: black;*/
-/*}*/
+.img-item-project{
+    min-width: 100px;
+    max-width: 100px;
+    /*height: 5rem;*/
+}
 
-/*.item-i{*/
-/*    width: 6rem;*/
-/*}*/
 
-/*!*.price{*!*/
-/*!*    border-color:  red  ;*!*/
-/*!*    background-color: black;*!*/
-/*!*    color:white;*!*/
-/*!*    opacity: .5;*!*/
-/*!*    border-radius: 100px;*!*/
-/*!*}*!*/
-/*.proforma{*/
-/*    background-color: black;*/
-/*}*/
-/*.proforma:hover{*/
-/*    !*background-color: red;*!*/
-/*    opacity: .9;*/
-/*}*/
-/*a:link, a:visited, a:active {*/
-/*    text-decoration:none;*/
-/*}*/
 
-/*.collection-button{*/
-/*    background-color:  #c4c4c4;*/
-/*    text-align: center;*/
-/*    color: black;*/
-/*    font-size: 20px;*/
-/*    border-radius: 100px;*/
-/*    height: 3rem;*/
-/*}*/
-/*.collection-button:hover{*/
-/*    opacity: .9;*/
-/*}*/
+.accordion-button.collapsed {
+    background-color: #ececec;
+    color: black;
+}
+.accordion-button:not(.collapsed) {
+    background-color:#ececec;
+    color: black;
+}
+.accordion-button.collapsed:hover {
+    background-color: #d7e0f8;
+    color: black;
+}
+.accordion-button:hover {
+    background-color:  #d7e0f8;
+    color: black;
+}
+
+
+.text-active{
+
+    font-weight: bold;
+    color: red;
+    font-size: 10px;
+}
+.text-disable{
+    font-weight: bold;
+    color:blue;
+    font-size: 10px;
+}
+.modal-item{
+    border-radius: 10px;
+    border-color: #000000;
+    background-color: #ececec;
+    min-width: 140px;
+    min-height: 140px;
+}
+
+.modal-item:hover{
+    /*color:white;*/
+    background-color:   #d7e0f8;
+
+}
+
+
+
+
+
+
+
+
